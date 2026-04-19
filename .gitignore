@@ -2,4 +2,4 @@ prd.md
 .opencode/
 prompt/
 AGENTS.md
-*.md
+dist/
