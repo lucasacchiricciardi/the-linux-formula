@@ -1,0 +1,37 @@
+{
+  "articles": [
+    {
+      "id": "kernel-61-lts",
+      "title": "Kernel 6.1 e la Long Term Support",
+      "date": "2026-04-15",
+      "tags": [
+        "kernel",
+        "lts",
+        "sysadmin"
+      ],
+      "content": "## Kernel 6.1 LTS: cosa cambia\n\nIl kernel Linux 6.1 segna un punto di svolta per la serie LTS. Le novità principali riguardano il supporto hardware migliorato e le ottimizzazioni di performance per carichi di lavoro server.\n\n### Punti chiave\n\n- Miglior gestione della memoria per sistemi ad alta densità\n- Supporto Btrfs migliorato con checksum più efficienti\n- Nuovi driver per NIC datacenter",
+      "html": "<p><h2>Kernel 6.1 LTS: cosa cambia</h2></p><p>Il kernel Linux 6.1 segna un punto di svolta per la serie LTS. Le novità principali riguardano il supporto hardware migliorato e le ottimizzazioni di performance per carichi di lavoro server.</p><p><h3>Punti chiave</h3></p><p><ul><li>Miglior gestione della memoria per sistemi ad alta densità</li><br><li>Supporto Btrfs migliorato con checksum più efficienti</li><br><li>Nuovi driver per NIC datacenter</li></ul></p>"
+    },
+    {
+      "id": "systemd-vs-openrc",
+      "title": "Systemd vs OpenRC: la guida pratica",
+      "date": "2026-03-28",
+      "tags": [
+        "systemd",
+        "openrc",
+        "init",
+        "comparison"
+      ],
+      "content": "## Systemd vs OpenRC: quale scegliere?\n\nLa scelta del sistema di init è una delle decisioni più dibattute nella comunità Linux. Analizziamo pro e contro di entrambi.\n\n**Systemd** offre un ecosistema integrato con journaling, network management e logging centralizzato. **OpenRC** resta la scelta per chi preferisce semplicità e conformità POSIX.",
+      "html": "<p><h2>Systemd vs OpenRC: quale scegliere?</h2></p><p>La scelta del sistema di init è una delle decisioni più dibattute nella comunità Linux. Analizziamo pro e contro di entrambi.</p><p><strong>Systemd</strong> offre un ecosistema integrato con journaling, network management e logging centralizzato. <strong>OpenRC</strong> resta la scelta per chi preferisce semplicità e conformità POSIX.</p>"
+    },
+    {
+      "id": "minimal-article",
+      "title": "minimal-article",
+      "date": null,
+      "tags": [],
+      "content": "Articolo senza frontmatter per testare il fallback.\n\nIl titolo dovrebbe essere il nome del file, la data null e i tags vuoti.",
+      "html": "<p>Articolo senza frontmatter per testare il fallback.</p><p>Il titolo dovrebbe essere il nome del file, la data null e i tags vuoti.</p>"
+    }
+  ]
+}
