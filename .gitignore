@@ -1,5 +1,14 @@
-prd.md
-.opencode/
-prompt/
-AGENTS.md
+# Dependencies
+node_modules/
+
+# Build output
 dist/
+
+# IDE
+.lastsession
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

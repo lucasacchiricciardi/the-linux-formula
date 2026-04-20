@@ -1,0 +1,140 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "orchestrator": {
+      "mode": "primary",
+      "model": "minimax-m2.5-free",
+      "description": "Coordinator - Interfaccia unica con l'utente",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow"
+      }
+    },
+    "pensante-architecture": {
+      "mode": "subagent",
+      "model": "minimax-m2.5-free",
+      "description": "Spec-Driven Architecture",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask"
+      }
+    },
+    "pensante-security": {
+      "mode": "subagent",
+      "model": "minimax-m2.5-free",
+      "description": "Security Audit",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask"
+      }
+    },
+    "pensante-design": {
+      "mode": "subagent",
+      "model": "opencode-go/glm-5.1",
+      "description": "Design System",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask"
+      }
+    },
+    "pensante-integration": {
+      "mode": "subagent",
+      "model": "minimax-m2.5-free",
+      "description": "Integration & Data Flow",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask"
+      }
+    },
+    "executer-implementation": {
+      "mode": "subagent",
+      "model": "github-copilot/grok-code-fast-1",
+      "description": "Code Implementation",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow"
+      }
+    },
+    "executer-test": {
+      "mode": "subagent",
+      "model": "github-copilot/grok-code-fast-1",
+      "description": "TDD Tests",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow"
+      }
+    },
+    "executer-security-audit": {
+      "mode": "subagent",
+      "model": "github-copilot/grok-code-fast-1",
+      "description": "Security Audit Execution",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask"
+      }
+    },
+    "executer-security-fix": {
+      "mode": "subagent",
+      "model": "github-copilot/grok-code-fast-1",
+      "description": "Security Fixes",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow"
+      }
+    },
+    "executer-ui": {
+      "mode": "subagent",
+      "model": "github-copilot/grok-code-fast-1",
+      "description": "UI Implementation",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow"
+      }
+    },
+    "executer-visual": {
+      "mode": "subagent",
+      "model": "github-copilot/grok-code-fast-1",
+      "description": "Visual Assets",
+      "permission": {
+        "edit": "allow",
+        "bash": "ask"
+      }
+    },
+    "executer-build": {
+      "mode": "subagent",
+      "model": "github-copilot/grok-code-fast-1",
+      "description": "Build Scripts",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow"
+      }
+    },
+    "executer-worker": {
+      "mode": "subagent",
+      "model": "github-copilot/grok-code-fast-1",
+      "description": "Web Worker",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow"
+      }
+    }
+  },
+  "instructions": [
+    "AGENTS.md"
+  ],
+  "permission": {
+    "skill": {
+      "*": "allow"
+    }
+  },
+  "mcp": {
+    "sequential-thinking": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+  }
+}
