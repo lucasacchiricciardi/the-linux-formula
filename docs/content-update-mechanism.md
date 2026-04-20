@@ -33,7 +33,6 @@ fetchNews();  // Called immediately on worker start
 |-----------|-------|------------|
 | `POLL_INTERVAL` | 3600000ms | 1 hour between checks |
 | `FETCH_URL` | `/news/news-feed.json` | News data endpoint |
-| `VERSION_URL` | `/version.txt` | Version file for auto-update |
 
 ### 3. Hash-Based Change Detection
 
@@ -50,29 +49,13 @@ if (hash === lastHash && lastVersion !== null) {
 
 Using content hash (not timestamp) ensures updates only when content actually changes.
 
-### 4. Version Checking
-
-```javascript
-// Fetch version.txt
-const remoteVersion = (await versionResponse.text()).trim();
-
-// If version changed, notify main thread
-if (lastVersion !== null && remoteVersion !== lastVersion) {
-  self.postMessage({ type: 'version-mismatch', 
-    oldVersion: lastVersion, 
-    newVersion: remoteVersion 
-  });
-}
-```
-
-### 5. Message Types
+### 4. Message Types
 
 | Type | Payload | Action |
 |------|---------|--------|
-| `news` | `{data, version, hash}` | Render articles |
+| `news` | `{data, hash}` | Render articles |
 | `error` | `{message}` | Show error |
 | `unchanged` | — | Skip (cache valid) |
-| `version-mismatch` | `{oldVersion, newVersion}` | Clear cache, force reload |
 
 ## Cache Flow (Main.js)
 
@@ -123,20 +106,6 @@ worker.onmessage = function(e) {
 };
 ```
 
-## Version Mismatch Handling
-
-When `version.txt` changes (indicating a new site build):
-
-```javascript
-if (e.data.type === 'version-mismatch') {
-  clearArticleStorage(currentLang);           // Clear old cache
-  storeAppVersion(e.data.newVersion);    // Update version
-  worker.postMessage({ type: 'refresh' }); // Force fetch
-}
-```
-
-This ensures users always get the latest content when the site is rebuilt.
-
 ## Error Handling
 
 ### Network Errors
@@ -156,5 +125,5 @@ This ensures users always get the latest content when the site is rebuilt.
 1. **Non-blocking**: Worker runs independently of UI
 2. **Efficient**: Hash-based change detection skips unnecessary renders
 3. **Offline-capable**: localStorage provides instant load
-4. **Auto-updating**: Version mismatch triggers cache invalidation
+4. **Simple**: No version.txt logic (PWA handles shell updates)
 5. **Compression**: LZ-string reduces localStorage usage

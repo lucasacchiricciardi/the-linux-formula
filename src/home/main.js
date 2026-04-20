@@ -418,7 +418,6 @@
         // Store in localStorage with compression
         compressAndStore(currentLang, msg.data);
         if (msg.hash) storeHash(msg.hash);
-        storeVersion(msg.version || '2.0.0');
         // Store all articles for search
         allArticles = msg.data;
         // Filter articles by current language (client-side filtering)
@@ -429,13 +428,7 @@
       } else if (msg.type === 'error') {
         showError('Unable to load news. Please check your connection.');
       } else if (msg.type === 'unchanged') {
-        // no action needed
-      } else if (msg.type === 'version-mismatch') {
-        // Handle version mismatch - invalidate cache and force reload
-        clearArticleStorage(currentLang);
-        storeAppVersion(msg.newVersion);
-        // Force refresh of news
-        worker.postMessage({ type: 'refresh' });
+        // no action needed - cache valid
       }
     } catch (err) {
       showError('An error occurred while loading news.');

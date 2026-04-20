@@ -193,8 +193,8 @@ describe('main.js — localStorage and compression', () => {
     assert.ok(src.includes("tlf_version'"), 'must use tlf_version key');
   });
 
-  it('should have version-mismatch handler', () => {
-    assert.ok(src.includes("type === 'version-mismatch'"), 'must handle version-mismatch');
+it('should handle unchanged message type', () => {
+    assert.ok(src.includes("'unchanged'"), 'must handle unchanged type');
   });
 
   it('should clear cache on version-mismatch', () => {

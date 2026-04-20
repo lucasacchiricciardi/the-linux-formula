@@ -1,9 +1,7 @@
 const FETCH_URL = '/news/news-feed.json';
-const VERSION_URL = '/version.txt';
 const POLL_INTERVAL = 3600000;
 
 let lastHash = null;
-let lastVersion = null;
 let consecutiveErrors = 0;
 let pollTimeout;
 
@@ -21,10 +19,7 @@ async function computeHash(data) {
 
 async function fetchNews() {
   try {
-    const [newsResponse, versionResponse] = await Promise.all([
-      fetch(FETCH_URL),
-      fetch(VERSION_URL).catch(() => null)
-    ]);
+    const newsResponse = await fetch(FETCH_URL);
 
     if (!newsResponse.ok) {
       self.postMessage({ type: 'error', message: `HTTP ${newsResponse.status}: ${newsResponse.statusText}` });
@@ -39,24 +34,16 @@ async function fetchNews() {
     const data = await newsResponse.text();
     const hash = await computeHash(data);
 
-    if (hash === lastHash && lastVersion !== null) {
+    // Skip if content unchanged
+    if (hash === lastHash) {
       self.postMessage({ type: 'unchanged' });
       scheduleNextPoll(POLL_INTERVAL);
       return;
     }
 
-    if (versionResponse && versionResponse.ok) {
-      const remoteVersion = (await versionResponse.text()).trim();
-      if (lastVersion !== null && remoteVersion !== lastVersion) {
-        self.postMessage({ type: 'version-mismatch', oldVersion: lastVersion, newVersion: remoteVersion });
-      }
-      lastVersion = remoteVersion;
-    }
-
-    lastVersion = lastVersion || '2.0.0';
     lastHash = hash;
     const parsed = JSON.parse(data);
-    self.postMessage({ type: 'news', data: parsed.articles || [], version: lastVersion, hash: hash });
+    self.postMessage({ type: 'news', data: parsed.articles || [], hash: hash });
     consecutiveErrors = 0;
     scheduleNextPoll(POLL_INTERVAL);
   } catch (err) {
