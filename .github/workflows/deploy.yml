@@ -29,12 +29,12 @@ jobs:
 
       - name: Run tests
         run: |
-          node --test scripts/build-news.test.js
+          node --test scripts/build-news.test.mjs
           node --test src/home/newsWorker.test.js
           node --test src/home/main.test.js
 
       - name: Build site
-        run: node scripts/build-news.js
+        run: node scripts/build-news.mjs
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v10
