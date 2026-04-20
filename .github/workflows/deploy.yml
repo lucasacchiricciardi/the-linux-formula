@@ -10,6 +10,9 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -39,7 +42,7 @@ jobs:
           urls: |
             https://lucasacchiricciardi.github.io/the-linux-formula/
           configPath: ./lighthouserc.js
-          uploadArtifacts: true
+          uploadArtifacts: false
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
