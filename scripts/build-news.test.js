@@ -35,8 +35,8 @@ describe('build-news.js', () => {
     execSync(`node ${SCRIPT}`, { cwd: ROOT });
     const feed = JSON.parse(readFileSync(FEED_OUTPUT, 'utf-8'));
 
-    const kernel = feed.articles.find(a => a.id === 'kernel-61-lts');
-    assert.ok(kernel, 'should find kernel-61-lts article');
+    const kernel = feed.articles.find(a => a.id === 'kernel-61-lts-it');
+    assert.ok(kernel, 'should find kernel-61-lts-it article');
     assert.equal(kernel.title, 'Kernel 6.1 e la Long Term Support');
     assert.equal(kernel.date, '2026-04-15');
     assert.deepEqual(kernel.tags, ['kernel', 'lts', 'sysadmin']);
@@ -47,8 +47,8 @@ describe('build-news.js', () => {
     execSync(`node ${SCRIPT}`, { cwd: ROOT });
     const feed = JSON.parse(readFileSync(FEED_OUTPUT, 'utf-8'));
 
-    const kernel = feed.articles.find(a => a.id === 'kernel-61-lts');
-    assert.ok(kernel, 'should find kernel-61-lts article');
+    const kernel = feed.articles.find(a => a.id === 'kernel-61-lts-it');
+    assert.ok(kernel, 'should find kernel-61-lts-it article');
     assert.equal(kernel.lang, 'it', 'lang should be extracted from frontmatter');
   });
 
@@ -56,8 +56,8 @@ describe('build-news.js', () => {
     execSync(`node ${SCRIPT}`, { cwd: ROOT });
     const feed = JSON.parse(readFileSync(FEED_OUTPUT, 'utf-8'));
 
-    const minimal = feed.articles.find(a => a.id === 'minimal-article');
-    assert.ok(minimal, 'should find minimal-article');
+    const minimal = feed.articles.find(a => a.id === 'minimal-article-it');
+    assert.ok(minimal, 'should find minimal-article-it');
     assert.equal(minimal.lang, 'it', 'lang should default to it when missing');
   });
 
@@ -65,9 +65,9 @@ describe('build-news.js', () => {
     execSync(`node ${SCRIPT}`, { cwd: ROOT });
     const feed = JSON.parse(readFileSync(FEED_OUTPUT, 'utf-8'));
 
-    const minimal = feed.articles.find(a => a.id === 'minimal-article');
-    assert.ok(minimal, 'should find minimal-article');
-    assert.equal(minimal.title, 'minimal-article');
+    const minimal = feed.articles.find(a => a.id === 'minimal-article-it');
+    assert.ok(minimal, 'should find minimal-article-it');
+    assert.equal(minimal.title, 'minimal-article-it');
     assert.equal(minimal.date, null);
     assert.deepEqual(minimal.tags, []);
   });
@@ -80,6 +80,16 @@ describe('build-news.js', () => {
     for (let i = 1; i < dated.length; i++) {
       assert.ok(dated[i - 1].date >= dated[i].date, `${dated[i - 1].date} should be >= ${dated[i].date}`);
     }
+  });
+
+  it('should support multilingual articles (English)', () => {
+    execSync(`node ${SCRIPT}`, { cwd: ROOT });
+    const feed = JSON.parse(readFileSync(FEED_OUTPUT, 'utf-8'));
+
+    const kernelEn = feed.articles.find(a => a.id === 'kernel-61-lts-en');
+    assert.ok(kernelEn, 'should find kernel-61-lts-en article');
+    assert.equal(kernelEn.lang, 'en', 'lang should be en');
+    assert.ok(kernelEn.content.length > 0, 'content should not be empty');
   });
 
   it('should produce idempotent output', () => {
