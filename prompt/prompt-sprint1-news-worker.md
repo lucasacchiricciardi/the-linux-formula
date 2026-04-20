@@ -1,7 +1,7 @@
 # Prompt di Fase: Implementazione Modulo News (Vanilla JS & Local Build)
 
 > **Regola fondamentale:** *Safety first, little often, double check*
-> Leggere `[ROOT_PROGETTO]/export/prd.md` prima di iniziare.
+> Leggere `[ROOT_PROGETTO]/docs/prd.md` prima di iniziare.
 
 ## 1. Prompt di Fase (Scope of Work)
 Implementare un sistema asincrono per la gestione delle news basato esclusivamente su HTML5, CSS3 e Vanilla JS. Il flusso prevede uno script locale per la conversione statica dei file Markdown e un Web Worker client-side che interroga i dati compilati per aggiornare la UI della homepage senza bloccare il main thread. Nessun tool di automazione esterno (n8n) è previsto.

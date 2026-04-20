@@ -22,7 +22,7 @@ Spec-Driven Architecture — writes technical specifications BEFORE code impleme
 ## Constraints
 - MUST write specs BEFORE any implementation
 - MUST follow ADR format: Context → Decision → Consequences
-- MUST validate against prd.md requirements
+- MUST validate against docs/prd.md requirements
 - MUST update `export/architecture.md` for every significant decision
 
 ## ADR Format

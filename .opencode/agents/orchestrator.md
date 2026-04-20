@@ -22,7 +22,7 @@ Project Coordinator — single interface with the user. Orchestrates all other a
 
 ## Constraints
 - MUST use sequential-thinking MCP for non-trivial decisions
-- MUST read prd.md before any implementation
+- MUST read docs/prd.md before any implementation
 - MUST validate all deliverables against specifications
 - MUST maintain export/kanban.md with current task status
 
