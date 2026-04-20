@@ -65,3 +65,16 @@
 - Supported syntax: `#`/`##`/`###` headers, `**bold**`, `*italic*`, `` `code` ``, `[link](url)`, `- list items`, plain paragraphs.
 - Not supported: code fences, blockquotes, images, tables, nested lists.
 - Rationale: zero npm dependencies; the source articles are controlled content (developer-authored). A full markdown library (e.g., `marked`) could be added later if content complexity increases, but the build script must remain zero-dependency.
+
+### ADR-010: Hash-Based Content Updates (v2.0)
+- NewsWorker computes SHA-256 hash of `news-feed.json` on each fetch.
+- If hash unchanged → send `{ type: 'unchanged' }`, skip rendering.
+- Message types: `{ type: 'news', data, hash }`, `{ type: 'error', message }`, `{ type: 'unchanged' }`.
+- Rationale: hash already detects content changes. PWA handles shell updates. Removed version.txt logic (redundant).
+
+### ADR-011: Error Boundaries
+- `window.onerror` global handler catches unhandled JavaScript errors.
+- `window.onunhandledrejection` catches promise rejections.
+- Try-catch in critical paths: `worker.onmessage`, `initializeOfflineFirst`.
+- Generic user-facing error messages (no stack traces exposed).
+- Rationale: graceful degradation in production without leaking internal details.

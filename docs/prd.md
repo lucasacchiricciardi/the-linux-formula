@@ -218,14 +218,11 @@ Il Worker esegue un sotto-processo di version checking PRIMA di ogni fetch di ne
 
 #### 7.6.5 Message Protocol Esteso
 
-Il Worker comunica al main thread anche lo stato del version checking:
+Il Worker comunica al main thread lo stato del contenuto:
 
 ```javascript
-// Version mismatch - cache invalidata
-self.postMessage({ type: 'version-mismatch', oldVersion: '2.0.0', newVersion: '2.0.1' });
-
-// Seguito da fetch completo delle news
-self.postMessage({ type: 'news', data: [...], source: 'forced-update' });
+// Contenuto invariato (hash uguale) - skip rendering
+self.postMessage({ type: 'unchanged' });
 ```
 
 ---
@@ -257,10 +254,10 @@ self.postMessage({ type: 'news', data: [...], source: 'forced-update' });
 ### 8.3 Main Thread (`src/home/main.js`)
 
 - Istanzia Web Worker
-- Gestisce messaggi: `news`, `unchanged`, `error`, `version-mismatch`
+- Gestisce messaggi: `news`, `unchanged`, `error`
 - Gestisce localStorage: compressione/decompressione LZ-string
 - Gestisce language switcher: cookie + localStorage
-- Gestisce invalidazione cache: quando riceve `version-mismatch`, clear localStorage articoli
+- Hash-based change detection (content unchanged → skip rendering)
 - Aggiorna DOM: `createElement` + `textContent` (NO innerHTML)
 
 ### 8.4 UI (`src/home/index.html`)
@@ -280,9 +277,8 @@ self.postMessage({ type: 'news', data: [...], source: 'forced-update' });
 
 ### 9.2 Web Worker
 - No `window`/`document` globals
-- Message protocol: news/unchanged/error/version-mismatch
-- Hash calculation
-- Version checking: fetch version.txt, compare, invalidate if needed
+- Message protocol: news/unchanged/error
+- Hash calculation via crypto.subtle
 - Polling interval: 1 ora
 
 ### 9.3 Main Thread

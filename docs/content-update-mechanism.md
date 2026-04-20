@@ -41,7 +41,7 @@ fetchNews();  // Called immediately on worker start
 const hash = await computeHash(data);
 
 // If hash unchanged, skip rendering
-if (hash === lastHash && lastVersion !== null) {
+if (hash === lastHash) {
   self.postMessage({ type: 'unchanged' });
   return;  // No update needed
 }

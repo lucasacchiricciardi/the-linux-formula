@@ -182,7 +182,7 @@ Commit `8fadf74` ha introdotto le fondamenta v2.0 nel build script e nel worker:
 | 3 | Web Worker filtra articoli per lingua rilevata | ❌ | Worker invia TUTTI gli articoli, nessun filtro |
 | 4 | Web Worker esegue version checking ad ogni ciclo | ✅ | Fetch `/version.txt` + confronto `lastVersion` |
 | 5 | Polling interval: 1 ora | ✅ | `POLL_INTERVAL = 3600000` |
-| 6 | Se remote version > local: invalidazione cache forzata | ❌ | Worker invia `version-mismatch` ma main.js NON lo gestisce |
+| 6 | Hash comparison: skip fetch se cache valida | ✅ | Hash calcolato nel worker, confrontato con cache |
 | 7 | Language switcher imposta cookie e aggiorna contenuto | ❌ | Nessun language switcher nell'UI |
 | 8 | Articoli compressi con LZ-string in localStorage | ❌ | Nessuna integrazione LZ-string |
 | 9 | Offline: articoli visualizzati da localStorage decompresso | ❌ | Nessuna lettura da localStorage |
@@ -209,7 +209,7 @@ Commit `8fadf74` ha introdotto le fondamenta v2.0 nel build script e nel worker:
 | 5.13 | Worker sends hash in news message | `worker` | High | `src/home/newsWorker.js` | Aggiungere `hash` al messaggio `{ type: 'news', data, version, hash }` |
 | 5.14 | Test LZ-string compression | `ui` | High | `src/home/main.test.js` | Test `compressAndStore` + `retrieveAndDecompress`: roundtrip, dati coerenti, gestione errore |
 | 5.15 | Test offline-first load | `ui` | Medium | `src/home/main.test.js` | Verifica che localStorage venga letto all'avvio e renderizzato |
-| 5.16 | Handle `version-mismatch` in main.js | `ui` | High | `src/home/main.js` | In `worker.onmessage`: gestisci `type: 'version-mismatch'` → clear `tlf_articles_*` e `tlf_hash` da localStorage → aggiorna `tlf_app_version` → forza re-fetch |
+| 5.16 | Hash-based change detection + handle unchanged | `ui` | High | `src/home/main.js` | Hash comparison triggers unchanged message (simpler than version.txt) |
 | 5.17 | App version localStorage keys | `ui` | High | `src/home/main.js` | Chiavi: `tlf_version` (schema), `tlf_app_version` (app per auto-update). Salvare/leggere in `worker.onmessage` |
 | 5.18 | Migration logic v1.x → v2.0 | `ui` | Medium | `src/home/main.js` | All'avvio: se `tlf_version` assente o ≠ `2.0.0` → clear tutte le chiavi `tlf_*` → set `tlf_version = 2.0.0` → mostra notifica "Benvenuto in v2.0" |
 | 5.19 | Test version-mismatch handling | `ui` | Medium | `src/home/main.test.js` | Verifica che `version-mismatch` triggeri clear cache + re-fetch |
