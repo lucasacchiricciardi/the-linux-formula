@@ -67,6 +67,18 @@
     errorContainer.textContent = '';
   }
 
+  var menuBtn = document.getElementById('mobile-menu-btn');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+      var icon = menuBtn.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.textContent = mobileMenu.classList.contains('hidden') ? 'menu' : 'close';
+      }
+    });
+  }
+
   worker.onmessage = function(e) {
     var msg = e.data;
     if (msg.type === 'news') {

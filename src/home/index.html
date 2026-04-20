@@ -10,6 +10,7 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://lucasacchiricciardi.github.io/the-linux-formula/"/>
 <link rel="canonical" href="https://lucasacchiricciardi.github.io/the-linux-formula/"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <title>The Linux Formula</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -128,9 +129,13 @@
 <a class="text-primary font-bold border-l-4 border-primary px-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#">Home</a>
 <a class="text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors hover:-translate-y-0.5 transform duration-150" href="#">LogWhispererAI</a>
 </div>
-<button class="md:hidden text-on-surface">
+<button class="md:hidden text-on-surface" id="mobile-menu-btn" aria-label="Toggle navigation menu">
 <span class="material-symbols-outlined">menu</span>
 </button>
+</div>
+<div id="mobile-menu" class="hidden md:hidden px-12 pb-4">
+<a class="block text-primary font-bold border-l-4 border-primary px-2 py-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#">Home</a>
+<a class="block text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors py-2 px-2" href="#">LogWhispererAI</a>
 </div>
 <div class="h-px w-full bg-outline-variant/20"></div>
 </nav>
