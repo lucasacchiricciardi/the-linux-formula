@@ -1,4 +1,5 @@
-const FETCH_URL = '/news/news-feed.json';
+const BASE_PATH = '/the-linux-formula';
+const FETCH_URL = BASE_PATH + '/news/news-feed.json';
 const POLL_INTERVAL = 3600000;
 
 let lastHash = null;
