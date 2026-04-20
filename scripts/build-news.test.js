@@ -9,7 +9,7 @@ const ROOT = join(import.meta.dirname, '..');
 const SRC_RAW = join(ROOT, 'src', 'raw');
 const DIST = join(ROOT, 'dist');
 const DIST_NEWS = join(DIST, 'news');
-const OUTPUT = join(DIST_NEWS, 'news-feed.json');
+const FEED_OUTPUT = join(DIST_NEWS, 'news-feed.json');
 const SCRIPT = join(ROOT, 'scripts', 'build-news.js');
 
 describe('build-news.js', () => {
@@ -23,9 +23,9 @@ describe('build-news.js', () => {
 
   it('should generate news-feed.json from src/raw/*.md', () => {
     execSync(`node ${SCRIPT}`, { cwd: ROOT });
-    assert.ok(existsSync(OUTPUT), 'news-feed.json should exist');
+    assert.ok(existsSync(FEED_OUTPUT), 'news-feed.json should exist');
 
-    const raw = readFileSync(OUTPUT, 'utf-8');
+    const raw = readFileSync(FEED_OUTPUT, 'utf-8');
     const feed = JSON.parse(raw);
     assert.ok(Array.isArray(feed.articles), 'feed.articles should be an array');
     assert.ok(feed.articles.length >= 3, 'should have at least 3 articles from fixtures');
@@ -33,7 +33,7 @@ describe('build-news.js', () => {
 
   it('should extract frontmatter fields (title, date, tags)', () => {
     execSync(`node ${SCRIPT}`, { cwd: ROOT });
-    const feed = JSON.parse(readFileSync(OUTPUT, 'utf-8'));
+    const feed = JSON.parse(readFileSync(FEED_OUTPUT, 'utf-8'));
 
     const kernel = feed.articles.find(a => a.id === 'kernel-61-lts');
     assert.ok(kernel, 'should find kernel-61-lts article');
@@ -45,7 +45,7 @@ describe('build-news.js', () => {
 
   it('should handle missing frontmatter with filename fallback', () => {
     execSync(`node ${SCRIPT}`, { cwd: ROOT });
-    const feed = JSON.parse(readFileSync(OUTPUT, 'utf-8'));
+    const feed = JSON.parse(readFileSync(FEED_OUTPUT, 'utf-8'));
 
     const minimal = feed.articles.find(a => a.id === 'minimal-article');
     assert.ok(minimal, 'should find minimal-article');
@@ -56,7 +56,7 @@ describe('build-news.js', () => {
 
   it('should sort articles by date descending (most recent first)', () => {
     execSync(`node ${SCRIPT}`, { cwd: ROOT });
-    const feed = JSON.parse(readFileSync(OUTPUT, 'utf-8'));
+    const feed = JSON.parse(readFileSync(FEED_OUTPUT, 'utf-8'));
 
     const dated = feed.articles.filter(a => a.date !== null);
     for (let i = 1; i < dated.length; i++) {
@@ -66,10 +66,10 @@ describe('build-news.js', () => {
 
   it('should produce idempotent output', () => {
     execSync(`node ${SCRIPT}`, { cwd: ROOT });
-    const first = readFileSync(OUTPUT, 'utf-8');
+    const first = readFileSync(FEED_OUTPUT, 'utf-8');
 
     execSync(`node ${SCRIPT}`, { cwd: ROOT });
-    const second = readFileSync(OUTPUT, 'utf-8');
+    const second = readFileSync(FEED_OUTPUT, 'utf-8');
 
     assert.equal(first, second, 'running twice should produce identical output');
   });
@@ -105,6 +105,22 @@ describe('build-news.js — dist assembly', () => {
     assert.ok(existsSync(join(DIST, 'main.js')), 'dist/main.js should exist');
     assert.ok(existsSync(join(DIST, 'newsWorker.js')), 'dist/newsWorker.js should exist');
     assert.ok(existsSync(join(DIST, 'news', 'news-feed.json')), 'dist/news/news-feed.json should exist');
+  });
+
+  it('should generate robots.txt', () => {
+    execSync(`node ${SCRIPT}`, { cwd: ROOT });
+    const robots = readFileSync(join(DIST, 'robots.txt'), 'utf-8');
+    assert.ok(robots.includes('User-agent: *'), 'robots.txt must have User-agent');
+    assert.ok(robots.includes('Allow: /'), 'robots.txt must Allow /');
+    assert.ok(robots.includes('Sitemap:'), 'robots.txt must reference sitemap');
+  });
+
+  it('should generate sitemap.xml', () => {
+    execSync(`node ${SCRIPT}`, { cwd: ROOT });
+    const sitemap = readFileSync(join(DIST, 'sitemap.xml'), 'utf-8');
+    assert.ok(sitemap.includes('<?xml'), 'sitemap must be XML');
+    assert.ok(sitemap.includes('<urlset'), 'sitemap must have urlset');
+    assert.ok(sitemap.includes('<loc>'), 'sitemap must have loc entries');
   });
 });
 

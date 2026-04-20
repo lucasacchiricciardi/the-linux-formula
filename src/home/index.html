@@ -5,13 +5,29 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta name="description" content="The Linux Formula: Tools, Apps, and Insights for the Open Source World. Architectural-grade insights for enterprise Linux systems."/>
+<meta name="robots" content="index, follow"/>
 <meta property="og:title" content="The Linux Formula"/>
 <meta property="og:description" content="Tools, Apps, and Insights for the Open Source World."/>
 <meta property="og:type" content="website"/>
+<meta property="og:image" content="https://lucasacchiricciardi.github.io/the-linux-formula/favicon.svg"/>
 <meta property="og:url" content="https://lucasacchiricciardi.github.io/the-linux-formula/"/>
 <link rel="canonical" href="https://lucasacchiricciardi.github.io/the-linux-formula/"/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <title>The Linux Formula</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "The Linux Formula",
+  "url": "https://lucasacchiricciardi.github.io/the-linux-formula/",
+  "logo": "https://lucasacchiricciardi.github.io/the-linux-formula/favicon.svg",
+  "description": "Tools, Apps, and Insights for the Open Source World. Architectural-grade insights for enterprise Linux systems.",
+  "sameAs": [
+    "https://www.linkedin.com/in/lucasacchi/",
+    "https://www.youtube.com/@lucasacchinet"
+  ]
+}
+</script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -124,19 +140,19 @@
 <div class="flex justify-between items-center px-12 py-6 max-w-7xl mx-auto">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">terminal</span>
-<a class="text-xl font-headline font-black tracking-tighter text-on-primary-fixed" href="#">The Linux Formula</a>
+<a class="text-xl font-headline font-black tracking-tighter text-on-primary-fixed" href="/">The Linux Formula</a>
 </div>
 <div class="hidden md:flex space-x-8 items-center bg-surface-container-low px-6 py-2">
-<a class="text-primary font-bold border-l-4 border-primary px-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#">Home</a>
-<a class="text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors hover:-translate-y-0.5 transform duration-150" href="#">LogWhispererAI</a>
+<a class="text-primary font-bold border-l-4 border-primary px-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">Home</a>
+<a class="text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors hover:-translate-y-0.5 transform duration-150" href="https://www.youtube.com/@lucasacchinet" rel="noopener noreferrer" target="_blank">LogWhispererAI</a>
 </div>
 <button class="md:hidden text-on-surface" id="mobile-menu-btn" aria-label="Toggle navigation menu">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
 <div id="mobile-menu" class="hidden md:hidden px-12 pb-4">
-<a class="block text-primary font-bold border-l-4 border-primary px-2 py-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#">Home</a>
-<a class="block text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors py-2 px-2" href="#">LogWhispererAI</a>
+<a class="block text-primary font-bold border-l-4 border-primary px-2 py-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">Home</a>
+<a class="block text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors py-2 px-2" href="https://www.youtube.com/@lucasacchinet" rel="noopener noreferrer" target="_blank">LogWhispererAI</a>
 </div>
 <div class="h-px w-full bg-outline-variant/20"></div>
 </nav>
@@ -157,11 +173,11 @@
                 A rigorous, methodical approach to system administration. Moving beyond generic tutorials to deliver architect-level blueprints for robust, scalable infrastructure.
             </p>
 <div class="flex flex-wrap gap-4 pt-4">
-<a class="bg-primary text-on-primary font-label text-sm uppercase tracking-widest px-8 py-4 hover:bg-primary-container transition-colors flex items-center gap-2 rounded-none" href="#">
+<a class="bg-primary text-on-primary font-label text-sm uppercase tracking-widest px-8 py-4 hover:bg-primary-container transition-colors flex items-center gap-2 rounded-none" href="#news-feed-container">
 <span>Explore Insights</span>
 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
-<a class="border-b-2 border-outline-variant/20 text-on-surface font-label text-sm uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-primary transition-all flex items-center gap-2 rounded-none bg-surface-container-low" href="#">
+<a class="border-b-2 border-outline-variant/20 text-on-surface font-label text-sm uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-primary transition-all flex items-center gap-2 rounded-none bg-surface-container-low" href="https://www.youtube.com/@lucasacchinet" rel="noopener noreferrer" target="_blank">
 <span>LogWhispererAI Beta</span>
 </a>
 </div>
@@ -312,8 +328,8 @@
 <div>
 <span class="block text-on-surface font-semibold mb-4 border-b border-outline-variant/20 pb-2">Comm_Links</span>
 <ul class="space-y-2">
-<li>Cell: +39 3939242165</li>
-<li>Email: info@lucasacchi.net</li>
+<li>Cell: <span id="phone-obf"></span></li>
+<li>Email: <span id="email-obf"></span></li>
 </ul>
 </div>
 </div>
@@ -322,7 +338,7 @@
 <div class="text-left md:text-right">
 <p>© The Linux Formula.</p>
 <p>All Rights Reserved.</p>
-<p class="mt-2">2023 - 2026</p>
+<p class="mt-2" id="copyright-years"></p>
 </div>
 </div>
 </div>

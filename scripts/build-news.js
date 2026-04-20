@@ -5,7 +5,9 @@ const SRC_HOME = process.env.BUILD_SRC_HOME || 'src/home';
 const SRC_RAW = process.env.BUILD_NEWS_SRC || 'src/raw';
 const DIST = process.env.BUILD_DIST || 'dist';
 const DIST_NEWS = join(DIST, 'news');
-const OUTPUT = join(DIST_NEWS, 'news-feed.json');
+const FEED_OUTPUT = join(DIST_NEWS, 'news-feed.json');
+
+const SITE_URL = process.env.SITE_URL || 'https://lucasacchiricciardi.github.io/the-linux-formula';
 
 export function parseFrontmatter(content) {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
@@ -147,7 +149,18 @@ function assembleDist() {
   }
 
   const feed = buildNewsFeed(SRC_RAW);
-  writeFileSync(OUTPUT, JSON.stringify(feed, null, 2) + '\n', 'utf-8');
+  writeFileSync(FEED_OUTPUT, JSON.stringify(feed, null, 2) + '\n', 'utf-8');
+
+  const robotsTxt = `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+  writeFileSync(join(DIST, 'robots.txt'), robotsTxt, 'utf-8');
+
+  const sitemapEntries = feed.articles
+    .filter(a => a.date)
+    .map(a => `  <url>\n    <loc>${SITE_URL}/</loc>\n    <lastmod>${a.date}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>`)
+    .join('\n');
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${SITE_URL}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n${sitemapEntries}\n</urlset>\n`;
+  writeFileSync(join(DIST, 'sitemap.xml'), sitemapXml, 'utf-8');
+
   console.log(`Assembled ${DIST}/ with ${feed.articles.length} article(s)`);
 }
 

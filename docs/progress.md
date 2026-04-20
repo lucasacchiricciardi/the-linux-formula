@@ -144,14 +144,14 @@ Total: **19 tests, 0 failures**. Zero npm dependencies — Node 24 built-in `nod
 
 | Task | Status | Notes |
 |------|--------|-------|
-| 4.1 OG image | ⬜ Planned | |
-| 4.2 Dynamic copyright year | ⬜ Planned | |
-| 4.3 Nav link targets | ⬜ Planned | |
-| 4.4 Email/phone obfuscation | ⬜ Planned | |
-| 4.5 Robots meta | ⬜ Planned | |
-| 4.6 JSON-LD structured data | ⬜ Planned | |
-| 4.7 EditorConfig | ⬜ Planned | |
-| 4.8 robots.txt + sitemap.xml | ⬜ Planned | |
+| 4.1 OG image | ✅ Done | Added og:image meta tag pointing to favicon.svg |
+| 4.2 Dynamic copyright year | ✅ Done | JS-injected year via `new Date().getFullYear()` |
+| 4.3 Nav link targets | ✅ Done | Replaced all `href="#"` with section anchors or external URLs |
+| 4.4 Email/phone obfuscation | ✅ Done | JS-injected via createElement, not in plaintext HTML |
+| 4.5 Robots meta | ✅ Done | `<meta name="robots" content="index, follow">` |
+| 4.6 JSON-LD structured data | ✅ Done | Schema.org Organization markup added |
+| 4.7 EditorConfig | ✅ Done | `.editorconfig` with 2-space indent, LF, trailing newline |
+| 4.8 robots.txt + sitemap.xml | ✅ Done | Build script generates both, tests added |
 
 ### Validation Checklist
 

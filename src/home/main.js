@@ -106,6 +106,31 @@
     });
   }
 
+  var copyrightEl = document.getElementById('copyright-years');
+  if (copyrightEl) {
+    copyrightEl.textContent = '2023 - ' + new Date().getFullYear();
+  }
+
+  var phoneEl = document.getElementById('phone-obf');
+  if (phoneEl) {
+    var p = '+39 ' + '393' + '92' + '42165';
+    var phA = document.createElement('a');
+    phA.href = 'tel:' + p;
+    phA.textContent = p;
+    phA.className = 'text-on-surface-variant hover:text-primary transition-colors';
+    phoneEl.appendChild(phA);
+  }
+
+  var emailEl = document.getElementById('email-obf');
+  if (emailEl) {
+    var e = 'info' + '@' + 'lucasacchi.net';
+    var emA = document.createElement('a');
+    emA.href = 'mailto:' + e;
+    emA.textContent = e;
+    emA.className = 'text-on-surface-variant hover:text-primary transition-colors';
+    emailEl.appendChild(emA);
+  }
+
   worker.onmessage = function(e) {
     var msg = e.data;
     if (msg.type === 'news') {
