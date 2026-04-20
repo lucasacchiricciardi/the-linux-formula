@@ -259,3 +259,29 @@ describe('index.html — search UI', () => {
     assert.ok(html.includes('material-symbols-outlined') && html.includes('search'), 'must have search icon');
   });
 });
+
+describe('main.js — contact form', () => {
+  const src = readFileSync(join(ROOT, 'src', 'home', 'main.js'), 'utf-8');
+
+  it('should have contact-form element', () => {
+    assert.ok(src.includes("'contact-form'"), 'must reference contact-form');
+  });
+
+  it('should open mailto on submit', () => {
+    assert.ok(src.includes('mailto:info@lucasacchi.net'), 'must open mailto link');
+  });
+});
+
+describe('index.html — contact form UI', () => {
+  const html = readFileSync(join(ROOT, 'src', 'home', 'index.html'), 'utf-8');
+
+  it('should have contact form', () => {
+    assert.ok(html.includes('id="contact-form"'), 'index.html must have contact form');
+  });
+
+  it('should have name, email, message fields', () => {
+    assert.ok(html.includes('name="name"'), 'must have name field');
+    assert.ok(html.includes('name="email"'), 'must have email field');
+    assert.ok(html.includes('name="message"'), 'must have message field');
+  });
+});
