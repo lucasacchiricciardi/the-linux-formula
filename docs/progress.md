@@ -311,3 +311,30 @@ node --test src/home/newsWorker.test.js  # 7 pass
 - [x] Hash comparison: skip fetch se cache valida (Step 5.13: hash nel message, storage in Step 5.10)
 - [x] Migrazione: clear localStorage vecchio al primo accesso v2.0 (Step 5.18)
 - [x] Zero XSS: solo `createElement` + `textContent`
+
+---
+
+## Sprint 6 — Future Improvements (Planned)
+
+### Potential Enhancements
+
+| # | Task | Scope | Priority | Description |
+|---|------|-------|----------|-------------|
+| 6.1 | Add more article content | `content` | Medium | Expand EN/IT article library with more topics |
+| 6.2 | Performance optimization | `ui` | Low | Lazy loading for images, font subsetting |
+| 6.3 | PWA support | `ui` | Low | Add service worker for full offline experience |
+| 6.4 | Analytics | `ui` | Low | Privacy-friendly analytics (Plausible/Matomo) |
+| 6.5 | Contact form | `ui` | Medium | Netlify Forms or formspree integration |
+| 6.6 | Newsletter signup | `ui` | Low | Email subscription for new articles |
+| 6.7 | Social sharing buttons | `ui` | Low | Share to LinkedIn, Twitter, etc. |
+| 6.8 | Search functionality | `ui` | Medium | Client-side search through articles |
+| 6.9 | Related articles | `ui` | Low | Show related content based on tags |
+| 6.10 | Code syntax highlighting | `build` | Low | Highlight code blocks in articles |
+
+### Technical Debt
+
+- [ ] Review all console.log statements (currently used for debug)
+- [ ] Add proper error boundaries for production
+- [ ] Set up error tracking (Sentry)
+- [ ] Performance budget monitoring
+- [ ] Lighthouse CI in GitHub Actions
