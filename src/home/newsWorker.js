@@ -1,10 +1,16 @@
-const BASE_PATH = '/the-linux-formula';
-const FETCH_URL = BASE_PATH + '/news/news-feed.json';
-const POLL_INTERVAL = 3600000;
+// Base URL for fetching news, set by main thread via 'setBaseUrl' message
+let BASE_URL = '';
+let FETCH_URL = '';
 
 let lastHash = null;
 let consecutiveErrors = 0;
 let pollTimeout;
+
+// Default fallback for backward compatibility (should be overridden by main thread)
+if (!BASE_URL) {
+  BASE_URL = '/the-linux-formula';
+  FETCH_URL = BASE_URL + '/news/news-feed.json';
+}
 
 function scheduleNextPoll(interval) {
   pollTimeout = setTimeout(fetchNews, interval);
@@ -60,6 +66,10 @@ async function fetchNews() {
 self.onmessage = function(e) {
   if (e.data && e.data.type === 'refresh') {
     fetchNews();
+  }
+  if (e.data && e.data.type === 'setBaseUrl') {
+    BASE_URL = e.data.baseUrl;
+    FETCH_URL = BASE_URL + '/news/news-feed.json';
   }
 };
 

@@ -22,6 +22,8 @@
     var worker;
     try {
       worker = new Worker('newsWorker.js');
+      // Set base URL for worker (important for GitHub Pages subdirectory)
+      worker.postMessage({ type: 'setBaseUrl', baseUrl: '' });
     } catch (e) {
       showError('Failed to initialize news. Please refresh the page.');
       return;
