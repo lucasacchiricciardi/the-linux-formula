@@ -20,6 +20,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
 
@@ -30,8 +32,8 @@ jobs:
       - name: Run tests
         run: |
           node --test scripts/build-news.test.mjs
-          node --test src/home/newsWorker.test.js
-          node --test src/home/main.test.js
+          node --test src/home/newsWorker.test.mjs
+          node --test src/home/main.test.mjs
 
       - name: Build site
         run: node scripts/build-news.mjs

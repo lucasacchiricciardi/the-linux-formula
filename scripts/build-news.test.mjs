@@ -3,14 +3,14 @@ import assert from 'node:assert/strict';
 import { readFileSync, rmSync, mkdirSync, existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
-import { parseFrontmatter, markdownToHtml } from './build-news.js';
+import { parseFrontmatter, markdownToHtml } from './build-news.mjs';
 
 const ROOT = join(import.meta.dirname, '..');
 const SRC_RAW = join(ROOT, 'src', 'raw');
 const DIST = join(ROOT, 'dist');
 const DIST_NEWS = join(DIST, 'news');
 const FEED_OUTPUT = join(DIST_NEWS, 'news-feed.json');
-const SCRIPT = join(ROOT, 'scripts', 'build-news.js');
+const SCRIPT = join(ROOT, 'scripts', 'build-news.mjs');
 
 describe('build-news.js', () => {
   before(() => {
