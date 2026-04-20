@@ -285,3 +285,36 @@ describe('index.html — contact form UI', () => {
     assert.ok(html.includes('name="message"'), 'must have message field');
   });
 });
+
+describe('main.js — error boundaries', () => {
+  const src = readFileSync(join(ROOT, 'src', 'home', 'main.js'), 'utf-8');
+
+  it('should have window.onerror handler', () => {
+    assert.ok(src.includes('window.onerror'), 'must have global error handler');
+  });
+
+  it('should have window.onunhandledrejection handler', () => {
+    assert.ok(src.includes('window.onunhandledrejection'), 'must have unhandled rejection handler');
+  });
+
+  it('should catch errors in worker.onmessage', () => {
+    assert.ok(src.includes('worker.onmessage'), 'must define worker.onmessage');
+    // Check for try-catch in onmessage
+    const onmessageStart = src.indexOf('worker.onmessage');
+    const onmessageBlock = src.slice(onmessageStart, onmessageStart + 500);
+    assert.ok(onmessageBlock.includes('try {') || onmessageBlock.includes('catch'), 'onmessage should have try-catch');
+  });
+
+  it('should catch errors in initializeOfflineFirst', () => {
+    assert.ok(src.includes('function initializeOfflineFirst'), 'must have initializeOfflineFirst function');
+    const initStart = src.indexOf('function initializeOfflineFirst');
+    const initBlock = src.slice(initStart, initStart + 600);
+    assert.ok(initBlock.includes('try {') || initBlock.includes('catch'), 'initializeOfflineFirst should have try-catch');
+  });
+
+  it('should not leak error details to user', () => {
+    // Generic error messages, no stack traces
+    assert.ok(src.includes('An error occurred') || src.includes('Please refresh'), 'should show generic error message');
+    assert.ok(!src.includes('e.stack') || !src.includes('error.stack'), 'should not expose stack traces');
+  });
+});

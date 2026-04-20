@@ -1,9 +1,21 @@
 (function() {
+  // Global error handlers for production
+  window.onerror = function(message, source, lineno, colno, error) {
+    var errorMsg = 'An error occurred. Please refresh the page.';
+    showError(errorMsg);
+    // Don't prevent default - let browser log it
+    return false;
+  };
+
+  window.onunhandledrejection = function(event) {
+    showError('An error occurred. Please refresh the page.');
+  };
+
   var worker;
   try {
     worker = new Worker('newsWorker.js');
   } catch (e) {
-    showError('Failed to instantiate worker: ' + e.message);
+    showError('Failed to initialize news. Please refresh the page.');
     return;
   }
   var articlesContainer = document.getElementById('news-feed-container').querySelector('#news-feed-articles') || document.getElementById('news-feed-articles');
@@ -122,24 +134,32 @@
 
   // Offline-first: try to load from localStorage first
   function initializeOfflineFirst() {
-    handleMigration();
+    try {
+      handleMigration();
+    } catch (e) {
+      // Migration failed, continue without cache
+    }
     
     // Try to load from localStorage
-    var storedArticles = retrieveAndDecompress(currentLang);
-    
-    if (storedArticles && storedArticles.length > 0) {
-      // Store all articles for search
-      allArticles = storedArticles;
-      // Show cached content immediately
-      var filteredArticles = storedArticles.filter(function(article) {
-        return article.lang === currentLang;
-      });
-      renderArticles(filteredArticles);
+    try {
+      var storedArticles = retrieveAndDecompress(currentLang);
       
-      // Still fetch in background for updates
-      worker.postMessage({ type: 'refresh' });
-    } else {
-      // No cache, fetch normally (worker will do initial fetch)
+      if (storedArticles && storedArticles.length > 0) {
+        // Store all articles for search
+        allArticles = storedArticles;
+        // Show cached content immediately
+        var filteredArticles = storedArticles.filter(function(article) {
+          return article.lang === currentLang;
+        });
+        renderArticles(filteredArticles);
+        
+        // Still fetch in background for updates
+        worker.postMessage({ type: 'refresh' });
+      } else {
+        // No cache, fetch normally (worker will do initial fetch)
+      }
+    } catch (e) {
+      // Failed to load from localStorage, fetch from server
     }
   }
 
@@ -335,30 +355,34 @@
   }
 
   worker.onmessage = function(e) {
-    var msg = e.data;
-    if (msg.type === 'news') {
-      hideError();
-      // Store in localStorage with compression
-      compressAndStore(currentLang, msg.data);
-      if (msg.hash) storeHash(msg.hash);
-      storeVersion(msg.version || '2.0.0');
-      // Store all articles for search
-      allArticles = msg.data;
-      // Filter articles by current language (client-side filtering)
-      var filteredArticles = msg.data.filter(function(article) {
-        return article.lang === currentLang;
-      });
-      renderArticles(filteredArticles);
-    } else if (msg.type === 'error') {
-      showError(msg.message);
-    } else if (msg.type === 'unchanged') {
-      // no action needed
-    } else if (msg.type === 'version-mismatch') {
-      // Handle version mismatch - invalidate cache and force reload
-      clearArticleStorage(currentLang);
-      storeAppVersion(msg.newVersion);
-      // Force refresh of news
-      worker.postMessage({ type: 'refresh' });
+    try {
+      var msg = e.data;
+      if (msg.type === 'news') {
+        hideError();
+        // Store in localStorage with compression
+        compressAndStore(currentLang, msg.data);
+        if (msg.hash) storeHash(msg.hash);
+        storeVersion(msg.version || '2.0.0');
+        // Store all articles for search
+        allArticles = msg.data;
+        // Filter articles by current language (client-side filtering)
+        var filteredArticles = msg.data.filter(function(article) {
+          return article.lang === currentLang;
+        });
+        renderArticles(filteredArticles);
+      } else if (msg.type === 'error') {
+        showError('Unable to load news. Please check your connection.');
+      } else if (msg.type === 'unchanged') {
+        // no action needed
+      } else if (msg.type === 'version-mismatch') {
+        // Handle version mismatch - invalidate cache and force reload
+        clearArticleStorage(currentLang);
+        storeAppVersion(msg.newVersion);
+        // Force refresh of news
+        worker.postMessage({ type: 'refresh' });
+      }
+    } catch (err) {
+      showError('An error occurred while loading news.');
     }
   };
 
@@ -468,4 +492,18 @@
       // Service Worker registration failed - silently fail, app works without it
     });
   }
-})();
+// Ensure UI is visible even if script fails partially
+  } catch (err) {
+    // Last resort error handler
+    var container = document.getElementById('news-feed-container');
+    if (container) {
+      var errorDiv = document.createElement('div');
+      errorDiv.id = 'news-feed-error';
+      errorDiv.className = 'bg-error-container/50 p-4 border border-error text-error font-body';
+      errorDiv.textContent = 'An error occurred. Please refresh the page.';
+      container.appendChild(errorDiv);
+    }
+  }
+
+  // Ensure initialization completes
+})(););
