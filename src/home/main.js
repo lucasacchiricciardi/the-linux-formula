@@ -64,17 +64,34 @@
       }
     }
 
-    function retrieveAndDecompress(lang) {
-      try {
-        var compressed = localStorage.getItem(STORAGE_KEYS.ARTICLES(lang));
-        if (!compressed) return null;
-        var decompressed = LZString.decompressFromBase64(compressed);
-        return decompressed ? JSON.parse(decompressed) : null;
-      } catch (e) {
-        localStorage.removeItem(STORAGE_KEYS.ARTICLES(lang));
-        return null;
+function retrieveAndDecompress(lang) {
+  try {
+    // Try to get articles for requested language
+    var compressed = localStorage.getItem(STORAGE_KEYS.ARTICLES(lang));
+    if (compressed) {
+      var decompressed = LZString.decompressFromBase64(compressed);
+      return decompressed ? JSON.parse(decompressed) : null;
+    }
+    
+    // If not found, try to get articles from ANY language storage key
+    // (since all language keys contain the full articles dataset)
+    for (var i = 0; i < localStorage.length; i++) {
+      var key = localStorage.key(i);
+      if (key.startsWith('tlf_articles_')) {
+        compressed = localStorage.getItem(key);
+        if (compressed) {
+          var decompressed = LZString.decompressFromBase64(compressed);
+          return decompressed ? JSON.parse(decompressed) : null;
+        }
       }
     }
+    
+    return null;
+  } catch (e) {
+    localStorage.removeItem(STORAGE_KEYS.ARTICLES(lang));
+    return null;
+  }
+}
 
     function storeHash(hash) {
       localStorage.setItem(STORAGE_KEYS.HASH, hash);
@@ -357,9 +374,11 @@
           renderArticles(filteredArticles);
         } else if (msg.type === 'error') {
           showError('Unable to load news. Please check your connection.');
-        } else if (msg.type === 'unchanged') {
-          // Cache valid - no action needed
-        }
+    } else if (msg.type === 'unchanged') {
+      // Re-filter and re-render with current language
+      var filteredArticles = allArticles.filter(function(article) { return article.lang === currentLang; });
+      renderArticles(filteredArticles);
+    }
       } catch (err) {
         showError('An error occurred while loading news.');
       }
