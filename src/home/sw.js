@@ -4,18 +4,30 @@ const ASSETS_TO_CACHE = [
   '/index.html',
   '/main.js',
   '/newsWorker.js',
+  '/sw.js',
   '/favicon.svg',
+  '/manifest.json',
   '/news/news-feed.json',
   '/version.txt',
   '/robots.txt',
   '/sitemap.xml'
 ];
 
-// Install event - cache assets
+// Install event - cache assets (individual to handle missing files gracefully)
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(ASSETS_TO_CACHE);
+      return Promise.allSettled(
+        ASSETS_TO_CACHE.map(function(url) {
+          return fetch(url).then(function(response) {
+            if (response.ok) {
+              cache.put(url, response);
+            }
+          }).catch(function() {
+            // Ignore individual failures
+          });
+        })
+      );
     })
   );
   self.skipWaiting();
