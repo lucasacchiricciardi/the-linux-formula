@@ -4,12 +4,17 @@
 <html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="The Linux Formula: Tools, Apps, and Insights for the Open Source World. Architectural-grade insights for enterprise Linux systems."/>
+<meta property="og:title" content="The Linux Formula"/>
+<meta property="og:description" content="Tools, Apps, and Insights for the Open Source World."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://lucasacchiricciardi.github.io/the-linux-formula/"/>
+<link rel="canonical" href="https://lucasacchiricciardi.github.io/the-linux-formula/"/>
 <title>The Linux Formula</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
@@ -184,7 +189,14 @@
 <section id="news-feed-container" class="lg:col-span-12 mt-12 md:mt-16">
 <h2 class="font-label text-sm uppercase tracking-widest text-on-surface-variant mb-8 border-b border-outline-variant/20 pb-2 inline-block">Latest Updates</h2>
 <div id="news-feed-articles" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div id="news-feed-skeleton" class="lg:col-span-3 animate-pulse">
+<div class="h-4 bg-surface-container-highest rounded w-3/4 mb-2"></div>
+<div class="h-3 bg-surface-container-highest rounded w-1/2 mb-4"></div>
+<div class="h-3 bg-surface-container-highest rounded w-full mb-1"></div>
+<div class="h-3 bg-surface-container-highest rounded w-5/6"></div>
 </div>
+</div>
+<noscript><p class="font-body text-sm text-on-surface-variant p-4">JavaScript is required to load the news feed.</p></noscript>
 <div id="news-feed-error" class="hidden font-label text-xs uppercase tracking-widest text-error p-4 border-l-2 border-error bg-error-container"></div>
 </section>
 <!-- Bio Section Bento -->

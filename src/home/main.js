@@ -47,6 +47,8 @@
   }
 
   function renderArticles(articles) {
+    var skeleton = document.getElementById('news-feed-skeleton');
+    if (skeleton) skeleton.remove();
     while (articlesContainer.firstChild) {
       articlesContainer.removeChild(articlesContainer.firstChild);
     }

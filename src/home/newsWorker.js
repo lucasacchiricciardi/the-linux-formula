@@ -42,5 +42,3 @@ self.onmessage = function(e) {
 
 fetchNews();
 setInterval(fetchNews, POLL_INTERVAL);
-
-export { computeHash };

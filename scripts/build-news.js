@@ -31,29 +31,59 @@ function parseFrontmatter(content) {
 
 function markdownToHtml(md) {
   if (!md) return '';
-  let html = md
-    // Headers
-    .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-    // Bold and italic
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    // Code
-    .replace(/`(.*?)`/g, '<code>$1</code>')
-    // Links
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-    // Lists
-    .replace(/^- (.*$)/gm, '<li>$1</li>')
-    // Paragraphs
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/\n/g, '<br>');
-  html = '<p>' + html + '</p>';
-  // Wrap lists
-  html = html.replace(/(<li>.*<\/li>)+/g, '<ul>$&</ul>');
-  // Clean up empty paragraphs
-  html = html.replace(/<p><\/p>/g, '');
-  return html;
+  const lines = md.split('\n');
+  const blocks = [];
+  let current = [];
+
+  function flush() {
+    if (current.length > 0) {
+      blocks.push(current.join('\n'));
+      current = [];
+    }
+  }
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed === '') {
+      flush();
+    } else if (/^#{1,3}\s/.test(trimmed)) {
+      flush();
+      blocks.push(trimmed);
+    } else if (/^- /.test(trimmed)) {
+      current.push(trimmed);
+    } else {
+      current.push(trimmed);
+    }
+  }
+  flush();
+
+  const htmlBlocks = blocks.map(function(block) {
+    if (/^#{1,3}\s/.test(block)) {
+      var leveled = block.replace(/^###\s+(.*)/, '<h3>$1</h3>')
+        .replace(/^##\s+(.*)/, '<h2>$1</h2>')
+        .replace(/^#\s+(.*)/, '<h1>$1</h1>');
+      return leveled;
+    }
+    if (/^- /.test(block)) {
+      var items = block.split('\n').map(function(l) {
+        var inner = l.replace(/^- /, '');
+        inner = inner.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        inner = inner.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        inner = inner.replace(/`(.*?)`/g, '<code>$1</code>');
+        inner = inner.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+        return '<li>' + inner + '</li>';
+      });
+      return '<ul>' + items.join('') + '</ul>';
+    }
+    var p = block.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    p = p.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    p = p.replace(/`(.*?)`/g, '<code>$1</code>');
+    p = p.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+    p = p.replace(/\n/g, '<br>');
+    return '<p>' + p + '</p>';
+  });
+
+  return htmlBlocks.join('\n');
 }
 
 function buildArticle(filePath) {
