@@ -130,6 +130,8 @@
     var storedArticles = retrieveAndDecompress(currentLang);
     
     if (storedArticles && storedArticles.length > 0) {
+      // Store all articles for search
+      allArticles = storedArticles;
       // Show cached content immediately
       var filteredArticles = storedArticles.filter(function(article) {
         return article.lang === currentLang;
@@ -195,6 +197,33 @@
     articles.forEach(function(article) {
       articlesContainer.appendChild(createArticleElement(article));
     });
+  }
+
+  // Search functionality
+  var allArticles = [];
+  
+  function filterArticles(query) {
+    var q = query.toLowerCase().trim();
+    if (!q) {
+      return allArticles.filter(function(a) { return a.lang === currentLang; });
+    }
+    return allArticles.filter(function(a) {
+      if (a.lang !== currentLang) return false;
+      var title = (a.title || '').toLowerCase();
+      var content = (a.content || '').toLowerCase();
+      var tags = (a.tags || []).join(' ').toLowerCase();
+      return title.includes(q) || content.includes(q) || tags.includes(q);
+    });
+  }
+  
+  function setupSearch() {
+    var searchInput = document.getElementById('news-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        var filtered = filterArticles(e.target.value);
+        renderArticles(filtered);
+      });
+    }
   }
 
   function showError(message) {
@@ -273,6 +302,8 @@
       compressAndStore(currentLang, msg.data);
       if (msg.hash) storeHash(msg.hash);
       storeVersion(msg.version || '2.0.0');
+      // Store all articles for search
+      allArticles = msg.data;
       // Filter articles by current language (client-side filtering)
       var filteredArticles = msg.data.filter(function(article) {
         return article.lang === currentLang;
@@ -329,6 +360,12 @@
       setLanguageCookie(lang);
       worker.postMessage({ type: 'refresh' });
       updateSwitcherUI(lang);
+      // Update search results if there's a search query
+      var searchInput = document.getElementById('news-search');
+      if (searchInput && searchInput.value) {
+        var filtered = filterArticles(searchInput.value);
+        renderArticles(filtered);
+      }
     }
 
     // Desktop buttons
@@ -363,4 +400,7 @@
   
   // Initialize offline-first load strategy
   initializeOfflineFirst();
+  
+  // Initialize search
+  setupSearch();
 })();

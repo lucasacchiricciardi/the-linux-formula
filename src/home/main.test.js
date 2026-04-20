@@ -225,3 +225,37 @@ describe('newsWorker.js — hash in message', () => {
     assert.ok(src.includes('hash: hash'), 'worker must include hash in news message');
   });
 });
+
+describe('main.js — search functionality', () => {
+  const src = readFileSync(join(ROOT, 'src', 'home', 'main.js'), 'utf-8');
+
+  it('should have filterArticles function', () => {
+    assert.ok(src.includes('function filterArticles'), 'must have filterArticles function');
+  });
+
+  it('should have setupSearch function', () => {
+    assert.ok(src.includes('function setupSearch'), 'must have setupSearch function');
+  });
+
+  it('should have allArticles storage', () => {
+    assert.ok(src.includes('allArticles ='), 'must store all articles for search');
+  });
+
+  it('should search in title, content, and tags', () => {
+    assert.ok(src.includes('article.title'), 'must search in title');
+    assert.ok(src.includes('article.content'), 'must search in content');
+    assert.ok(src.includes('article.tags'), 'must search in tags');
+  });
+});
+
+describe('index.html — search UI', () => {
+  const html = readFileSync(join(ROOT, 'src', 'home', 'index.html'), 'utf-8');
+
+  it('should have search input', () => {
+    assert.ok(html.includes('id="news-search"'), 'index.html must have search input');
+  });
+
+  it('should have search icon', () => {
+    assert.ok(html.includes('material-symbols-outlined') && html.includes('search'), 'must have search icon');
+  });
+});
