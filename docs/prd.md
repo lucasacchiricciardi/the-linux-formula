@@ -301,22 +301,22 @@ self.postMessage({ type: 'news', data: [...], source: 'forced-update' });
 ## 10. Versioning
 
 - **Schema:** SemVer (`major.minor.patch`)
-- **v2.0.0:** Multilingua + localStorage compression (current)
+- **v2.0.0:** Multilingua + localStorage compression + auto-update (✅ COMPLETE - Sprint 5)
 - **v1.x.x:** Legacy (non più supportato, localStorage cleared)
 
 ---
 
 ## 11. Acceptance Criteria
 
-- [ ] Build script genera `news-feed.json` con campo `lang` per ogni articolo
-- [ ] Build script genera `dist/version.txt` con tag versione
-- [ ] Web Worker filtra articoli per lingua rilevata
-- [ ] Web Worker esegue version checking ad ogni ciclo
-- [ ] Polling interval: 1 ora
-- [ ] Se remote version > local: invalidazione cache forzata
-- [ ] Language switcher imposta cookie e aggiorna contenuto
-- [ ] Articoli compressi con LZ-string in localStorage
-- [ ] Offline: articoli visualizzati da localStorage decompresso
-- [ ] Hash comparison: skip fetch se cache valida
-- [ ] Migrazione: clear localStorage vecchio al primo accesso v2.0
-- [ ] Zero XSS: solo `createElement` + `textContent`
+- [x] Build script genera `news-feed.json` con campo `lang` per ogni articolo
+- [x] Build script genera `dist/version.txt` con tag versione
+- [x] Web Worker filtra articoli per lingua rilevata
+- [x] Web Worker esegue version checking ad ogni ciclo
+- [x] Polling interval: 1 ora
+- [x] Se remote version > local: invalidazione cache forzata
+- [x] Language switcher imposta cookie e aggiorna contenuto
+- [x] Articoli compressi con LZ-string in localStorage
+- [x] Offline: articoli visualizzati da localStorage decompresso
+- [x] Hash comparison: skip fetch se cache valida
+- [x] Migrazione: clear localStorage vecchio al primo accesso v2.0
+- [x] Zero XSS: solo `createElement` + `textContent`

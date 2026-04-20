@@ -281,21 +281,21 @@ Update docs, run full test suite, validazione finale PRD v2.0 acceptance criteri
 | 5.18 Migration logic | ✅ Done | `handleMigration()`: clear old, set v2.0.0 |
 | 5.19 Test version-mismatch | ✅ Done | Verifica handler nei test |
 | 5.20 Test migration | ✅ Done | Verifica migration logic nei test |
-| 5.21 Rename MD files | ⏳ Pending | Richiede refactoring build script |
-| 5.22 Add EN fixtures | ⏳ Pending | Dipende da 5.21 |
-| 5.23 Update build tests | ⏳ Pending | Dipende da Wave 4 |
-| 5.24 Update validation checklists | ⏳ Pending | Post Wave 4-5 |
-| 5.25 Run full test suite | ⏳ Pending | Final validation |
+| 5.21 Rename MD files | ✅ Done | Rinominati a `<slug>-<lang>.md` |
+| 5.22 Add EN fixtures | ✅ Done | kernel-61-lts-en, systemd-vs-openrc-en, etc |
+| 5.23 Update build tests | ✅ Done | Aggiornati per nuovi nomi file |
+| 5.24 Update validation checklists | ✅ Done | Spuntati criteria PRD |
+| 5.25 Run full test suite | ✅ Done | 77 test pass |
 
 ### Test Execution
 
 ```bash
 node --test src/home/main.test.js     # 42 pass
-node --test scripts/build-news.test.js  # 27 pass
+node --test scripts/build-news.test.js  # 28 pass
 node --test src/home/newsWorker.test.js  # 7 pass
 ```
 
-**Total: 76 tests, 0 failures**
+**Total: 77 tests, 0 failures**
 
 ### Validation Checklist (PRD v2.0 Acceptance Criteria)
 
