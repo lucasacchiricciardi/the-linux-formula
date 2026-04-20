@@ -33,6 +33,14 @@ jobs:
       - name: Build site
         run: node scripts/build-news.js
 
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: |
+            https://lucasacchiricciardi.github.io/the-linux-formula/
+          configPath: ./lighthouserc.js
+          uploadArtifacts: true
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
