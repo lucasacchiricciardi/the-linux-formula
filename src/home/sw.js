@@ -1,16 +1,17 @@
 const CACHE_NAME = 'tlf-v1';
+const BASE_PATH = location.pathname.replace(/\/[^/]*$/, '') || '';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/main.js',
-  '/newsWorker.js',
-  '/sw.js',
-  '/favicon.svg',
-  '/manifest.json',
-  '/news/news-feed.json',
-  '/version.txt',
-  '/robots.txt',
-  '/sitemap.xml'
+  BASE_PATH + '/',
+  BASE_PATH + '/index.html',
+  BASE_PATH + '/main.js',
+  BASE_PATH + '/newsWorker.js',
+  BASE_PATH + '/sw.js',
+  BASE_PATH + '/favicon.svg',
+  BASE_PATH + '/manifest.json',
+  BASE_PATH + '/news/news-feed.json',
+  BASE_PATH + '/version.txt',
+  BASE_PATH + '/robots.txt',
+  BASE_PATH + '/sitemap.xml'
 ];
 
 // Install event - cache assets (individual to handle missing files gracefully)
@@ -75,7 +76,7 @@ self.addEventListener('fetch', function(event) {
       .catch(function() {
         // Fallback to cache
         return caches.match(event.request).then(function(response) {
-          return response || caches.match('/');
+          return response || caches.match(BASE_PATH + '/');
         });
       })
   );
