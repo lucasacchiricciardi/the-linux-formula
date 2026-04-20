@@ -43,3 +43,25 @@
 ### ADR-005: Visual identity — no rounded corners
 - Buttons, CTAs, cards use `rounded-none` and minimal `borderRadius` (0.25rem default).
 - Rationale: deliberate brutalist aesthetic matching the "sysadmin terminal" theme.
+
+### ADR-007: Test strategy — source code string checks
+- Tests use string-matching on source files (`readFileSync` + `includes`) rather than runtime execution or DOM simulation.
+- Rationale: zero external dependencies (no jsdom, no test framework beyond `node:test`); fast execution; verifies contract patterns (no `innerHTML`, no `window` in Worker).
+- Gap: does not catch runtime errors (e.g., the `export` bug in newsWorker.js was not detected because the Worker was never instantiated in tests).
+- Mitigation: the `computeHash` function is tested separately via direct invocation with `crypto.subtle` in the test file. Future consideration: add browser-based E2E tests or Playwright for runtime verification.
+
+### ADR-008: Deploy pipeline — GitHub Actions official Pages actions
+- Two-job pipeline: `build` (checkout, test, build, upload artifact) → `deploy` (`actions/deploy-pages@v4`).
+- Trigger: push to `main` branch + manual `workflow_dispatch`.
+- Permissions: `contents: read`, `pages: write`, `id-token: write`.
+- Concurrency: `group: pages`, `cancel-in-progress: false`.
+- GitHub Pages Source must be set to "GitHub Actions" (not "Deploy from a branch").
+- Rationale: official actions are maintained by GitHub, support Node.js 24, and eliminate dependency on third-party actions. The `peaceiris/actions-gh-pages` approach required a `publish` branch and the legacy "Deploy from a branch" Pages setting.
+
+### ADR-009: Inline markdown-to-HTML converter (block-level parser)
+- `markdownToHtml()` in `scripts/build-news.js` is a hand-written parser, not a library.
+- Phase 1 (Sprint 1) used regex-based replacements that produced invalid HTML (`<p><h2>`, `<br>` inside `<ul>`).
+- Phase 2 (Sprint 2) rewrote it as a block-level parser: splits input into blocks (headers, lists, paragraphs) and wraps each appropriately.
+- Supported syntax: `#`/`##`/`###` headers, `**bold**`, `*italic*`, `` `code` ``, `[link](url)`, `- list items`, plain paragraphs.
+- Not supported: code fences, blockquotes, images, tables, nested lists.
+- Rationale: zero npm dependencies; the source articles are controlled content (developer-authored). A full markdown library (e.g., `marked`) could be added later if content complexity increases, but the build script must remain zero-dependency.
