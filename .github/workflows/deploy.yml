@@ -11,58 +11,51 @@ permissions:
   id-token: write
 
 env:
-   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 concurrency:
-   group: pages
-   cancel-in-progress: false
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-   build:
-     runs-on: ubuntu-latest
-     env:
-       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-     steps:
-       - uses: actions/checkout@v4
+  build:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Run tests
+        run: |
+          node --test scripts/build-news.test.mjs
+          node --test src/home/newsWorker.test.mjs
+          node --test src/home/main.test.mjs
+      - name: Build site
+        run: node scripts/build-news.mjs
+      - name: Start HTTP server for Lighthouse
+        run: |
+          # Start a simple HTTP server in the dist directory in the background
+          python3 -m http.server 8080 --directory dist &
+          echo $! > /tmp/server.pid
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: |
+            http://localhost:8080/
+          configPath: ./lighthouserc.js
+          uploadArtifacts: false
+      - name: Stop HTTP server
+        if: always()
+        run: |
+          kill $(cat /tmp/server.pid)
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
 
-       - uses: actions/setup-node@v4
-         with:
-           node-version: '24'
-
-       - name: Run tests
-         run: |
-           node --test scripts/build-news.test.mjs
-           node --test src/home/newsWorker.test.mjs
-           node --test src/home/main.test.mjs
-
-       - name: Build site
-         run: node scripts/build-news.mjs
-
-       - name: Start HTTP server for Lighthouse
-         run: |
-           # Start a simple HTTP server in the dist directory in the background
-           python3 -m http.server 8080 --directory dist &
-           echo $! > /tmp/server.pid
-
-       - name: Run Lighthouse CI
-         uses: treosh/lighthouse-ci-action@v10
-         with:
-           urls: |
-             http://localhost:8080/
-           configPath: ./lighthouserc.js
-           uploadArtifacts: false
-
-       - name: Stop HTTP server
-         if: always()
-         run: |
-           kill $(cat /tmp/server.pid)
-
-       - name: Upload artifact
-         uses: actions/upload-pages-artifact@v3
-         with:
-           path: ./dist
-
-   deploy:
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
