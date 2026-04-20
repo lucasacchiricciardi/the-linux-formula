@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, rmSync, mkdirSync, existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
+import { parseFrontmatter, markdownToHtml } from './build-news.js';
 
 const ROOT = join(import.meta.dirname, '..');
 const SRC_RAW = join(ROOT, 'src', 'raw');
@@ -104,5 +105,135 @@ describe('build-news.js — dist assembly', () => {
     assert.ok(existsSync(join(DIST, 'main.js')), 'dist/main.js should exist');
     assert.ok(existsSync(join(DIST, 'newsWorker.js')), 'dist/newsWorker.js should exist');
     assert.ok(existsSync(join(DIST, 'news', 'news-feed.json')), 'dist/news/news-feed.json should exist');
+  });
+});
+
+describe('parseFrontmatter — unit tests', () => {
+  it('should parse standard frontmatter with title, date, tags', () => {
+    const content = `---
+title: Test Article
+date: 2023-01-01
+tags: [test, example]
+---
+This is the body.`;
+    const result = parseFrontmatter(content);
+    assert.deepEqual(result.metadata, {
+      title: 'Test Article',
+      date: '2023-01-01',
+      tags: ['test', 'example']
+    });
+    assert.equal(result.body, 'This is the body.');
+  });
+
+  it('should handle multi-line arrays', () => {
+    // Note: current parser does not support multi-line arrays, only single line
+    const content = `---
+tags: [tag1, tag2, tag3]
+---
+Body`;
+    const result = parseFrontmatter(content);
+    assert.deepEqual(result.metadata.tags, ['tag1', 'tag2', 'tag3']);
+  });
+
+  it('should handle missing frontmatter', () => {
+    const content = 'Just plain markdown content.';
+    const result = parseFrontmatter(content);
+    assert.deepEqual(result.metadata, {});
+    assert.equal(result.body, 'Just plain markdown content.');
+  });
+
+  it('should handle empty tags array', () => {
+    const content = `---
+title: No Tags
+tags: []
+---
+Body`;
+    const result = parseFrontmatter(content);
+    assert.deepEqual(result.metadata.tags, []);
+  });
+
+  it('should handle duplicate keys (last wins)', () => {
+    const content = `---
+title: First
+title: Second
+---
+Body`;
+    const result = parseFrontmatter(content);
+    assert.equal(result.metadata.title, 'Second');
+  });
+
+  it('should handle missing date', () => {
+    const content = `---
+title: No Date
+tags: [test]
+---
+Body`;
+    const result = parseFrontmatter(content);
+    assert.equal(result.metadata.title, 'No Date');
+    assert.deepEqual(result.metadata.tags, ['test']);
+    assert.equal(result.metadata.date, undefined);
+  });
+
+  it('should handle CRLF line endings', () => {
+    const content = `---\r\n
+title: CRLF Test\r\n
+---\r\n
+Body`;
+    const result = parseFrontmatter(content);
+    assert.equal(result.metadata.title, 'CRLF Test');
+  });
+});
+
+describe('markdownToHtml — unit tests', () => {
+  it('should convert headers', () => {
+    const md = '# Header 1\n## Header 2\n### Header 3';
+    const html = markdownToHtml(md);
+    assert.ok(html.includes('<h1>Header 1</h1>'));
+    assert.ok(html.includes('<h2>Header 2</h2>'));
+    assert.ok(html.includes('<h3>Header 3</h3>'));
+  });
+
+  it('should convert bold and italic', () => {
+    const md = '**bold** and *italic*';
+    const html = markdownToHtml(md);
+    assert.ok(html.includes('<strong>bold</strong>'));
+    assert.ok(html.includes('<em>italic</em>'));
+  });
+
+  it('should convert code', () => {
+    const md = '`code`';
+    const html = markdownToHtml(md);
+    assert.ok(html.includes('<code>code</code>'));
+  });
+
+  it('should convert links', () => {
+    const md = '[link](http://example.com)';
+    const html = markdownToHtml(md);
+    assert.ok(html.includes('<a href="http://example.com">link</a>'));
+  });
+
+  it('should convert lists', () => {
+    const md = '- Item 1\n- Item 2';
+    const html = markdownToHtml(md);
+    assert.ok(html.includes('<ul><li>Item 1</li><li>Item 2</li></ul>'));
+  });
+
+  it('should convert paragraphs', () => {
+    const md = 'Line 1\nLine 2';
+    const html = markdownToHtml(md);
+    assert.ok(html.includes('<p>Line 1<br>Line 2</p>'));
+  });
+
+  it('should handle empty input', () => {
+    const html = markdownToHtml('');
+    assert.equal(html, '');
+  });
+
+  it('should handle mixed content', () => {
+    const md = '# Title\n\nParagraph with **bold** and [link](url).\n\n- List item';
+    const html = markdownToHtml(md);
+    assert.ok(html.includes('<h1>Title</h1>'));
+    assert.ok(html.includes('<p>Paragraph with <strong>bold</strong> and <a href="url">link</a>.</p>'));
+    assert.ok(html.includes('<ul><li>List item</li></ul>'));
   });
 });

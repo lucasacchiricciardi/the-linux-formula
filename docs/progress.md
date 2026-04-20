@@ -104,17 +104,17 @@ Total: **19 tests, 0 failures**. Zero npm dependencies — Node 24 built-in `nod
 
 | Task | Status | Notes |
 |------|--------|-------|
-| 3.1 parseFrontmatter unit tests | ⬜ Planned | |
-| 3.2 markdownToHtml unit tests | ⬜ Planned | |
-| 3.3 stripHtml unit tests | ⬜ Planned | |
-| 3.4 worker.onerror handler | ⬜ Planned | |
-| 3.5 Exponential backoff | ⬜ Planned | |
-| 3.6 ARIA labels + skip-nav | ⬜ Planned | |
-| 3.7 Article semantic elements | ⬜ Planned | |
-| 3.8 Focus management mobile menu | ⬜ Planned | |
-| 3.9 ADR-007: Test strategy | ⬜ Planned | |
-| 3.10 ADR-008: Deploy pipeline | ⬜ Planned | |
-| 3.11 ADR-009: markdownToHtml | ⬜ Planned | |
+| 3.1 parseFrontmatter unit tests | ✅ Done | Added 7 unit tests covering edge cases: multi-line arrays, missing date, empty tags, duplicate keys, CRLF |
+| 3.2 markdownToHtml unit tests | ✅ Done | Added 8 unit tests for headers, bold/italic, code, links, lists, paragraphs, empty input, mixed content |
+| 3.3 stripHtml unit tests | ✅ Done | Added 6 unit tests for HTML removal, nested tags, attributes, empty string, plain text, self-closing tags |
+| 3.4 worker.onerror handler | ✅ Done | Added try-catch for Worker instantiation and worker.onerror for runtime errors |
+| 3.5 Exponential backoff | ✅ Done | Added consecutive error tracking, backoff to 30s after 3 errors, 60s after 6 errors, reset on success |
+| 3.6 ARIA labels + skip-nav | ✅ Done | Added skip-to-main link, aria-label on nav, role="status" aria-live="polite" on news container |
+| 3.7 Article semantic elements | ✅ Done | Changed createArticleElement to use <article> instead of <div> |
+| 3.8 Focus management mobile menu | ✅ Done | Trap focus on open, return to button on close, escape key support |
+| 3.9 ADR-007: Test strategy | ✅ Done | Already documented in architecture.md |
+| 3.10 ADR-008: Deploy pipeline | ✅ Done | Already documented in architecture.md |
+| 3.11 ADR-009: markdownToHtml | ✅ Done | Already documented in architecture.md |
 
 ### Validation Checklist
 

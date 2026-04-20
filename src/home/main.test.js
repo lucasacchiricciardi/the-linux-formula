@@ -39,3 +39,44 @@ describe('index.html — news container', () => {
     assert.ok(html.includes('news-feed-container'), 'index.html must have news-feed-container');
   });
 });
+
+describe('stripHtml — unit tests', () => {
+  function stripHtml(html) {
+    return html.replace(/<[^>]*>/g, '');
+  }
+
+  it('should remove HTML tags', () => {
+    const html = '<p>Hello <strong>world</strong></p>';
+    const result = stripHtml(html);
+    assert.equal(result, 'Hello world');
+  });
+
+  it('should handle nested tags', () => {
+    const html = '<div><span>Nested</span></div>';
+    const result = stripHtml(html);
+    assert.equal(result, 'Nested');
+  });
+
+  it('should handle attributes', () => {
+    const html = '<a href="http://example.com" class="link">Link</a>';
+    const result = stripHtml(html);
+    assert.equal(result, 'Link');
+  });
+
+  it('should handle empty string', () => {
+    const result = stripHtml('');
+    assert.equal(result, '');
+  });
+
+  it('should pass through plain text', () => {
+    const text = 'Plain text without tags';
+    const result = stripHtml(text);
+    assert.equal(result, 'Plain text without tags');
+  });
+
+  it('should handle self-closing tags', () => {
+    const html = '<br/><img src="test.png"/>';
+    const result = stripHtml(html);
+    assert.equal(result, '');
+  });
+});

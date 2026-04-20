@@ -7,7 +7,7 @@ const DIST = process.env.BUILD_DIST || 'dist';
 const DIST_NEWS = join(DIST, 'news');
 const OUTPUT = join(DIST_NEWS, 'news-feed.json');
 
-function parseFrontmatter(content) {
+export function parseFrontmatter(content) {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
   if (!match) {
     return { metadata: {}, body: content.trim() };
@@ -21,7 +21,12 @@ function parseFrontmatter(content) {
     const key = line.slice(0, sep).trim();
     const val = line.slice(sep + 1).trim();
     if (val.startsWith('[') && val.endsWith(']')) {
-      metadata[key] = val.slice(1, -1).split(',').map(s => s.trim());
+      const arrayStr = val.slice(1, -1).trim();
+      if (arrayStr === '') {
+        metadata[key] = [];
+      } else {
+        metadata[key] = arrayStr.split(',').map(s => s.trim()).filter(s => s);
+      }
     } else {
       metadata[key] = val;
     }
@@ -29,7 +34,7 @@ function parseFrontmatter(content) {
   return { metadata, body };
 }
 
-function markdownToHtml(md) {
+export function markdownToHtml(md) {
   if (!md) return '';
   const lines = md.split('\n');
   const blocks = [];

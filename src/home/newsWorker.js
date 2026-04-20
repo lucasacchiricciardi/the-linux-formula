@@ -2,6 +2,12 @@ const FETCH_URL = '/news/news-feed.json';
 const POLL_INTERVAL = 300000;
 
 let lastHash = null;
+let consecutiveErrors = 0;
+let pollTimeout;
+
+function scheduleNextPoll(interval) {
+  pollTimeout = setTimeout(fetchNews, interval);
+}
 
 async function computeHash(data) {
   const encoder = new TextEncoder();
@@ -16,6 +22,11 @@ async function fetchNews() {
     const response = await fetch(FETCH_URL);
     if (!response.ok) {
       self.postMessage({ type: 'error', message: `HTTP ${response.status}: ${response.statusText}` });
+      consecutiveErrors++;
+      let nextInterval = POLL_INTERVAL;
+      if (consecutiveErrors >= 3) nextInterval = 30000;
+      if (consecutiveErrors >= 6) nextInterval = 60000;
+      scheduleNextPoll(nextInterval);
       return;
     }
     const data = await response.text();
@@ -23,14 +34,22 @@ async function fetchNews() {
 
     if (hash === lastHash) {
       self.postMessage({ type: 'unchanged' });
+      scheduleNextPoll(POLL_INTERVAL);
       return;
     }
 
     lastHash = hash;
     const parsed = JSON.parse(data);
     self.postMessage({ type: 'news', data: parsed.articles || [] });
+    consecutiveErrors = 0;
+    scheduleNextPoll(POLL_INTERVAL);
   } catch (err) {
     self.postMessage({ type: 'error', message: err.message || 'Network error' });
+    consecutiveErrors++;
+    let nextInterval = POLL_INTERVAL;
+    if (consecutiveErrors >= 3) nextInterval = 30000;
+    if (consecutiveErrors >= 6) nextInterval = 60000;
+    scheduleNextPoll(nextInterval);
   }
 }
 
@@ -41,4 +60,3 @@ self.onmessage = function(e) {
 };
 
 fetchNews();
-setInterval(fetchNews, POLL_INTERVAL);
