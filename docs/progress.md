@@ -333,7 +333,7 @@ node --test src/home/newsWorker.test.js  # 7 pass
 
 ### Technical Debt (Future)
 
-- [ ] Review all console.log statements (remove for production)
+- [x] Review all console.log statements (remove for production)
 - [ ] Add proper error boundaries for production
 - [ ] Set up error tracking (Sentry)
 - [ ] Performance budget monitoring
