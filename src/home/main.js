@@ -1,5 +1,15 @@
 (function() {
-  // Global error handlers for production
+  // Wait for DOM if script is deferred
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      init();
+    });
+  } else {
+    init();
+  }
+
+  function init() {
+    // Global error handlers for production
   window.onerror = function(message, source, lineno, colno, error) {
     var errorMsg = 'An error occurred. Please refresh the page.';
     showError(errorMsg);
@@ -492,18 +502,21 @@
       // Service Worker registration failed - silently fail, app works without it
     });
   }
-// Ensure UI is visible even if script fails partially
-  } catch (err) {
-    // Last resort error handler
-    var container = document.getElementById('news-feed-container');
-    if (container) {
-      var errorDiv = document.createElement('div');
-      errorDiv.id = 'news-feed-error';
-      errorDiv.className = 'bg-error-container/50 p-4 border border-error text-error font-body';
-      errorDiv.textContent = 'An error occurred. Please refresh the page.';
-      container.appendChild(errorDiv);
-    }
-  }
+  } // end init()
 
-  // Ensure initialization completes
+} // end init()
+
+// Ensure UI is visible even if script fails partially
+} catch (err) {
+  var container = document.getElementById('news-feed-container');
+  if (container) {
+    var errorDiv = document.createElement('div');
+    errorDiv.id = 'news-feed-error';
+    errorDiv.className = 'bg-error-container/50 p-4 border border-error text-error font-body';
+    errorDiv.textContent = 'An error occurred. Please refresh the page.';
+    container.appendChild(errorDiv);
+  }
+}
+
+// Start initialization
 })(););
