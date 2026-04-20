@@ -543,8 +543,6 @@
   }
   } // end init()
 
-} // end init()
-
 // Ensure UI is visible even if script fails partially
 } catch (err) {
   var container = document.getElementById('news-feed-container');
