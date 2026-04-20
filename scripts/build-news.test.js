@@ -43,6 +43,24 @@ describe('build-news.js', () => {
     assert.ok(kernel.content.length > 0, 'content should not be empty');
   });
 
+  it('should extract lang field from frontmatter', () => {
+    execSync(`node ${SCRIPT}`, { cwd: ROOT });
+    const feed = JSON.parse(readFileSync(FEED_OUTPUT, 'utf-8'));
+
+    const kernel = feed.articles.find(a => a.id === 'kernel-61-lts');
+    assert.ok(kernel, 'should find kernel-61-lts article');
+    assert.equal(kernel.lang, 'it', 'lang should be extracted from frontmatter');
+  });
+
+  it('should default lang to "it" if missing in frontmatter', () => {
+    execSync(`node ${SCRIPT}`, { cwd: ROOT });
+    const feed = JSON.parse(readFileSync(FEED_OUTPUT, 'utf-8'));
+
+    const minimal = feed.articles.find(a => a.id === 'minimal-article');
+    assert.ok(minimal, 'should find minimal-article');
+    assert.equal(minimal.lang, 'it', 'lang should default to it when missing');
+  });
+
   it('should handle missing frontmatter with filename fallback', () => {
     execSync(`node ${SCRIPT}`, { cwd: ROOT });
     const feed = JSON.parse(readFileSync(FEED_OUTPUT, 'utf-8'));
@@ -121,6 +139,14 @@ describe('build-news.js — dist assembly', () => {
     assert.ok(sitemap.includes('<?xml'), 'sitemap must be XML');
     assert.ok(sitemap.includes('<urlset'), 'sitemap must have urlset');
     assert.ok(sitemap.includes('<loc>'), 'sitemap must have loc entries');
+  });
+
+  it('should generate version.txt with version from package.json', () => {
+    execSync(`node ${SCRIPT}`, { cwd: ROOT });
+    const versionFile = join(DIST, 'version.txt');
+    assert.ok(existsSync(versionFile), 'version.txt should exist in dist/');
+    const version = readFileSync(versionFile, 'utf-8').trim();
+    assert.ok(/^\d+\.\d+\.\d+$/.test(version), 'version should be semver format');
   });
 });
 

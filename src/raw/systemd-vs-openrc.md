@@ -2,6 +2,7 @@
 title: Systemd vs OpenRC: la guida pratica
 date: 2026-03-28
 tags: [systemd, openrc, init, comparison]
+lang: it
 ---
 
 ## Systemd vs OpenRC: quale scegliere?

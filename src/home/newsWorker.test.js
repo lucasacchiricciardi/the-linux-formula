@@ -18,14 +18,19 @@ describe('newsWorker.js — source code checks', () => {
     assert.ok(src.includes('self.postMessage'), 'must use self.postMessage');
   });
 
-  it('should define a fetch interval of 5 minutes (300000ms)', () => {
-    assert.ok(src.includes('300000'), 'polling interval must be 300000ms (5 min)');
+  it('should define a fetch interval of 1 hour (3600000ms)', () => {
+    assert.ok(src.includes('3600000'), 'polling interval must be 3600000ms (1 hour)');
   });
 
-  it('should send message types: news, error, unchanged', () => {
+  it('should fetch version.txt for version checking', () => {
+    assert.ok(src.includes('version.txt'), 'must fetch version.txt');
+  });
+
+  it('should send message types: news, error, unchanged, version-mismatch', () => {
     assert.ok(src.includes("'news'"), 'must define news message type');
     assert.ok(src.includes("'error'"), 'must define error message type');
     assert.ok(src.includes("'unchanged'"), 'must define unchanged message type');
+    assert.ok(src.includes("'version-mismatch'"), 'must define version-mismatch message type');
   });
 });
 

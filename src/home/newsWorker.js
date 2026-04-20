@@ -1,7 +1,9 @@
 const FETCH_URL = '/news/news-feed.json';
-const POLL_INTERVAL = 300000;
+const VERSION_URL = '/version.txt';
+const POLL_INTERVAL = 3600000;
 
 let lastHash = null;
+let lastVersion = null;
 let consecutiveErrors = 0;
 let pollTimeout;
 
@@ -19,9 +21,13 @@ async function computeHash(data) {
 
 async function fetchNews() {
   try {
-    const response = await fetch(FETCH_URL);
-    if (!response.ok) {
-      self.postMessage({ type: 'error', message: `HTTP ${response.status}: ${response.statusText}` });
+    const [newsResponse, versionResponse] = await Promise.all([
+      fetch(FETCH_URL),
+      fetch(VERSION_URL).catch(() => null)
+    ]);
+
+    if (!newsResponse.ok) {
+      self.postMessage({ type: 'error', message: `HTTP ${newsResponse.status}: ${newsResponse.statusText}` });
       consecutiveErrors++;
       let nextInterval = POLL_INTERVAL;
       if (consecutiveErrors >= 3) nextInterval = 30000;
@@ -29,18 +35,28 @@ async function fetchNews() {
       scheduleNextPoll(nextInterval);
       return;
     }
-    const data = await response.text();
+
+    const data = await newsResponse.text();
     const hash = await computeHash(data);
 
-    if (hash === lastHash) {
+    if (hash === lastHash && lastVersion !== null) {
       self.postMessage({ type: 'unchanged' });
       scheduleNextPoll(POLL_INTERVAL);
       return;
     }
 
+    if (versionResponse && versionResponse.ok) {
+      const remoteVersion = (await versionResponse.text()).trim();
+      if (lastVersion !== null && remoteVersion !== lastVersion) {
+        self.postMessage({ type: 'version-mismatch', oldVersion: lastVersion, newVersion: remoteVersion });
+      }
+      lastVersion = remoteVersion;
+    }
+
+    lastVersion = lastVersion || '2.0.0';
     lastHash = hash;
     const parsed = JSON.parse(data);
-    self.postMessage({ type: 'news', data: parsed.articles || [] });
+    self.postMessage({ type: 'news', data: parsed.articles || [], version: lastVersion });
     consecutiveErrors = 0;
     scheduleNextPoll(POLL_INTERVAL);
   } catch (err) {

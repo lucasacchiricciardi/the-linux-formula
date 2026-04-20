@@ -2,6 +2,7 @@
 title: Kernel 6.1 e la Long Term Support
 date: 2026-04-15
 tags: [kernel, lts, sysadmin]
+lang: it
 ---
 
 ## Kernel 6.1 LTS: cosa cambia

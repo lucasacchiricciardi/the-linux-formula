@@ -8,6 +8,7 @@ const DIST_NEWS = join(DIST, 'news');
 const FEED_OUTPUT = join(DIST_NEWS, 'news-feed.json');
 
 const SITE_URL = process.env.SITE_URL || 'https://lucasacchiricciardi.github.io/the-linux-formula';
+const APP_VERSION = process.env.BUILD_VERSION || '2.0.0';
 
 export function parseFrontmatter(content) {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
@@ -103,6 +104,7 @@ function buildArticle(filePath) {
     title: metadata.title || id,
     date: metadata.date || null,
     tags: Array.isArray(metadata.tags) ? metadata.tags : [],
+    lang: metadata.lang || 'it',
     content: body,
     html,
   };
@@ -150,6 +152,8 @@ function assembleDist() {
 
   const feed = buildNewsFeed(SRC_RAW);
   writeFileSync(FEED_OUTPUT, JSON.stringify(feed, null, 2) + '\n', 'utf-8');
+
+  writeFileSync(join(DIST, 'version.txt'), APP_VERSION + '\n', 'utf-8');
 
   const robotsTxt = `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
   writeFileSync(join(DIST, 'robots.txt'), robotsTxt, 'utf-8');
