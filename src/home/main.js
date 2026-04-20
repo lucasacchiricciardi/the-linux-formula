@@ -103,8 +103,6 @@
     
     // If no version stored or old version, migrate
     if (!storedVersion || storedVersion !== CURRENT_SCHEMA_VERSION) {
-      console.log('Migration needed from v1.x to v2.0 or first run');
-      
       // Clear old localStorage
       Object.keys(localStorage).forEach(function(key) {
         if (key.startsWith('tlf_')) {
@@ -357,7 +355,6 @@
       // no action needed
     } else if (msg.type === 'version-mismatch') {
       // Handle version mismatch - invalidate cache and force reload
-      console.log('Version mismatch: ' + msg.oldVersion + ' → ' + msg.newVersion);
       clearArticleStorage(currentLang);
       storeAppVersion(msg.newVersion);
       // Force refresh of news
@@ -467,10 +464,8 @@
   
   // Initialize PWA (Service Worker)
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(function(registration) {
-      console.log('Service Worker registered:', registration.scope);
-    }).catch(function(error) {
-      console.log('Service Worker registration failed:', error);
+    navigator.serviceWorker.register('sw.js').catch(function() {
+      // Service Worker registration failed - silently fail, app works without it
     });
   }
 })();
