@@ -51,6 +51,7 @@ jobs:
         with:
           path: ./dist
 
+  # Ensure Node.js 24 is used for all actions
   deploy:
     environment:
       name: github-pages
