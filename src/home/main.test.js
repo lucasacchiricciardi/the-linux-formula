@@ -318,3 +318,23 @@ describe('main.js — error boundaries', () => {
     assert.ok(!src.includes('e.stack') || !src.includes('error.stack'), 'should not expose stack traces');
   });
 });
+
+describe('main.js — social sharing', () => {
+  const src = readFileSync(join(ROOT, 'src', 'home', 'main.js'), 'utf-8');
+
+  it('should have LinkedIn share button', () => {
+    assert.ok(src.includes('linkedin.com/shareArticle'), 'must have LinkedIn share');
+  });
+
+  it('should have mailto share button', () => {
+    assert.ok(src.includes('mailto:?subject'), 'must have email share');
+  });
+
+  it('should have copy link button', () => {
+    assert.ok(src.includes('navigator.clipboard.writeText'), 'must have copy link');
+  });
+
+  it('should encode URL for sharing', () => {
+    assert.ok(src.includes('encodeURIComponent'), 'must encode URLs');
+  });
+});

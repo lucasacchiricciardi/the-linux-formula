@@ -215,6 +215,52 @@
       renderRelatedArticles(related, card);
     }
 
+    // Social sharing buttons
+    var shareRow = document.createElement('div');
+    shareRow.className = 'flex gap-3 mt-4 pt-4 border-t border-outline-variant/20';
+    
+    // LinkedIn share
+    var linkedinBtn = document.createElement('a');
+    linkedinBtn.className = 'text-on-surface-variant hover:text-[#0077b5] transition-colors text-sm font-label';
+    linkedinBtn.href = 'https://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent('https://lucasacchiricciardi.github.io/the-linux-formula/') + '&title=' + encodeURIComponent(article.title);
+    linkedinBtn.target = '_blank';
+    linkedinBtn.rel = 'noopener noreferrer';
+    linkedinBtn.title = 'Share on LinkedIn';
+    var linkedinIcon = document.createElement('span');
+    linkedinIcon.className = 'material-symbols-outlined';
+    linkedinIcon.textContent = 'work';
+    linkedinBtn.appendChild(linkedinIcon);
+    shareRow.appendChild(linkedinBtn);
+    
+    // Email share
+    var emailBtn = document.createElement('a');
+    emailBtn.className = 'text-on-surface-variant hover:text-primary transition-colors text-sm font-label';
+    emailBtn.href = 'mailto:?subject=' + encodeURIComponent(article.title) + '&body=' + encodeURIComponent(article.title + '\n\nhttps://lucasacchiricciardi.github.io/the-linux-formula/');
+    emailBtn.title = 'Share via email';
+    var emailIcon = document.createElement('span');
+    emailIcon.className = 'material-symbols-outlined';
+    emailIcon.textContent = 'mail';
+    emailBtn.appendChild(emailIcon);
+    shareRow.appendChild(emailBtn);
+    
+    // Copy link
+    var copyBtn = document.createElement('button');
+    copyBtn.className = 'text-on-surface-variant hover:text-primary transition-colors text-sm font-label';
+    copyBtn.title = 'Copy link';
+    var copyIcon = document.createElement('span');
+    copyIcon.className = 'material-symbols-outlined';
+    copyIcon.textContent = 'link';
+    copyBtn.appendChild(copyIcon);
+    copyBtn.addEventListener('click', function() {
+      navigator.clipboard.writeText('https://lucasacchiricciardi.github.io/the-linux-formula/').then(function() {
+        copyIcon.textContent = 'check';
+        setTimeout(function() { copyIcon.textContent = 'link'; }, 2000);
+      });
+    });
+    shareRow.appendChild(copyBtn);
+    
+    card.appendChild(shareRow);
+
     return card;
   }
 

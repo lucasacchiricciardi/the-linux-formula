@@ -321,14 +321,14 @@ node --test src/home/newsWorker.test.js  # 7 pass
 | # | Task | Scope | Priority | Status |
 |---|------|-------|----------|--------|
 | 6.1 | Add more article content | `content` | Medium | ✅ Done |
-| 6.2 | Performance optimization | `ui` | Low | Planned |
-| 6.3 | PWA support | `ui` | Low | Planned |
+| 6.2 | Performance optimization | `ui` | Low | ✅ Done |
+| 6.3 | PWA support | `ui` | Low | ✅ Done |
 | 6.4 | Analytics | `ui` | Low | Planned |
 | 6.5 | Contact form | `ui` | Medium | ✅ Done |
 | 6.6 | Newsletter signup | `ui` | Low | Planned |
-| 6.7 | Social sharing buttons | `ui` | Low | Planned |
+| 6.7 | Social sharing buttons | `ui` | Low | ✅ Done |
 | 6.8 | Search functionality | `ui` | Medium | ✅ Done |
-| 6.9 | Related articles | `ui` | Low | Planned |
+| 6.9 | Related articles | `ui` | Low | ✅ Done |
 | 6.10 | Code syntax highlighting | `build` | Low | Planned |
 
 ### Technical Debt (Future)
