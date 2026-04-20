@@ -180,6 +180,12 @@
       excerpt.textContent = text.split(' ').slice(0, 50).join(' ') + '...';
       card.appendChild(excerpt);
     }
+    
+    // Show related articles for first article (most recent)
+    if (allArticles.length > 0) {
+      var related = getRelatedArticles(article, 2);
+      renderRelatedArticles(related, card);
+    }
 
     return card;
   }
@@ -224,6 +230,42 @@
         renderArticles(filtered);
       });
     }
+  }
+  
+  // Related articles based on tags
+  function getRelatedArticles(currentArticle, limit) {
+    if (!currentArticle || !currentArticle.tags || currentArticle.tags.length === 0) return [];
+    var currentTags = currentArticle.tags;
+    return allArticles
+      .filter(function(a) {
+        if (a.lang !== currentLang) return false;
+        if (a.id === currentArticle.id) return false;
+        var shared = a.tags.filter(function(t) { return currentTags.includes(t); });
+        return shared.length > 0;
+      })
+      .sort(function(a, b) {
+        var aShared = a.tags.filter(function(t) { return currentTags.includes(t); }).length;
+        var bShared = b.tags.filter(function(t) { return currentTags.includes(t); }).length;
+        return bShared - aShared;
+      })
+      .slice(0, limit || 3);
+  }
+  
+  function renderRelatedArticles(related, container) {
+    if (!related || related.length === 0 || !container) return;
+    var relatedHeader = document.createElement('div');
+    relatedHeader.className = 'mt-4 pt-4 border-t border-outline-variant/20';
+    var relatedLabel = document.createElement('span');
+    relatedLabel.className = 'font-label text-xs text-on-surface-variant uppercase tracking-widest';
+    relatedLabel.textContent = 'Related';
+    relatedHeader.appendChild(relatedLabel);
+    container.appendChild(relatedHeader);
+    related.forEach(function(article) {
+      var link = document.createElement('a');
+      link.className = 'block text-sm text-primary hover:text-primary-container mt-2 font-body';
+      link.textContent = '→ ' + article.title;
+      container.appendChild(link);
+    });
   }
 
   function showError(message) {
