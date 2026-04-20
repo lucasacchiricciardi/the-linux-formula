@@ -29,6 +29,7 @@
 }
 </script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
@@ -145,6 +146,16 @@
 <div class="hidden md:flex space-x-8 items-center bg-surface-container-low px-6 py-2">
 <a class="text-primary font-bold border-l-4 border-primary px-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">Home</a>
 <a class="text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors hover:-translate-y-0.5 transform duration-150" href="https://www.youtube.com/@lucasacchinet" rel="noopener noreferrer" target="_blank">LogWhispererAI</a>
+<div class="flex items-center gap-2 ml-2 pl-2 border-l border-outline-variant/20">
+<button id="lang-it-btn" class="lang-switcher flex items-center gap-1 px-2 py-1 text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20 rounded-none" aria-label="Switch to Italian">
+<span class="material-symbols-outlined text-sm">translate</span>
+<span class="font-label text-xs uppercase">IT</span>
+</button>
+<button id="lang-en-btn" class="lang-switcher flex items-center gap-1 px-2 py-1 text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20 rounded-none" aria-label="Switch to English">
+<span class="material-symbols-outlined text-sm">translate</span>
+<span class="font-label text-xs uppercase">EN</span>
+</button>
+</div>
 </div>
 <button class="md:hidden text-on-surface" id="mobile-menu-btn" aria-label="Toggle navigation menu">
 <span class="material-symbols-outlined">menu</span>
@@ -153,6 +164,17 @@
 <div id="mobile-menu" class="hidden md:hidden px-12 pb-4">
 <a class="block text-primary font-bold border-l-4 border-primary px-2 py-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">Home</a>
 <a class="block text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors py-2 px-2" href="https://www.youtube.com/@lucasacchinet" rel="noopener noreferrer" target="_blank">LogWhispererAI</a>
+<div class="flex items-center gap-2 py-2 px-2 border-t border-outline-variant/20 mt-2">
+<span class="font-label text-xs text-on-surface-variant uppercase">Lingua / Language</span>
+<button id="lang-it-btn-mobile" class="lang-switcher flex items-center gap-1 px-2 py-1 text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20 rounded-none" aria-label="Switch to Italian">
+<span class="material-symbols-outlined text-sm">translate</span>
+<span class="font-label text-xs uppercase">IT</span>
+</button>
+<button id="lang-en-btn-mobile" class="lang-switcher flex items-center gap-1 px-2 py-1 text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20 rounded-none" aria-label="Switch to English">
+<span class="material-symbols-outlined text-sm">translate</span>
+<span class="font-label text-xs uppercase">EN</span>
+</button>
+</div>
 </div>
 <div class="h-px w-full bg-outline-variant/20"></div>
 </nav>

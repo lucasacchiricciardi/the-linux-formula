@@ -56,7 +56,7 @@ async function fetchNews() {
     lastVersion = lastVersion || '2.0.0';
     lastHash = hash;
     const parsed = JSON.parse(data);
-    self.postMessage({ type: 'news', data: parsed.articles || [], version: lastVersion });
+    self.postMessage({ type: 'news', data: parsed.articles || [], version: lastVersion, hash: hash });
     consecutiveErrors = 0;
     scheduleNextPoll(POLL_INTERVAL);
   } catch (err) {

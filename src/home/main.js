@@ -9,6 +9,140 @@
   var articlesContainer = document.getElementById('news-feed-container').querySelector('#news-feed-articles') || document.getElementById('news-feed-articles');
   var errorContainer = document.getElementById('news-feed-container').querySelector('#news-feed-error') || document.getElementById('news-feed-error');
 
+  // Language detection and management
+  var currentLang = getPreferredLanguage();
+
+  function getPreferredLanguage() {
+    // 1. Check cookie for user preference
+    var langCookie = document.cookie
+      .split('; ')
+      .find(function(row) { return row.startsWith('tlf_lang='); })
+      ?.split('=')[1];
+    
+    if (langCookie) return langCookie;
+
+    // 2. Check browser language
+    var browserLang = navigator.language || navigator.userLanguage;
+    if (browserLang.startsWith('it')) return 'it';
+    if (browserLang.startsWith('en')) return 'en';
+
+    // 3. Default to Italian
+    return 'it';
+  }
+
+  function setLanguageCookie(lang) {
+    document.cookie = 'tlf_lang=' + lang + '; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
+  }
+
+  // LocalStorage keys
+  var STORAGE_KEYS = {
+    ARTICLES: function(lang) { return 'tlf_articles_' + lang; },
+    LANG: 'tlf_lang',
+    HASH: 'tlf_hash',
+    VERSION: 'tlf_version',
+    APP_VERSION: 'tlf_app_version'
+  };
+
+  // LZ-string compression helpers
+  function compressAndStore(lang, articles) {
+    try {
+      var articlesJson = JSON.stringify(articles);
+      var compressed = LZString.compressToBase64(articlesJson);
+      localStorage.setItem(STORAGE_KEYS.ARTICLES(lang), compressed);
+    } catch (e) {
+      console.error('Failed to compress articles:', e);
+    }
+  }
+
+  function retrieveAndDecompress(lang) {
+    try {
+      var compressed = localStorage.getItem(STORAGE_KEYS.ARTICLES(lang));
+      if (!compressed) return null;
+      var decompressed = LZString.decompressFromBase64(compressed);
+      return decompressed ? JSON.parse(decompressed) : null;
+    } catch (e) {
+      console.error('Failed to decompress articles:', e);
+      localStorage.removeItem(STORAGE_KEYS.ARTICLES(lang));
+      return null;
+    }
+  }
+
+  function storeHash(hash) {
+    localStorage.setItem(STORAGE_KEYS.HASH, hash);
+  }
+
+  function retrieveHash() {
+    return localStorage.getItem(STORAGE_KEYS.HASH);
+  }
+
+  function storeVersion(version) {
+    localStorage.setItem(STORAGE_KEYS.VERSION, version);
+  }
+
+  function retrieveVersion() {
+    return localStorage.getItem(STORAGE_KEYS.VERSION);
+  }
+
+  function storeAppVersion(version) {
+    localStorage.setItem(STORAGE_KEYS.APP_VERSION, version);
+  }
+
+  function retrieveAppVersion() {
+    return localStorage.getItem(STORAGE_KEYS.APP_VERSION);
+  }
+
+  function clearArticleStorage(lang) {
+    localStorage.removeItem(STORAGE_KEYS.ARTICLES(lang));
+    localStorage.removeItem(STORAGE_KEYS.HASH);
+  }
+
+  // Migration logic v1.x → v2.0
+  function handleMigration() {
+    var storedVersion = retrieveVersion();
+    var CURRENT_SCHEMA_VERSION = '2.0.0';
+    
+    // If no version stored or old version, migrate
+    if (!storedVersion || storedVersion !== CURRENT_SCHEMA_VERSION) {
+      console.log('Migration needed from v1.x to v2.0 or first run');
+      
+      // Clear old localStorage
+      Object.keys(localStorage).forEach(function(key) {
+        if (key.startsWith('tlf_')) {
+          localStorage.removeItem(key);
+        }
+      });
+      
+      // Set current version
+      storeVersion(CURRENT_SCHEMA_VERSION);
+      storeAppVersion(CURRENT_SCHEMA_VERSION);
+      
+      return true;
+    }
+    
+    return false;
+  }
+
+  // Offline-first: try to load from localStorage first
+  function initializeOfflineFirst() {
+    handleMigration();
+    
+    // Try to load from localStorage
+    var storedArticles = retrieveAndDecompress(currentLang);
+    
+    if (storedArticles && storedArticles.length > 0) {
+      // Show cached content immediately
+      var filteredArticles = storedArticles.filter(function(article) {
+        return article.lang === currentLang;
+      });
+      renderArticles(filteredArticles);
+      
+      // Still fetch in background for updates
+      worker.postMessage({ type: 'refresh' });
+    } else {
+      // No cache, fetch normally (worker will do initial fetch)
+    }
+  }
+
   function createArticleElement(article) {
     var card = document.createElement('article');
     card.className = 'bg-surface-container-low p-8 border-t-4 border-primary hover:bg-surface-container-high transition-colors group';
@@ -135,15 +269,98 @@
     var msg = e.data;
     if (msg.type === 'news') {
       hideError();
-      renderArticles(msg.data);
+      // Store in localStorage with compression
+      compressAndStore(currentLang, msg.data);
+      if (msg.hash) storeHash(msg.hash);
+      storeVersion(msg.version || '2.0.0');
+      // Filter articles by current language (client-side filtering)
+      var filteredArticles = msg.data.filter(function(article) {
+        return article.lang === currentLang;
+      });
+      renderArticles(filteredArticles);
     } else if (msg.type === 'error') {
       showError(msg.message);
     } else if (msg.type === 'unchanged') {
       // no action needed
+    } else if (msg.type === 'version-mismatch') {
+      // Handle version mismatch - invalidate cache and force reload
+      console.log('Version mismatch: ' + msg.oldVersion + ' → ' + msg.newVersion);
+      clearArticleStorage(currentLang);
+      storeAppVersion(msg.newVersion);
+      // Force refresh of news
+      worker.postMessage({ type: 'refresh' });
     }
   };
 
   worker.onerror = function(e) {
     showError('Worker runtime error: ' + e.message);
   };
+
+  // Language switcher handler
+  function setupLanguageSwitcher() {
+    var itBtn = document.getElementById('lang-it-btn');
+    var enBtn = document.getElementById('lang-en-btn');
+    var itBtnMobile = document.getElementById('lang-it-btn-mobile');
+    var enBtnMobile = document.getElementById('lang-en-btn-mobile');
+
+    function updateSwitcherUI(lang) {
+      // Desktop buttons
+      if (itBtn) {
+        itBtn.classList.toggle('border-primary', lang === 'it');
+        itBtn.classList.toggle('border-outline-variant/20', lang !== 'it');
+      }
+      if (enBtn) {
+        enBtn.classList.toggle('border-primary', lang === 'en');
+        enBtn.classList.toggle('border-outline-variant/20', lang !== 'en');
+      }
+      // Mobile buttons
+      if (itBtnMobile) {
+        itBtnMobile.classList.toggle('border-primary', lang === 'it');
+        itBtnMobile.classList.toggle('border-outline-variant/20', lang !== 'it');
+      }
+      if (enBtnMobile) {
+        enBtnMobile.classList.toggle('border-primary', lang === 'en');
+        enBtnMobile.classList.toggle('border-outline-variant/20', lang !== 'en');
+      }
+    }
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      setLanguageCookie(lang);
+      worker.postMessage({ type: 'refresh' });
+      updateSwitcherUI(lang);
+    }
+
+    // Desktop buttons
+    if (itBtn) {
+      itBtn.addEventListener('click', function() {
+        if (currentLang !== 'it') switchLanguage('it');
+      });
+    }
+    if (enBtn) {
+      enBtn.addEventListener('click', function() {
+        if (currentLang !== 'en') switchLanguage('en');
+      });
+    }
+
+    // Mobile buttons
+    if (itBtnMobile) {
+      itBtnMobile.addEventListener('click', function() {
+        if (currentLang !== 'it') switchLanguage('it');
+      });
+    }
+    if (enBtnMobile) {
+      enBtnMobile.addEventListener('click', function() {
+        if (currentLang !== 'en') switchLanguage('en');
+      });
+    }
+
+    // Initialize UI
+    updateSwitcherUI(currentLang);
+  }
+
+  setupLanguageSwitcher();
+  
+  // Initialize offline-first load strategy
+  initializeOfflineFirst();
 })();
