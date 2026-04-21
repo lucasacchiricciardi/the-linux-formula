@@ -203,26 +203,25 @@
   
   // Initialize auth gate
   async function initAuthGate() {
+    // Default: auth disabled (show content)
+    document.body.classList.remove('tlf-auth-required');
+    
     try {
       // Try to fetch secret.json
       const response = await fetch('./secret.json');
       
-      if (!response.ok) {
-        // No secret file = auth disabled
-        document.body.classList.remove('tlf-auth-required');
+      // If file doesn't exist or error, auth is disabled
+      if (!response || !response.ok) {
         return;
       }
       
       const secretData = await response.json();
       if (!secretData.hash) {
-        // Invalid secret file
-        document.body.classList.remove('tlf-auth-required');
         return;
       }
       
       // Check if already authenticated in this session
       if (sessionStorage.getItem('tlf_auth') === 'true') {
-        document.body.classList.remove('tlf-auth-required');
         return;
       }
       
@@ -233,8 +232,7 @@
       showAuthOverlay(secretData.hash);
     } catch (error) {
       // Error loading secret = auth disabled for safety
-      console.error('Auth gate init error:', error);
-      document.body.classList.remove('tlf-auth-required');
+      console.log('Auth gate disabled (no secret.json)');
     }
   }
   
