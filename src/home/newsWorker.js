@@ -1,6 +1,7 @@
 // Base URL for fetching news, set by main thread via 'setBaseUrl' message
 let BASE_URL = '';
 let FETCH_URL = '';
+const POLL_INTERVAL = 3600000; // 1 hour
 
 let lastHash = null;
 let consecutiveErrors = 0;
