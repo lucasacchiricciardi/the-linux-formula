@@ -316,3 +316,175 @@ self.postMessage({ type: 'unchanged' });
 - [x] Hash comparison: skip fetch se cache valida
 - [x] Migrazione: clear localStorage vecchio al primo accesso v2.0
 - [x] Zero XSS: solo `createElement` + `textContent`
+
+---
+
+## 12. Work-in-Progress Auth Gate (Sprint 7)
+
+### 12.1 Obiettivo
+
+Proteggere il sito con un overlay di autenticazione durante lo sviluppo.
+Meccanismo disabilitabile con assenza di file `secret.json`.
+
+### 12.2 Flusso
+
+1. Pagina carica con tutto il contenuto nascosto (`opacity: 0`)
+2. Script inline nel `<head>` verifica presenza di `secret.json`
+3. Se `secret.json` esiste:
+   - Modal overlay fisso mostra "Work in Progress" + input password + bottone "Unlock"
+   - Contenuto rimane `opacity: 0`
+4. User inserisce password, preme Unlock
+5. Script valida contro hash htpasswd nel file `secret.json`
+6. Se valida: overlay scompare, contenuto diventa `opacity: 1`
+7. Se invalida: messaggio errore, campo rosso, focus reset
+8. Se `secret.json` non esiste: overlay non mostrato, `opacity: 1` immediato
+
+### 12.3 File `secret.json`
+
+**Posizione:** `src/secret.json` (dev) → copiato in `dist/secret.json` dal build
+
+**Formato:**
+```json
+{
+  "hash": "$apr1$i724wv6z$csyRYbwLN.YBuXzN2qWi1."
+}
+```
+
+**Generazione:** https://www.web2generators.com/apache-tools/htpasswd-generator
+- Username: `luca` (ignorato, solo per il form online)
+- Password: [a scelta] → copia il risultato `username:$apr1$...` → estrai solo hash
+
+### 12.4 Validazione Password
+
+- Libreria: `crypto-js` (CDN, ~20KB gzipped)
+  - Algoritmo htpasswd interno: APR1-MD5
+  - URL: `https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js`
+- Script crea una funzione `verifyApr1Password(plainPassword, aprHash)` che testa matching
+- Se match: rimuovi overlay, imposta `sessionStorage['tlf_auth'] = true`
+
+### 12.5 UI Overlay
+
+**CSS inline nel `<head>`:**
+```css
+body.tlf-auth-required {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tlf-auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.tlf-auth-modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  min-width: 320px;
+}
+
+.tlf-auth-modal h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-family: 'IBM Plex Serif', serif;
+}
+
+.tlf-auth-modal input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 1rem 0;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-family: 'IBM Plex Mono', monospace;
+  box-sizing: border-box;
+}
+
+.tlf-auth-modal input:focus {
+  outline: none;
+  border-color: #003f87;
+  box-shadow: 0 0 0 3px rgba(0, 63, 135, 0.1);
+}
+
+.tlf-auth-modal input.error {
+  border-color: #ba1a1a;
+  background-color: #ffdad6;
+}
+
+.tlf-auth-modal button {
+  background: #003f87;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: Inter, sans-serif;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.tlf-auth-modal button:hover {
+  background: #0056b3;
+}
+
+.tlf-auth-modal button:active {
+  background: #003f87;
+}
+
+.tlf-auth-error {
+  color: #ba1a1a;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: none;
+}
+
+.tlf-auth-error.show {
+  display: block;
+}
+```
+
+### 12.6 Script di Autenticazione (Inline nel `<head>`)
+
+- Carica `secret.json` via fetch asincrono
+- Se 404 → nessun overlay (funzionalità disabilitata) → rimuovi `body.tlf-auth-required`
+- Se successo → mostra overlay, attach event listeners
+- Enter key o click "Unlock" valida password
+- On success: sessionStorage impostato, toggle overlay, reset body opacity
+
+### 12.7 Build Script Aggiornamenti
+
+`scripts/build-news.mjs`:
+- Se `src/secret.json` esiste → copia in `dist/secret.json`
+- Se non esiste → salta (niente nel dist)
+
+### 12.8 Git e Sicurezza
+
+- `src/secret.json` **INCLUSO** nel repo (è una demo/dev password, non produzione)
+- Se volessi password real: aggiungi a `.gitignore`, usa env var al build
+- Per production-ready: elimina `src/secret.json` dal repo
+
+### 12.9 Acceptance Criteria
+
+- [ ] Script inline nel `<head>` carica `secret.json` prima di DOM render
+- [ ] Se `secret.json` assente: nessun overlay, sito visibile subito
+- [ ] Se presente: overlay modal centrato con "Work in Progress" + input + bottone
+- [ ] Password validata contro APR1-MD5 hash
+- [ ] Su success: overlay scompare, contenuto `opacity: 1`, sessionStorage impostato
+- [ ] Su error: messaggio rosso, input evidenziato, reset per nuovo tentativo
+- [ ] Escape key chiude input (NO unlock — security)
+- [ ] Zero XSS: nessun innerHTML, solo textContent
+- [ ] Build script copia file se esiste
+- [ ] 100% test coverage su validazione e hash matching

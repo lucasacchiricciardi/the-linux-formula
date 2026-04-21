@@ -338,3 +338,49 @@ node --test src/home/newsWorker.test.js  # 7 pass
 - [ ] Set up error tracking (Sentry)
 - [x] Performance budget monitoring
 - [x] Lighthouse CI in GitHub Actions
+
+---
+
+## Sprint 7 — Work-in-Progress Auth Gate
+
+### Obiettivo
+
+Proteggere il sito in fase di sviluppo con overlay di autenticazione via password htpasswd.
+Meccanismo disabilitabile semplicemente assente il file `src/secret.json`.
+
+### Implementation Plan
+
+| Step | Task | Scope | Priority | Files | Description |
+|------|------|-------|----------|-------|-------------|
+| 7.1 | Create secret.json with hash | `build` | High | `src/secret.json` | File JSON con hash APR1-MD5 htpasswd |
+| 7.2 | Add CSS auth overlay inline | `ui` | High | `src/home/index.html` | Stili modali + input + button nel `<style>` della head |
+| 7.3 | Add auth script inline | `ui` | High | `src/home/index.html` | Script nel `<head>` che: carica secret.json, valida password, rimuove overlay |
+| 7.4 | Update build script | `build` | High | `scripts/build-news.mjs` | Aggiungi copia di `src/secret.json` → `dist/secret.json` se esiste |
+| 7.5 | Add crypto-js CDN | `ui` | High | `src/home/index.html` | Link crypto-js CDN prima dello script auth inline |
+| 7.6 | Test auth script | `ui` | High | `src/home/index.html` | Test fetch secret.json, validazione hash, overlay toggling |
+| 7.7 | Add hidden overlay HTML | `ui` | High | `src/home/index.html` | Modal HTML inline nel head: "Work in Progress" + input + button + error message |
+| 7.8 | Update progress + PRD docs | `docs` | Medium | `docs/progress.md`, `docs/prd.md` | Documentare Sprint 7 acceptance criteria |
+
+### Task Progress
+
+| Task | Status | Notes |
+|------|--------|-------|
+| 7.1 Create secret.json | ⏳ In Progress | Hash htpasswd utente 'luca' |
+| 7.2 CSS auth overlay | ⏳ In Progress | Inline in `<head>` `<style>` |
+| 7.3 Auth script inline | ⏳ In Progress | Fetch + validation + toggle |
+| 7.4 Build script copy | ⏳ In Progress | Copia conditionale secret.json |
+| 7.5 crypto-js CDN | ⏳ In Progress | Link script prima auth script |
+| 7.6 Test auth script | ⏳ In Progress | Validation logic + API coverage |
+| 7.7 Hidden overlay HTML | ⏳ In Progress | Inline nel head |
+| 7.8 Update docs | ⏳ In Progress | PRD Sezione 12 + progress |
+
+### Validation Checklist
+
+- [ ] Senza `src/secret.json`: sito visibile subito, nessun overlay
+- [ ] Con file: overlay mostra "Work in Progress" + input password
+- [ ] Password corretta: overlay scompare, contenuto `opacity: 1`
+- [ ] Password sbagliata: messaggio errore rosso, input evidenziato
+- [ ] Escape key chiude input senza unlock
+- [ ] Build script copia file se esiste
+- [ ] Zero XSS: solo textContent, nessun innerHTML
+- [ ] sessionStorage impostato su auth success
