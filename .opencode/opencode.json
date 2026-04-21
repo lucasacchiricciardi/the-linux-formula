@@ -1,9 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "model" : "opencode/nemotron-3-super-free",
+  "small_model" : "opencode/big-pickle",
   "agent": {
     "orchestrator": {
       "mode": "primary",
-      "model": "minimax-m2.5-free",
+      "model": "opencode/nemotron-3-super-free",
       "description": "Coordinator - Interfaccia unica con l'utente",
       "permission": {
         "edit": "allow",
@@ -12,7 +14,7 @@
     },
     "pensante-architecture": {
       "mode": "subagent",
-      "model": "minimax-m2.5-free",
+      "model": "opencode/nemotron-3-super-free",
       "description": "Spec-Driven Architecture",
       "permission": {
         "edit": "deny",
@@ -21,7 +23,7 @@
     },
     "pensante-security": {
       "mode": "subagent",
-      "model": "minimax-m2.5-free",
+      "model": "opencode/big-pickle",
       "description": "Security Audit",
       "permission": {
         "edit": "deny",
@@ -30,7 +32,7 @@
     },
     "pensante-design": {
       "mode": "subagent",
-      "model": "opencode-go/glm-5.1",
+      "model": "opencode/big-pickle",
       "description": "Design System",
       "permission": {
         "edit": "deny",
@@ -39,7 +41,7 @@
     },
     "pensante-integration": {
       "mode": "subagent",
-      "model": "minimax-m2.5-free",
+      "model": "opencode/big-pickle",
       "description": "Integration & Data Flow",
       "permission": {
         "edit": "deny",
@@ -48,7 +50,7 @@
     },
     "executer-implementation": {
       "mode": "subagent",
-      "model": "github-copilot/grok-code-fast-1",
+      "model": "opencode/big-pickle",
       "description": "Code Implementation",
       "permission": {
         "edit": "allow",
@@ -57,7 +59,7 @@
     },
     "executer-test": {
       "mode": "subagent",
-      "model": "github-copilot/grok-code-fast-1",
+      "model": "opencode/big-pickle",
       "description": "TDD Tests",
       "permission": {
         "edit": "allow",
@@ -66,7 +68,7 @@
     },
     "executer-security-audit": {
       "mode": "subagent",
-      "model": "github-copilot/grok-code-fast-1",
+      "model": "opencode/big-pickle",
       "description": "Security Audit Execution",
       "permission": {
         "edit": "deny",
@@ -75,7 +77,7 @@
     },
     "executer-security-fix": {
       "mode": "subagent",
-      "model": "github-copilot/grok-code-fast-1",
+      "model": "opencode/big-pickle",
       "description": "Security Fixes",
       "permission": {
         "edit": "allow",
@@ -84,7 +86,7 @@
     },
     "executer-ui": {
       "mode": "subagent",
-      "model": "github-copilot/grok-code-fast-1",
+      "model": "opencode/big-pickle",
       "description": "UI Implementation",
       "permission": {
         "edit": "allow",
@@ -93,7 +95,7 @@
     },
     "executer-visual": {
       "mode": "subagent",
-      "model": "github-copilot/grok-code-fast-1",
+      "model": "opencode/big-pickle",
       "description": "Visual Assets",
       "permission": {
         "edit": "allow",
@@ -102,7 +104,7 @@
     },
     "executer-build": {
       "mode": "subagent",
-      "model": "github-copilot/grok-code-fast-1",
+      "model": "opencode/big-pickle",
       "description": "Build Scripts",
       "permission": {
         "edit": "allow",
@@ -111,7 +113,7 @@
     },
     "executer-worker": {
       "mode": "subagent",
-      "model": "github-copilot/grok-code-fast-1",
+      "model": "opencode/big-pickle",
       "description": "Web Worker",
       "permission": {
         "edit": "allow",
