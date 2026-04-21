@@ -34,8 +34,8 @@
   ]
 }
 </script>
-<link href="/the-linux-formula/assets/tailwind.css" rel="stylesheet">
-<script src="/the-linux-formula/vendor/lz-string.min.js"></script>
+<link href="assets/tailwind.css" rel="stylesheet">
+<script src="vendor/lz-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -67,8 +67,11 @@
         }
         /* Work-in-Progress Auth Gate Styles */
         body.tlf-auth-required {
-            opacity: 0;
-            pointer-events: none;
+          overflow: hidden;
+        }
+        body.tlf-auth-required > *:not(#tlf-auth-overlay) {
+          opacity: 0;
+          pointer-events: none;
         }
         .tlf-auth-overlay {
             position: fixed;
@@ -81,6 +84,16 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            pointer-events: all;
+        }
+        /* Ensure modal and its children are clickable */
+        .tlf-auth-overlay * {
+            pointer-events: auto;
+        }
+        .tlf-auth-button {
+            pointer-events: auto !important;
+            z-index: 10000;
+            position: relative;
         }
         .tlf-auth-modal {
             background: white;
@@ -149,7 +162,7 @@
 (function initAuthGate() {
   'use strict';
   
-  // APR1-MD5 hash validation function (proper implementation)
+  // APR1-MD5 hash validation function
   function verifyApr1Password(plainPassword, aprHash) {
     if (!aprHash || !aprHash.startsWith('$apr1$')) {
       return false;
@@ -163,99 +176,91 @@
       const salt = parts[2];
       const expectedHash = parts[3];
       
-      // Check CryptoJS is available
       if (typeof CryptoJS === 'undefined') {
-        console.error('CryptoJS not loaded');
         return false;
       }
-      
-      // APR1-MD5 algorithm implementation
-      // Based on: https://httpd.apache.org/docs/2.4/misc/password_encryptions.html
-      
-      // Step 1: $apr1$<salt>$<hash>
-      // hash = MD5(salt + password + salt)
-      // Then: for i = 0 to 999
-      //   a = (i & 1) ? password : hash
-      //   b = (i & 1) ? hash : password  
-      //   hash = MD5(hash + a + b)
-      
-      const md5 = (str) => CryptoJS.MD5(str).toString();
-      
-      // Initial hash: salt + password + salt
-      let hash = salt + plainPassword + salt;
-      hash = md5(hash);
-      
-      //循环1000次
-      for (let i = 0; i < 1000; i++) {
-        // Alternate: password + hash or hash + password
-        const a = (i & 1) ? plainPassword : hash;
-        const b = (i & 1) ? hash : plainPassword;
-        hash = md5(a + b + salt);
+      const itoa64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+      function md5Binary(value) {
+        return CryptoJS.enc.Latin1.stringify(CryptoJS.MD5(CryptoJS.enc.Latin1.parse(value)));
       }
-      
-      // Format: $apr1$salt$<hash>
-      // Hash is stored in a specific format from the 1000 iterations
-      // We need to extract the correct format from our computed hash
-      const computed = '$apr1$' + salt + '$' + hash;
-      
-      // For proper comparison, we need to encode in the same format
-      // The hash bytes need to be rearranged to match the htpasswd format
-      const hashBytes = [];
-      for (let i = 0; i < hash.length; i += 2) {
-        hashBytes.push(parseInt(hash.substr(i, 2), 16));
+
+      function to64(value, length) {
+        var result = '';
+        while (--length >= 0) {
+          result += itoa64[value & 0x3f];
+          value >>= 6;
+        }
+        return result;
       }
-      
-      // Reorder bytes for htpasswd format
-      const reordered = [
-        hashBytes[11], hashBytes[4], hashBytes[10], hashBytes[5], 
-        hashBytes[3], hashBytes[9], hashBytes[15], hashBytes[2],
-        hashBytes[8], hashBytes[14], hashBytes[1], hashBytes[7],
-        hashBytes[13], hashBytes[0], hashBytes[6], hashBytes[12]
-      ];
-      
-      const finalHash = reordered.map(b => 
-        './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'[b & 0x3f]
-      ).join('');
-      
-      return finalHash === expectedHash;
+
+      function apacheMd5(password, hashSalt) {
+        var message = password + '$apr1$' + hashSalt;
+        var final = md5Binary(password + hashSalt + password);
+        var remaining = password.length;
+
+        while (remaining > 0) {
+          message += final.substring(0, remaining > 16 ? 16 : remaining);
+          remaining -= 16;
+        }
+
+        for (var bit = password.length; bit > 0; bit >>= 1) {
+          message += (bit & 1) ? String.fromCharCode(0) : password.charAt(0);
+        }
+
+        final = md5Binary(message);
+
+        for (var i = 0; i < 1000; i++) {
+          var iteration = '';
+          iteration += (i & 1) ? password : final;
+          if (i % 3) iteration += hashSalt;
+          if (i % 7) iteration += password;
+          iteration += (i & 1) ? final : password;
+          final = md5Binary(iteration);
+        }
+
+        var passwd = '';
+        passwd += to64((final.charCodeAt(0) << 16) | (final.charCodeAt(6) << 8) | final.charCodeAt(12), 4);
+        passwd += to64((final.charCodeAt(1) << 16) | (final.charCodeAt(7) << 8) | final.charCodeAt(13), 4);
+        passwd += to64((final.charCodeAt(2) << 16) | (final.charCodeAt(8) << 8) | final.charCodeAt(14), 4);
+        passwd += to64((final.charCodeAt(3) << 16) | (final.charCodeAt(9) << 8) | final.charCodeAt(15), 4);
+        passwd += to64((final.charCodeAt(4) << 16) | (final.charCodeAt(10) << 8) | final.charCodeAt(5), 4);
+        passwd += to64(final.charCodeAt(11), 2);
+
+        return '$apr1$' + hashSalt + '$' + passwd;
+      }
+
+      return apacheMd5(plainPassword, salt) === '$apr1$' + salt + '$' + expectedHash;
     } catch (e) {
-      console.error('Auth validation error:', e);
       return false;
     }
   }
   
   // Initialize auth gate
   async function initAuthGate() {
-    // Default: auth disabled (show content)
-    document.body.classList.remove('tlf-auth-required');
-    
     try {
-      // Try to fetch secret.json
       const response = await fetch('./secret.json');
-      
-      // If file doesn't exist or error, auth is disabled
+
       if (!response || !response.ok) {
+        document.body.classList.remove('tlf-auth-required');
         return;
       }
-      
+
       const secretData = await response.json();
       if (!secretData.hash) {
+        document.body.classList.remove('tlf-auth-required');
         return;
       }
-      
-      // Check if already authenticated in this session
+
       if (sessionStorage.getItem('tlf_auth') === 'true') {
+        document.body.classList.remove('tlf-auth-required');
         return;
       }
-      
-      // Auth is required - add class to hide body
+
       document.body.classList.add('tlf-auth-required');
-      
-      // Create and show overlay
       showAuthOverlay(secretData.hash);
     } catch (error) {
-      // Error loading secret = auth disabled for safety
-      console.log('Auth gate disabled (no secret.json)');
+      document.body.classList.remove('tlf-auth-required');
     }
   }
   
@@ -284,6 +289,7 @@
     const button = document.createElement('button');
     button.id = 'tlf-auth-button';
     button.type = 'button';
+    button.className = 'tlf-auth-button';
     button.textContent = 'Unlock';
     
     modal.appendChild(title);
@@ -294,37 +300,14 @@
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
     
-    // Event handlers
     function handleUnlock() {
       const password = input.value;
-      
-      // Simple password validation: check if password matches a known value
-      // For real implementation, use proper APR1 validation on server
-      // Here we'll use a basic SHA-256 comparison approach
-      
-      // Hash the password and compare
-      let isValid = false;
-      
-      // Method 1: Use CryptoJS to create SHA-256 hash and compare with pre-computed values
-      if (typeof CryptoJS !== 'undefined') {
-        const pwd256 = CryptoJS.SHA256(password).toString();
-        // For demo, we'll do a very basic check - just verify password matches
-        // In production, compute password hash server-side and send it
-        // For now, accept password 'luca' as demo
-        isValid = password === 'luca';
-      } else {
-        // Fallback: accept 'luca' as password
-        isValid = password === 'luca';
-      }
-      
-      if (isValid) {
-        // Success
+      if (verifyApr1Password(password, aprHash)) {
         sessionStorage.setItem('tlf_auth', 'true');
         document.body.classList.remove('tlf-auth-required');
         overlay.remove();
         input.value = '';
       } else {
-        // Error
         errorMsg.classList.add('show');
         input.classList.add('error');
         input.value = '';
@@ -349,7 +332,6 @@
       }
     });
     
-    // Focus input
     input.focus();
   }
   
@@ -362,7 +344,7 @@
 })();
 </script>
 </head>
-<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<body class="tlf-auth-required bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-on-primary px-4 py-2 rounded-none z-50 font-label text-xs uppercase tracking-widest">Skip to main content</a>
 <!-- TopNavBar -->
 <nav class="bg-surface-container-lowest/80 backdrop-blur-xl w-full sticky top-0 z-50 flat no-shadows" aria-label="Main navigation">
