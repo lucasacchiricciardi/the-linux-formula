@@ -16,6 +16,7 @@
 <link rel="manifest" href="https://lucasacchiricciardi.github.io/the-linux-formula/manifest.json"/>
 <meta name="theme-color" content="#003f87"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
 <meta name="apple-mobile-web-app-title" content="TLF"/>
 <title>The Linux Formula</title>
@@ -33,47 +34,8 @@
   ]
 }
 </script>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    darkMode: 'class',
-    theme: {
-      extend: {
-        colors: {
-          surface: '#f8f9fa',
-          'surface-container': '#edeeef',
-          'surface-container-low': '#f3f4f5',
-          'surface-container-high': '#e7e8e9',
-          'surface-container-highest': '#e1e3e4',
-          'surface-container-lowest': '#ffffff',
-          'surface-dim': '#d9dadb',
-          'on-surface': '#191c1d',
-          'on-surface-variant': '#424752',
-          primary: '#003f87',
-          'primary-container': '#0056b3',
-          'on-primary': '#ffffff',
-          'on-primary-container': '#bbd0ff',
-          secondary: '#5f5e5f',
-          error: '#ba1a1a',
-          'error-container': '#ffdad6',
-          'on-error': '#ffffff',
-          'on-error-container': '#93000a',
-          outline: '#727784',
-          'outline-variant': '#c2c6d4'
-        },
-        fontFamily: {
-          headline: ['IBM Plex Serif', 'serif'],
-          body: ['Inter', 'sans-serif'],
-          label: ['IBM Plex Mono', 'monospace']
-        },
-        borderRadius: {
-          DEFAULT: '0.25rem'
-        }
-      }
-    }
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
+<link href="/the-linux-formula/assets/tailwind.css" rel="stylesheet">
+<script src="/the-linux-formula/vendor/lz-string.min.js"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>

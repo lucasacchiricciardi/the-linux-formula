@@ -1,5 +1,6 @@
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, copyFileSync, rmSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
+import { execSync } from 'node:child_process';
 
 const SRC_HOME = process.env.BUILD_SRC_HOME || 'src/home';
 const SRC_RAW = process.env.BUILD_NEWS_SRC || 'src/raw';
@@ -128,6 +129,22 @@ function buildNewsFeed(srcDir) {
   return { articles: sorted };
 }
 
+function generateTailwindCSS() {
+  const assetsDir = join(DIST, 'assets');
+  if (!existsSync(assetsDir)) {
+    mkdirSync(assetsDir, { recursive: true });
+  }
+  const tailwindOutput = join(assetsDir, 'tailwind.css');
+  try {
+    // Run tailwindcss via npx
+    execSync(`npx tailwindcss -i ${join(SRC_HOME, 'styles', 'input.css')} -o ${tailwindOutput} --minify`, { stdio: 'inherit' });
+    console.log(`Generated Tailwind CSS at ${tailwindOutput}`);
+  } catch (error) {
+    console.error('Failed to generate Tailwind CSS:', error.message);
+    process.exit(1);
+  }
+}
+
 function assembleDist() {
   if (existsSync(DIST)) {
     for (const entry of readdirSync(DIST)) {
@@ -149,6 +166,19 @@ function assembleDist() {
       console.warn(`Warning: ${src} not found, skipping`);
     }
   }
+
+  // Copy vendor libraries
+  const vendorSrc = 'src/vendor';
+  const vendorDst = join(DIST, 'vendor');
+  if (existsSync(vendorSrc)) {
+    mkdirSync(vendorDst, { recursive: true });
+    for (const f of readdirSync(vendorSrc)) {
+      copyFileSync(join(vendorSrc, f), join(vendorDst, f));
+    }
+  }
+
+  // Generate Tailwind CSS
+  generateTailwindCSS();
 
   const feed = buildNewsFeed(SRC_RAW);
   writeFileSync(FEED_OUTPUT, JSON.stringify(feed, null, 2) + '\n', 'utf-8');
