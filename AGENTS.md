@@ -41,6 +41,13 @@ python3 -m http.server 8000 --directory dist
 4. GitHub Pages must be configured in Settings → Pages → Source: **GitHub Actions** (not "Deploy from a branch")
 5. `dist/` is gitignored on `main` — only exists as a build artifact
 
+### GitHub Actions version policy
+
+- **ALWAYS use `actions/checkout@v5`** or higher — never `@v4` (targets Node20, EOL April 2026)
+- **ALWAYS use `actions/setup-node@v5`** or higher — never `@v4` (targets Node20, EOL April 2026)
+- Do NOT rely on `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24` as a substitute for upgrading action versions
+- When adding new third-party actions, verify they natively support Node24
+
 ## Design system (from `src/home/index.html`)
 
 The reference layout is `src/home/index.html`. All new UI must follow these patterns.
