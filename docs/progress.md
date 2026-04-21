@@ -341,6 +341,85 @@ node --test src/home/newsWorker.test.js  # 7 pass
 
 ---
 
+## Sprint 8 — LimesAnalytics Integration
+
+### Contesto
+
+Il progetto `docs/analytics-prd.md` definisce un sistema di web analytics leggero (<10KB) senza cookie, usando localStorage con compressione LZ-string. Il sistema emula le metriche core di GA (Pageviews, Events, Sessions) garantendo esenzione dal banner cookie tramite anonimizzazione nativa.
+
+### Gap Analysis vs analytics-prd.md
+
+| # | Requirement | Stato | Dettaglio |
+|---|-------------|-------|-----------|
+| 1 | Pageview tracking con referrer | ✅ | Traccia navigazione |
+| 2 | Event tracking (click, scroll) | ✅ | Interazioni utente |
+| 3 | Session ID (hash, 30min) | ✅ | Identificazione anonima sessione |
+| 4 | localStorage compression LZ | ✅ | Già disponibile nel progetto |
+| 5 | Heatmaps | ❌ | Escluso da MVP |
+| 6 | IP masking | ✅ | Nessun IP salvato |
+| 7 | No cookie | ✅ | Solo localStorage |
+| 8 | GDPR compliance | ✅ | First-party, anonimizzato |
+| 9 | Script < 10KB | ✅ | Target |
+
+### Implementation Plan
+
+| Step | Task | Scope | Priority | Files |
+|------|------|-------|----------|-------|
+| 8.1 | Create analytics.js module | `analytics` | High | `src/home/analytics.js` |
+| 8.2 | Session ID generation + rotation | `analytics` | High | `src/home/analytics.js` |
+| 8.3 | Pageview tracking | `analytics` | High | `src/home/analytics.js` |
+| 8.4 | Event click tracking | `analytics` | Medium | `src/home/analytics.js` |
+| 8.5 | Scroll depth tracking | `analytics` | Medium | `src/home/analytics.js` |
+| 8.6 | Analytics TDD tests | `test` | High | `src/home/analytics.test.js` |
+| 8.7 | Integrate in index.html | `ui` | Medium | `src/home/index.html` |
+| 8.8 | Admin debug page (optional) | `ui` | Low | `src/home/analytics-debug.html` |
+| 8.9 | Privacy Policy update | `docs` | Medium | `src/home/index.html` |
+
+### Data Model
+
+```javascript
+{
+  "s": "abc123",        // Session ID (hash, ruota 30min)
+  "v": [                // Views
+    { "p": "/", "t": 1672531200, "r": "google.com" }
+  ],
+  "e": [                // Events
+    { "n": "click", "l": "cta-main", "t": 1672531210 }
+  ],
+  "ts": 1672531200     // Timestamp inizio sessione
+}
+```
+
+### Storage Keys
+
+| Key | Contenuto | Formato |
+|-----|-----------|---------|
+| `tlf_analytics` | Dati compressi | LZ-string → base64 |
+
+### Task Progress
+
+| Task | Status | Notes |
+|------|--------|-------|
+| 8.1 Analytics module | ⏳ In Progress | Struttura base |
+| 8.2 Session ID | ⏳ In Progress | Hash temporaneo |
+| 8.3 Pageview tracking | ⏳ In Progress | Con referrer |
+| 8.4 Event tracking | ⏳ In Progress | Click handler |
+| 8.5 Scroll tracking | ⏳ In Progress | Depth % |
+| 8.6 TDD tests | ⏳ In Progress | Test-first |
+| 8.7 Integration | ⏳ In Progress | HTML include |
+| 8.8 Debug page | ⏳ In Progress | Visualizzazione |
+| 8.9 Privacy Policy | ⏳ In Progress | Cookie exemption |
+
+### Validation Checklist
+
+- [ ] Script < 10KB gzipped
+- [ ] No third-party domain calls
+- [ ] localStorage dati non leggibili senza decompressione
+- [ ] IP mai salvato
+- [ ] Privacy Policy aggiornata
+
+---
+
 ## Sprint 7 — Work-in-Progress Auth Gate
 
 ### Obiettivo
