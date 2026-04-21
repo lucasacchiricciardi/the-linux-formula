@@ -126,7 +126,7 @@ function buildNewsFeed(srcDir) {
     return b.date.localeCompare(a.date);
   });
 
-  return { articles: sorted };
+  return { articles: sorted, version: APP_VERSION };
 }
 
 function generateTailwindCSS() {

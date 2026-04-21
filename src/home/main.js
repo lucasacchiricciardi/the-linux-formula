@@ -23,7 +23,8 @@
     try {
       worker = new Worker('newsWorker.js');
       // Set base URL for worker (important for GitHub Pages subdirectory)
-      worker.postMessage({ type: 'setBaseUrl', baseUrl: '' });
+      var baseUrl = '/the-linux-formula';
+      worker.postMessage({ type: 'setBaseUrl', baseUrl: baseUrl });
     } catch (e) {
       showError('Failed to initialize news. Please refresh the page.');
       return;
@@ -47,12 +48,13 @@
       document.cookie = 'tlf_lang=' + lang + '; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
     }
 
-    var STORAGE_KEYS = {
-      ARTICLES: function(lang) { return 'tlf_articles_' + lang; },
-      LANG: 'tlf_lang',
-      HASH: 'tlf_hash',
-      VERSION: 'tlf_version'
-    };
+     var STORAGE_KEYS = {
+       ARTICLES: function(lang) { return 'tlf_articles_' + lang; },
+       LANG: 'tlf_lang',
+       HASH: 'tlf_hash',
+       VERSION: 'tlf_version',
+       APP_VERSION: 'tlf_app_version'
+     };
 
     function compressAndStore(lang, articles) {
       try {
@@ -101,6 +103,10 @@ function retrieveAndDecompress(lang) {
       return localStorage.getItem(STORAGE_KEYS.HASH);
     }
 
+    function retrieveVersion() {
+      return localStorage.getItem(STORAGE_KEYS.APP_VERSION);
+    }
+
     function storeVersion(version) {
       localStorage.setItem(STORAGE_KEYS.VERSION, version);
     }
@@ -125,20 +131,22 @@ function retrieveAndDecompress(lang) {
       return false;
     }
 
-    function initializeOfflineFirst() {
-      handleMigration();
-      try {
-        var storedArticles = retrieveAndDecompress(currentLang);
-        if (storedArticles && storedArticles.length > 0) {
-          allArticles = storedArticles;
-          var filteredArticles = storedArticles.filter(function(article) { return article.lang === currentLang; });
-          renderArticles(filteredArticles);
-          worker.postMessage({ type: 'refresh' });
-        }
-      } catch (e) {
-        // Fetch normally
-      }
-    }
+     function initializeOfflineFirst() {
+       handleMigration();
+       // Store app version for version checking
+       storeVersion('2.0.0');
+       try {
+         var storedArticles = retrieveAndDecompress(currentLang);
+         if (storedArticles && storedArticles.length > 0) {
+           allArticles = storedArticles;
+           var filteredArticles = storedArticles.filter(function(article) { return article.lang === currentLang; });
+           renderArticles(filteredArticles);
+           worker.postMessage({ type: 'refresh' });
+         }
+       } catch (e) {
+         // Fetch normally
+       }
+     }
 
     function createArticleElement(article) {
       var card = document.createElement('article');
@@ -369,6 +377,7 @@ function retrieveAndDecompress(lang) {
         if (msg.type === 'news') {
           compressAndStore(currentLang, msg.data);
           if (msg.hash) storeHash(msg.hash);
+          if (msg.version) storeVersion(msg.version);
           allArticles = msg.data;
           var filteredArticles = msg.data.filter(function(article) { return article.lang === currentLang; });
           renderArticles(filteredArticles);
@@ -378,6 +387,10 @@ function retrieveAndDecompress(lang) {
       // Re-filter and re-render with current language
       var filteredArticles = allArticles.filter(function(article) { return article.lang === currentLang; });
       renderArticles(filteredArticles);
+    } else if (msg.type === 'version-mismatch') {
+      // Clear local cache and reload
+      clearArticleStorage(currentLang);
+      storeVersion(msg.newVersion);
     }
       } catch (err) {
         showError('An error occurred while loading news.');

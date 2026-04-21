@@ -1,17 +1,13 @@
 // Base URL for fetching news, set by main thread via 'setBaseUrl' message
-let BASE_URL = '';
-let FETCH_URL = '';
+let BASE_URL = '/the-linux-formula';
+let FETCH_URL = BASE_URL + '/news/news-feed.json';
+let VERSION_URL = BASE_URL + '/news/version.txt';
 const POLL_INTERVAL = 3600000; // 1 hour
 
 let lastHash = null;
+let lastVersion = null;
 let consecutiveErrors = 0;
 let pollTimeout;
-
-// Default fallback for backward compatibility (should be overridden by main thread)
-if (!BASE_URL) {
-  BASE_URL = '/the-linux-formula';
-  FETCH_URL = BASE_URL + '/news/news-feed.json';
-}
 
 function scheduleNextPoll(interval) {
   pollTimeout = setTimeout(fetchNews, interval);
@@ -25,8 +21,22 @@ async function computeHash(data) {
     .join('');
 }
 
+async function fetchVersion() {
+  try {
+    const versionResponse = await fetch(VERSION_URL);
+    if (!versionResponse.ok) return null;
+    return (await versionResponse.text()).trim();
+  } catch {
+    return null;
+  }
+}
+
 async function fetchNews() {
   try {
+    // Fetch version for version checking
+    const remoteVersion = await fetchVersion();
+    
+    // Fetch news feed
     const newsResponse = await fetch(FETCH_URL);
 
     if (!newsResponse.ok) {
@@ -42,6 +52,18 @@ async function fetchNews() {
     const data = await newsResponse.text();
     const hash = await computeHash(data);
 
+    // Check version mismatch - invalidate cache if version changed
+    if (remoteVersion && lastVersion && remoteVersion !== lastVersion) {
+      // Version changed - clear cache by forcing a fetch
+      lastHash = null;
+      self.postMessage({ type: 'version-mismatch', oldVersion: lastVersion, newVersion: remoteVersion });
+    }
+    
+    // Update stored version
+    if (remoteVersion) {
+      lastVersion = remoteVersion;
+    }
+
     // Skip if content unchanged
     if (hash === lastHash) {
       self.postMessage({ type: 'unchanged' });
@@ -51,7 +73,7 @@ async function fetchNews() {
 
     lastHash = hash;
     const parsed = JSON.parse(data);
-    self.postMessage({ type: 'news', data: parsed.articles || [], hash: hash });
+    self.postMessage({ type: 'news', data: parsed.articles || [], hash: hash, version: parsed.version || remoteVersion });
     consecutiveErrors = 0;
     scheduleNextPoll(POLL_INTERVAL);
   } catch (err) {
@@ -69,8 +91,9 @@ self.onmessage = function(e) {
     fetchNews();
   }
   if (e.data && e.data.type === 'setBaseUrl') {
-    BASE_URL = e.data.baseUrl;
+    BASE_URL = e.data.baseUrl || '/the-linux-formula';
     FETCH_URL = BASE_URL + '/news/news-feed.json';
+    VERSION_URL = BASE_URL + '/news/version.txt';
   }
 };
 
