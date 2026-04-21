@@ -167,6 +167,14 @@ function assembleDist() {
     }
   }
 
+  // Copy secret.json if exists (for auth gate)
+  const secretSrc = 'src/secret.json';
+  const secretDst = join(DIST, 'secret.json');
+  if (existsSync(secretSrc)) {
+    copyFileSync(secretSrc, secretDst);
+    console.log('Copied secret.json to dist/ (auth gate enabled)');
+  }
+
   // Copy vendor libraries
   const vendorSrc = 'src/vendor';
   const vendorDst = join(DIST, 'vendor');
@@ -175,14 +183,6 @@ function assembleDist() {
     for (const f of readdirSync(vendorSrc)) {
       copyFileSync(join(vendorSrc, f), join(vendorDst, f));
     }
-  }
-
-  // Copy secret.json if it exists (for work-in-progress auth gate)
-  const secretSrc = 'src/secret.json';
-  const secretDst = join(DIST, 'secret.json');
-  if (existsSync(secretSrc)) {
-    copyFileSync(secretSrc, secretDst);
-    console.log('Copied secret.json to dist/ (auth gate enabled)');
   }
 
   // Generate Tailwind CSS
