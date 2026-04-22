@@ -1,6 +1,19 @@
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, copyFileSync, rmSync, statSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
-import { execSync } from 'node:child_process';
+
+function copyDirectoryRecursive(src, dst) {
+  mkdirSync(dst, { recursive: true });
+  for (const entry of readdirSync(src)) {
+    const srcPath = join(src, entry);
+    const dstPath = join(dst, entry);
+    const stat = statSync(srcPath);
+    if (stat.isFile()) {
+      copyFileSync(srcPath, dstPath);
+    } else if (stat.isDirectory()) {
+      copyDirectoryRecursive(srcPath, dstPath);
+    }
+  }
+}
 
 const SRC_HOME = process.env.BUILD_SRC_HOME || 'src/home';
 const SRC_RAW = process.env.BUILD_NEWS_SRC || 'src/raw';
@@ -194,6 +207,9 @@ function assembleDist() {
       const fStat = statSync(srcFile);
       if (fStat.isFile()) {
         copyFileSync(srcFile, dstFile);
+      } else if (fStat.isDirectory()) {
+        // Copy subdirectories (e.g., i18n/)
+        copyDirectoryRecursive(srcFile, dstFile);
       }
     }
     console.log(`Copied subpage ${sub}/ to dist/${sub}/`);
