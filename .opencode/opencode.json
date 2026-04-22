@@ -1,11 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model" : "opencode/nemotron-3-super-free",
+  "model" : "opencode/big-pickle",
   "small_model" : "opencode/big-pickle",
   "agent": {
     "orchestrator": {
       "mode": "primary",
-      "model": "opencode/nemotron-3-super-free",
+      "model": "opencode/big-pickle",
       "description": "Coordinator - Interfaccia unica con l'utente",
       "permission": {
         "edit": "allow",
@@ -14,7 +14,7 @@
     },
     "pensante-architecture": {
       "mode": "subagent",
-      "model": "opencode/nemotron-3-super-free",
+      "model": "opencode/big-pickle",
       "description": "Spec-Driven Architecture",
       "permission": {
         "edit": "deny",

@@ -1,0 +1,180 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - navigation "Main navigation" [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: terminal
+        - link "The Linux Formula" [ref=e7] [cursor=pointer]:
+          - /url: https://lucasacchiricciardi.github.io/the-linux-formula/
+      - generic [ref=e8]:
+        - link "Home" [ref=e9] [cursor=pointer]:
+          - /url: https://lucasacchiricciardi.github.io/the-linux-formula/
+        - link "LogWhispererAI" [ref=e10] [cursor=pointer]:
+          - /url: "#main-content"
+      - button "Toggle navigation menu" [ref=e11]:
+        - generic [ref=e12]: menu
+    - generic [ref=e13]:
+      - link "Home" [ref=e14] [cursor=pointer]:
+        - /url: https://lucasacchiricciardi.github.io/the-linux-formula/
+      - link "LogWhispererAI" [ref=e15] [cursor=pointer]:
+        - /url: "#main-content"
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]: LogWhispererAI_Beta_v0.1
+        - heading "Stop deciphering logs. Start fixing crashes." [level=1] [ref=e20]:
+          - text: Stop deciphering logs.
+          - text: Start fixing crashes.
+        - paragraph [ref=e21]: The first AI assistant that translates your Linux server errors into ready-to-use solutions. Built on 20+ years of enterprise systems expertise — the Metodo Sacchi (Safety First).
+        - generic [ref=e22]:
+          - link "Join the Closed Beta (Free) arrow_forward" [ref=e23] [cursor=pointer]:
+            - /url: "#beta-signup"
+            - text: Join the Closed Beta (Free)
+            - generic [ref=e24]: arrow_forward
+          - link "See How It Works" [ref=e25] [cursor=pointer]:
+            - /url: "#how-it-works"
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - text: FIG. 01
+          - generic [ref=e29]: schema
+        - generic [ref=e30]:
+          - text: LOG_ANALYSIS_ENGINE // ERROR_PATTERN_MATCH
+          - text: "UPTIME: 99.999% // AVG_RESPONSE: <60s"
+    - generic [ref=e32]:
+      - heading "The Problem" [level=2] [ref=e34]
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - paragraph [ref=e37]: It's 1 AM. The server is down. The logs are an incomprehensible wall of text. How much time will you waste before finding the right fix?
+          - generic [ref=e38]:
+            - generic [ref=e39]:
+              - generic [ref=e40]: error
+              - generic [ref=e41]:
+                - heading "Hours lost on StackOverflow" [level=3] [ref=e42]
+                - paragraph [ref=e43]: Searching through outdated threads for a fix that matches your exact error.
+            - generic [ref=e44]:
+              - generic [ref=e45]: error
+              - generic [ref=e46]:
+                - heading "Downtime anxiety" [level=3] [ref=e47]
+                - paragraph [ref=e48]: Every minute your server is down costs money and trust.
+            - generic [ref=e49]:
+              - generic [ref=e50]: error
+              - generic [ref=e51]:
+                - heading "Risk of wrong fixes" [level=3] [ref=e52]
+                - paragraph [ref=e53]: Copy-pasting commands you don't fully understand can make things worse.
+        - generic [ref=e54]:
+          - generic [ref=e55]: kernel.log
+          - generic [ref=e56]: "[ 123.456789] BUG: unable to handle page fault for address: ffff88800 [ 123.456790] IP: <ffff88800> not found in kernel mappings [ 123.456791] PGD 0 P4D 0 [ 123.456792] Oops: 0002 [#1] SMP NOPTI [ 123.456793] CPU: 3 PID: 4521 Comm: nginx Tainted: G [ 123.456794] Hardware name: Dell PowerEdge R740 [ 123.456795] Call Trace: [ 123.456796] ? show_regs.cold+0x/0x [ 123.456797] ? __die_body+0x/0x [ 123.456798] ? page_fault_oops+0x/0x [ 123.456799] ? kernel-mode trap at ffff88800 [ 123.456800] ---[ end trace 0000000000 ]--- [ 124.000000] Out of memory: Killed process 4521 (nginx)"
+    - generic [ref=e57]:
+      - 'heading "The Solution: Metodo Sacchi" [level=2] [ref=e59]'
+      - paragraph [ref=e60]:
+        - text: This isn't just another AI chatbot. LogWhispererAI is trained on 20+ years of real-world systems administration experience. Every suggestion follows the
+        - strong [ref=e61]: Safety First
+        - text: "protocol:"
+        - emphasis [ref=e62]: little often, double check
+        - text: .
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - generic [ref=e65]:
+            - generic [ref=e67]: translate
+            - text: "01"
+          - heading "Human Translation" [level=3] [ref=e68]
+          - paragraph [ref=e69]: From machine jargon to plain English. Understand exactly what went wrong and why — no guessing.
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - generic [ref=e73]: terminal
+            - text: "02"
+          - heading "Exact Fix Command" [level=3] [ref=e74]
+          - paragraph [ref=e75]: Receive the precise command to copy and paste. No vague suggestions — actionable solutions only.
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - generic [ref=e79]: verified_user
+            - text: "03"
+          - heading "Safety First" [level=3] [ref=e80]
+          - paragraph [ref=e81]: Every recommendation follows the "little often, double check" protocol. Destructive commands are flagged and explained.
+      - generic [ref=e82]:
+        - generic [ref=e84]: architecture
+        - generic [ref=e85]:
+          - generic [ref=e86]:
+            - generic [ref=e87]: notifications_active
+            - heading "Instant Delivery" [level=3] [ref=e88]
+          - paragraph [ref=e89]: Get notified immediately via Telegram or Slack when your server logs contain actionable errors. No manual log checking. No reactive firefighting.
+          - generic [ref=e90]:
+            - generic [ref=e91]: CHANNEL_01 Telegram Bot
+            - generic [ref=e92]: CHANNEL_02 Slack Webhook
+    - generic [ref=e94]:
+      - heading "Authority" [level=2] [ref=e96]
+      - generic [ref=e97]:
+        - generic [ref=e98]:
+          - generic [ref=e99]:
+            - generic [ref=e101]: person
+            - generic [ref=e102]:
+              - heading "Luca Sacchi" [level=3] [ref=e103]
+              - paragraph [ref=e104]: Senior Systems Administrator
+          - paragraph [ref=e105]: 20+ years managing mission-critical Unix/Linux infrastructure. Educator for ITS/IFTS programs, bridging academic theory with enterprise-grade operations.
+          - generic [ref=e106]:
+            - generic [ref=e107]: Experience 20+ Years
+            - generic [ref=e108]: Specialty Unix / Linux / Solaris
+            - generic [ref=e109]: Role ITS/IFTS Educator
+        - generic [ref=e110]:
+          - generic [ref=e112]: school
+          - generic [ref=e113]:
+            - generic [ref=e114]:
+              - text: Powered By Experience
+              - heading "Not just AI. AI + Expertise." [level=3] [ref=e115]
+              - paragraph [ref=e116]: LogWhispererAI is built on the patterns, failures, and solutions encountered across two decades of enterprise systems administration. The AI doesn't guess — it applies proven methodologies.
+            - generic [ref=e117]:
+              - text: Language Note
+              - paragraph [ref=e118]: During the Beta phase, AI responses are provided in English. Full multilingual support is planned for the final release.
+    - generic [ref=e119]:
+      - heading "Join the Closed Beta" [level=2] [ref=e121]
+      - generic [ref=e122]:
+        - generic [ref=e123]:
+          - text: Early Access — Free
+          - heading "Be among the first to fix logs with AI." [level=3] [ref=e124]
+          - paragraph [ref=e125]: Join the closed beta and get free access to LogWhispererAI. Upload a real log that's driving you crazy — we'll send you the solution via email as a beta test.
+          - generic [ref=e126]:
+            - generic [ref=e127]:
+              - generic [ref=e128]: check_circle
+              - text: Free during the entire beta period
+            - generic [ref=e129]:
+              - generic [ref=e130]: check_circle
+              - text: Direct feedback channel with the founder
+            - generic [ref=e131]:
+              - generic [ref=e132]: check_circle
+              - text: Priority access to the final release
+            - generic [ref=e133]:
+              - generic [ref=e134]: check_circle
+              - text: Upload a log, get a free AI analysis
+        - generic [ref=e135]:
+          - heading "Beta Signup Form" [level=3] [ref=e136]
+          - paragraph [ref=e138]: Loading form...
+  - contentinfo [ref=e139]:
+    - generic [ref=e140]:
+      - generic [ref=e141]:
+        - text: The Linux Formula
+        - paragraph [ref=e142]: Architectural-grade insights for enterprise Linux systems.
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - text: Coordinates
+          - list [ref=e145]:
+            - listitem [ref=e146]: "Office: Viale Bligny 13/a Milano"
+            - listitem [ref=e147]: "P.IVA: IT09731490968"
+        - generic [ref=e148]:
+          - text: Links
+          - list [ref=e149]:
+            - listitem [ref=e150]:
+              - link "Home" [ref=e151] [cursor=pointer]:
+                - /url: https://lucasacchiricciardi.github.io/the-linux-formula/
+            - listitem [ref=e152]:
+              - link "LinkedIn" [ref=e153] [cursor=pointer]:
+                - /url: https://www.linkedin.com/in/lucasacchi/
+            - listitem [ref=e154]:
+              - link "YouTube" [ref=e155] [cursor=pointer]:
+                - /url: https://www.youtube.com/@lucasacchinet
+      - generic [ref=e156]:
+        - generic [ref=e157]: terminal
+        - generic [ref=e158]:
+          - paragraph [ref=e159]: © The Linux Formula.
+          - paragraph [ref=e160]: All Rights Reserved.
+          - paragraph [ref=e161]: 2023 - 2026
