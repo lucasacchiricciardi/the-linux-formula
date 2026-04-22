@@ -1,5 +1,6 @@
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, copyFileSync, rmSync, statSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
+import { execSync } from 'node:child_process';
 
 function copyDirectoryRecursive(src, dst) {
   mkdirSync(dst, { recursive: true });
