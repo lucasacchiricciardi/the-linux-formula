@@ -488,3 +488,84 @@ body.tlf-auth-required {
 - [ ] Zero XSS: nessun innerHTML, solo textContent
 - [ ] Build script copia file se esiste
 - [ ] 100% test coverage su validazione e hash matching
+
+---
+
+## 13. LogWhispererAI Landing Page (Sprint 9)
+
+### 13.1 Obiettivo
+
+Creare una sottopagina `/logwhispererai` del sito `thelinuxformula.com` per validare l'offerta Micro-SaaS LogWhispererAI catturando lead qualificati (Early Adopters) tramite waitlist profilata.
+
+### 13.2 Target e Posizionamento
+
+- **Target:** Freelance tech, micro-agency, startup bootstrapped (gestione 1-5 VPS)
+- **Problema:** Ansia da downtime, log illeggibili, ore perse su StackOverflow
+- **Promessa:** Trasformare un log criptico in un comando risolutivo sicuro in < 60 secondi
+- **Vibe:** "The Formula" (Concept C). Pulito, autorevole, accademico-scientifico, affidabile
+
+### 13.3 Struttura Contenuti (Sequenza di Conversione)
+
+#### A. Hero Section (The Hook)
+- **Headline:** "Stop deciphering logs. Start fixing crashes."
+- **Sub-headline:** "The first AI assistant that translates your Linux server errors into ready-to-use solutions. Built on 20+ years of enterprise systems expertise."
+- **CTA Primaria:** "Join the Closed Beta (Free)" → scroll al form
+
+#### B. Problem & Agitation (Framework PAS)
+- Scenario con blocco di log reale (kernel panic / OOM killer) in stile terminale
+- Copy focalizzato sul dolore: downtime notturno, log incomprensibili, tempo perso
+
+#### C. La Soluzione: Metodo Sacchi
+- Tre feature highlights: Traduzione Umana, Comando Risolutivo, Sicurezza (Safety First)
+- Delivery via Telegram/Slack
+
+#### D. Social Proof & Authority
+- Profilo Luca Sacchi: 20+ anni esperienza, ITS/IFTS Educator
+- Disclaimer lingua Beta (risposte in Inglese, multilingua previsto per release finale)
+
+#### E. Offerta & Validazione
+- Pre-lancio / Waitlist profilata tramite Tally embed
+- Campi: Email, Numero server gestiti, Upload log (opzionale)
+
+### 13.4 Requisiti di Design
+
+- Coerenza totale con Concept C: stessi font (IBM Plex Serif, Inter, IBM Plex Mono), stessa palette, stessi pattern layout
+- Layout: max-w-7xl, grid 12 colonne, card con border-t-4 border-primary
+- No rounded corners su elementi interattivi
+- Material Symbols Outlined per icone
+- 40px grid overlay su body
+
+### 13.5 Vincoli Tecnici
+
+- **Pagina statica:** HTML5/Tailwind CSS, caricamento istantaneo
+- **Posizione:** `src/logwhispererai/index.html` → build in `dist/logwhispererai/index.html`
+- **SEO:** Title, meta description, JSON-LD (SoftwareApplication), Open Graph tags
+- **Keyword target:** "Linux Log Analyzer AI", "Troubleshooting Server Linux", "Metodo Sacchi"
+- **Form:** Tally embed (no backend custom)
+- **Sitemap:** Inserimento automatico URL `/logwhispererai/` nel sitemap.xml via build script
+
+### 13.6 Integrazione con Home Page
+
+- Nav desktop: link "LogWhispererAI" punta a `/logwhispererai/` (link relativo)
+- Nav mobile: stesso link
+- Hero CTA "LogWhispererAI Beta" punta a `/logwhispererai/`
+- Build script: copia automatica directory `src/logwhispererai/` in `dist/logwhispererai/`
+
+### 13.7 Build Script Updates
+
+- `scripts/build-news.mjs`: aggiunto copia automatica di subdirectory in `src/` (escluse `home`, `raw`, `vendor`) verso `dist/`
+- Sitemap: aggiunto URL `/logwhispererai/` con priority 0.9
+
+### 13.8 Acceptance Criteria
+
+- [ ] Pagina `/logwhispererai/` accessibile e renderizzata correttamente
+- [ ] Design system coerente con la homepage (font, colori, layout, icone)
+- [ ] Cinque sezioni implementate: Hero, Problem, Solution, Authority, Offer
+- [ ] Nav link nella homepage punta alla sottopagina (desktop + mobile)
+- [ ] Form Tally embed funzionante (o placeholder visibile)
+- [ ] SEO: title, meta, JSON-LD, OG tags ottimizzati per keyword target
+- [ ] Build script copia la sottopagina in `dist/logwhispererai/`
+- [ ] Sitemap include URL `/logwhispererai/`
+- [ ] Mobile responsive (hamburger menu, layout fluido)
+- [ ] Zero XSS: nessun innerHTML, solo textContent
+- [ ] Performance: caricamento istantaneo (statico, no JS pesante)

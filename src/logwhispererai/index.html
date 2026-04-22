@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="LogWhispererAI — AI-Powered Linux Log Analyzer. Transform cryptic server logs into actionable commands in under 60 seconds. Based on the Metodo Sacchi (Safety First)."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:title" content="LogWhispererAI - AI-Powered Linux Log Analyzer | The Linux Formula"/>
+<meta property="og:description" content="Transform cryptic server logs into actionable commands in under 60 seconds. Based on 20+ years of Linux systems expertise."/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://lucasacchiricciardi.github.io/the-linux-formula/favicon.svg"/>
+<meta property="og:url" content="https://lucasacchiricciardi.github.io/the-linux-formula/logwhispererai/"/>
+<link rel="canonical" href="https://lucasacchiricciardi.github.io/the-linux-formula/logwhispererai/"/>
+<link rel="icon" type="image/svg+xml" href="https://lucasacchiricciardi.github.io/the-linux-formula/favicon.svg"/>
+<title>LogWhispererAI - AI-Powered Linux Log Analyzer | The Linux Formula</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "LogWhispererAI",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Linux",
+  "description": "AI-powered Linux log analyzer that translates cryptic server errors into actionable commands. Based on 20+ years of systems administration expertise.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR",
+    "description": "Closed Beta — Free Early Access"
+  }
+}
+</script>
+<link href="assets/tailwind.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+body {
+    background-image: 
+        linear-gradient(to right, rgba(194, 198, 212, 0.2) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(194, 198, 212, 0.2) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+.terminal-block {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-x: auto;
+}
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-on-primary px-4 py-2 rounded-none z-50 font-label text-xs uppercase tracking-widest">Skip to main content</a>
+
+<nav class="bg-surface-container-lowest/80 backdrop-blur-xl w-full sticky top-0 z-50" aria-label="Main navigation">
+<div class="flex justify-between items-center px-12 py-6 max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<a class="text-xl font-headline font-black tracking-tighter text-on-primary-fixed" href="https://lucasacchiricciardi.github.io/the-linux-formula/">The Linux Formula</a>
+</div>
+<div class="hidden md:flex space-x-8 items-center bg-surface-container-low px-6 py-2">
+<a class="text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors hover:-translate-y-0.5 transform duration-150" href="https://lucasacchiricciardi.github.io/the-linux-formula/">Home</a>
+<a class="text-primary font-bold border-l-4 border-primary px-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">LogWhispererAI</a>
+</div>
+<button class="md:hidden text-on-surface" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div id="mobile-menu" class="hidden md:hidden px-12 pb-4">
+<a class="block text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors py-2 px-2" href="https://lucasacchiricciardi.github.io/the-linux-formula/">Home</a>
+<a class="block text-primary font-bold border-l-4 border-primary px-2 py-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">LogWhispererAI</a>
+</div>
+<div class="h-px w-full bg-outline-variant/20"></div>
+</nav>
+
+<main id="main-content" class="flex-grow">
+
+<section class="max-w-7xl mx-auto w-full px-6 md:px-12 py-12 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16">
+<div class="lg:col-span-8 flex flex-col justify-center space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-highest w-max">
+<span class="w-2 h-2 bg-primary rounded-none"></span>
+<span class="font-label text-xs text-on-surface-variant uppercase tracking-widest">LogWhispererAI_Beta_v0.1</span>
+</div>
+<h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tight text-on-surface leading-tight text-balance">
+Stop deciphering logs.<br/>
+<span class="text-primary italic font-light">Start fixing crashes.</span>
+</h1>
+<p class="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+The first AI assistant that translates your Linux server errors into ready-to-use solutions. Built on 20+ years of enterprise systems expertise — the Metodo Sacchi (Safety First).
+</p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="bg-primary text-on-primary font-label text-sm uppercase tracking-widest px-8 py-4 hover:bg-primary-container transition-colors flex items-center gap-2 rounded-none" href="#beta-signup">
+<span>Join the Closed Beta (Free)</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<a class="border-b-2 border-outline-variant/20 text-on-surface font-label text-sm uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-primary transition-all flex items-center gap-2 rounded-none bg-surface-container-low" href="#how-it-works">
+<span>See How It Works</span>
+</a>
+</div>
+</div>
+
+<section class="lg:col-span-4 relative hidden lg:block">
+<div class="absolute inset-0 bg-surface-container-low opacity-50 z-0"></div>
+<div class="relative z-10 h-full min-h-[400px] border border-outline-variant/20 p-8 flex flex-col justify-between bg-surface-container-lowest/80 backdrop-blur-md">
+<div class="flex justify-between items-start">
+<span class="font-label text-xs text-outline">FIG. 01</span>
+<span class="material-symbols-outlined text-outline">schema</span>
+</div>
+<div class="space-y-4">
+<div class="h-2 w-full bg-surface-container-highest">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+<div class="h-2 w-full bg-surface-container-highest">
+<div class="h-full bg-secondary w-1/2"></div>
+</div>
+<div class="h-2 w-full bg-surface-container-highest">
+<div class="h-full bg-outline w-5/6"></div>
+</div>
+</div>
+<div class="font-label text-[10px] text-on-surface-variant leading-tight">
+                    LOG_ANALYSIS_ENGINE // ERROR_PATTERN_MATCH<br/>
+                    UPTIME: 99.999% // AVG_RESPONSE: &lt;60s
+                </div>
+</div>
+</section>
+</section>
+
+<section class="bg-surface-container-lowest border-y border-outline-variant/20">
+<div class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
+<div class="flex items-center gap-4 mb-12">
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">The Problem</h2>
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="flex flex-col justify-center space-y-6">
+<p class="font-body text-lg text-on-surface-variant leading-relaxed">
+It's 1 AM. The server is down. The logs are an incomprehensible wall of text. How much time will you waste before finding the right fix?
+</p>
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-error mt-1">error</span>
+<div>
+<h3 class="font-body font-semibold text-on-surface">Hours lost on StackOverflow</h3>
+<p class="font-body text-sm text-on-surface-variant">Searching through outdated threads for a fix that matches your exact error.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-error mt-1">error</span>
+<div>
+<h3 class="font-body font-semibold text-on-surface">Downtime anxiety</h3>
+<p class="font-body text-sm text-on-surface-variant">Every minute your server is down costs money and trust.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-error mt-1">error</span>
+<div>
+<h3 class="font-body font-semibold text-on-surface">Risk of wrong fixes</h3>
+<p class="font-body text-sm text-on-surface-variant">Copy-pasting commands you don't fully understand can make things worse.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-highest border border-outline-variant/20 p-6 relative overflow-hidden">
+<div class="flex items-center gap-2 mb-4">
+<span class="w-3 h-3 rounded-none bg-error"></span>
+<span class="w-3 h-3 rounded-none bg-[#f59e0b]"></span>
+<span class="w-3 h-3 rounded-none bg-[#10b981]"></span>
+<span class="font-label text-xs text-on-surface-variant ml-2 uppercase tracking-widest">kernel.log</span>
+</div>
+<div class="terminal-block text-on-surface-variant">
+<span class="text-error">[  123.456789] </span><span class="text-on-surface">BUG: unable to handle page fault for address: ffff88800</span>
+<span class="text-error">[  123.456790] </span><span class="text-on-surface">IP: &lt;ffff88800&gt; not found in kernel mappings</span>
+<span class="text-error">[  123.456791] </span><span class="text-on-surface">PGD 0 P4D 0</span>
+<span class="text-error">[  123.456792] </span><span class="text-on-surface">Oops: 0002 [#1] SMP NOPTI</span>
+<span class="text-error">[  123.456793] </span><span class="text-on-surface">CPU: 3 PID: 4521 Comm: nginx Tainted: G</span>
+<span class="text-error">[  123.456794] </span><span class="text-on-surface">Hardware name: Dell PowerEdge R740</span>
+<span class="text-error">[  123.456795] </span><span class="text-on-surface">Call Trace:</span>
+<span class="text-on-surface-variant">[  123.456796]  ? show_regs.cold+0x/0x</span>
+<span class="text-on-surface-variant">[  123.456797]  ? __die_body+0x/0x</span>
+<span class="text-on-surface-variant">[  123.456798]  ? page_fault_oops+0x/0x</span>
+<span class="text-on-surface-variant">[  123.456799]  ? kernel-mode trap at ffff88800</span>
+<span class="text-error">[  123.456800] </span><span class="text-on-surface">---[ end trace 0000000000 ]---</span>
+<span class="text-error">[  124.000000] </span><span class="text-on-surface">Out of memory: Killed process 4521 (nginx)</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="how-it-works" class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
+<div class="flex items-center gap-4 mb-12">
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">The Solution: Metodo Sacchi</h2>
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+</div>
+<p class="font-body text-lg text-on-surface-variant max-w-3xl leading-relaxed mb-12">
+This isn't just another AI chatbot. LogWhispererAI is trained on 20+ years of real-world systems administration experience. Every suggestion follows the <strong class="text-on-surface">Safety First</strong> protocol: <em>little often, double check</em>.
+</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-surface-container-low p-8 border-t-4 border-primary hover:bg-surface-container-high transition-colors group">
+<div class="flex items-start justify-between mb-6">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl text-primary">translate</span>
+</div>
+<span class="font-label text-xs text-outline">01</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Human Translation</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">
+From machine jargon to plain English. Understand exactly what went wrong and why — no guessing.
+</p>
+</div>
+<div class="bg-surface-container-low p-8 border-t-4 border-primary hover:bg-surface-container-high transition-colors group">
+<div class="flex items-start justify-between mb-6">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl text-primary">terminal</span>
+</div>
+<span class="font-label text-xs text-outline">02</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Exact Fix Command</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">
+Receive the precise command to copy and paste. No vague suggestions — actionable solutions only.
+</p>
+</div>
+<div class="bg-surface-container-low p-8 border-t-4 border-primary hover:bg-surface-container-high transition-colors group">
+<div class="flex items-start justify-between mb-6">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<span class="font-label text-xs text-outline">03</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Safety First</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">
+Every recommendation follows the "little often, double check" protocol. Destructive commands are flagged and explained.
+</p>
+</div>
+</div>
+<div class="mt-12 bg-surface-container-highest p-8 border border-outline-variant/20 relative overflow-hidden">
+<div class="absolute -right-12 -top-12 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[15rem]">architecture</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">notifications_active</span>
+<h3 class="font-headline text-xl font-bold text-on-surface">Instant Delivery</h3>
+</div>
+<p class="font-body text-on-surface-variant leading-relaxed max-w-2xl">
+Get notified immediately via Telegram or Slack when your server logs contain actionable errors. No manual log checking. No reactive firefighting.
+</p>
+<div class="flex gap-4 mt-6">
+<div class="bg-surface px-4 py-2 border-l-2 border-primary">
+<span class="block font-label text-[10px] text-outline mb-1">CHANNEL_01</span>
+<span class="font-body text-sm font-medium text-on-surface">Telegram Bot</span>
+</div>
+<div class="bg-surface px-4 py-2 border-l-2 border-secondary">
+<span class="block font-label text-[10px] text-outline mb-1">CHANNEL_02</span>
+<span class="font-body text-sm font-medium text-on-surface">Slack Webhook</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bg-surface-container-lowest border-y border-outline-variant/20">
+<div class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
+<div class="flex items-center gap-4 mb-12">
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">Authority</h2>
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-surface-container-low p-8 border-t-4 border-primary">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-primary">person</span>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface">Luca Sacchi</h3>
+<p class="font-label text-sm text-primary">Senior Systems Administrator</p>
+</div>
+</div>
+<p class="font-body text-on-surface-variant leading-relaxed mb-6">
+20+ years managing mission-critical Unix/Linux infrastructure. Educator for ITS/IFTS programs, bridging academic theory with enterprise-grade operations.
+</p>
+<div class="space-y-2">
+<div class="flex justify-between items-center border-b border-outline-variant/20 py-2">
+<span class="font-label text-xs text-on-surface-variant">Experience</span>
+<span class="font-body text-sm font-medium text-on-surface">20+ Years</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/20 py-2">
+<span class="font-label text-xs text-on-surface-variant">Specialty</span>
+<span class="font-body text-sm font-medium text-on-surface text-right">Unix / Linux / Solaris</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/20 py-2">
+<span class="font-label text-xs text-on-surface-variant">Role</span>
+<span class="font-body text-sm font-medium text-on-surface text-right">ITS/IFTS Educator</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-highest p-8 relative overflow-hidden">
+<div class="absolute -right-12 -top-12 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[12rem]">school</span>
+</div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<div>
+<span class="inline-block px-2 py-1 bg-surface text-on-surface font-label text-[10px] uppercase tracking-widest mb-6">Powered By Experience</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-4">Not just AI. AI + Expertise.</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">
+LogWhispererAI is built on the patterns, failures, and solutions encountered across two decades of enterprise systems administration. The AI doesn't guess — it applies proven methodologies.
+</p>
+</div>
+<div class="mt-8 bg-surface p-4 border-l-2 border-primary">
+<span class="font-label text-xs text-on-surface-variant uppercase tracking-widest block">Language Note</span>
+<p class="font-body text-sm text-on-surface mt-1">
+During the Beta phase, AI responses are provided in English. Full multilingual support is planned for the final release.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="beta-signup" class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
+<div class="flex items-center gap-4 mb-12">
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">Join the Closed Beta</h2>
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="flex flex-col justify-center space-y-6">
+<span class="inline-block px-2 py-1 bg-surface-container-highest text-on-surface font-label text-[10px] uppercase tracking-widest w-max">Early Access — Free</span>
+<h3 class="font-headline text-2xl font-bold text-on-surface">Be among the first to fix logs with AI.</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">
+Join the closed beta and get free access to LogWhispererAI. Upload a real log that's driving you crazy — we'll send you the solution via email as a beta test.
+</p>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body text-sm text-on-surface">Free during the entire beta period</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body text-sm text-on-surface">Direct feedback channel with the founder</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body text-sm text-on-surface">Priority access to the final release</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body text-sm text-on-surface">Upload a log, get a free AI analysis</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 border-t-4 border-primary">
+<h3 class="font-label text-sm uppercase tracking-widest text-on-surface-variant mb-6">Beta Signup Form</h3>
+<div data-tally-open="w3xNqG" data-tally-layout="1" data-tally-width="100%" data-tally-auto-close="0">
+<p class="font-body text-on-surface-variant text-sm">Loading form...</p>
+</div>
+<script src="https://tally.so/widgets/embed.js" async></script>
+<noscript>
+<p class="font-body text-sm text-on-surface-variant">JavaScript is required to load the signup form.</p>
+<p class="font-body text-sm text-on-surface-variant mt-2">Alternatively, email us directly at <span class="text-primary font-medium">logwhisperer@thelinuxformula.com</span></p>
+</noscript>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="bg-surface-container-low text-on-surface border-t border-outline-variant/20 mt-auto">
+<div class="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="md:col-span-1">
+<span class="font-headline font-bold text-lg block mb-4">The Linux Formula</span>
+<p class="font-label text-[10px] leading-relaxed uppercase tracking-widest text-on-surface-variant">
+Architectural-grade insights for enterprise Linux systems.
+</p>
+</div>
+<div class="md:col-span-2 grid grid-cols-2 gap-8 font-label text-[10px] leading-relaxed uppercase tracking-widest text-on-surface-variant">
+<div>
+<span class="block text-on-surface font-semibold mb-4 border-b border-outline-variant/20 pb-2">Coordinates</span>
+<ul class="space-y-2">
+<li>Office: Viale Bligny 13/a Milano</li>
+<li>P.IVA: IT09731490968</li>
+</ul>
+</div>
+<div>
+<span class="block text-on-surface font-semibold mb-4 border-b border-outline-variant/20 pb-2">Links</span>
+<ul class="space-y-2">
+<li><a class="hover:text-primary transition-colors" href="https://lucasacchiricciardi.github.io/the-linux-formula/">Home</a></li>
+<li><a class="hover:text-primary transition-colors" href="https://www.linkedin.com/in/lucasacchi/" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+<li><a class="hover:text-primary transition-colors" href="https://www.youtube.com/@lucasacchinet" rel="noopener noreferrer" target="_blank">YouTube</a></li>
+</ul>
+</div>
+</div>
+<div class="md:col-span-1 flex flex-col justify-between items-start md:items-end font-label text-[10px] uppercase tracking-widest text-outline">
+<span class="material-symbols-outlined text-3xl mb-4">terminal</span>
+<div class="text-left md:text-right">
+<p>&copy; The Linux Formula.</p>
+<p>All Rights Reserved.</p>
+<p class="mt-2" id="copyright-years"></p>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+(function() {
+    var y = new Date().getFullYear();
+    var el = document.getElementById('copyright-years');
+    if (el) el.textContent = '2023 - ' + y;
+
+    var btn = document.getElementById('mobile-menu-btn');
+    var menu = document.getElementById('mobile-menu');
+    if (btn && menu) {
+        btn.addEventListener('click', function() {
+            menu.classList.toggle('hidden');
+            var icon = btn.querySelector('.material-symbols-outlined');
+            if (icon) {
+                icon.textContent = menu.classList.contains('hidden') ? 'menu' : 'close';
+            }
+        });
+    }
+})();
+</script>
+</body>
+</html>

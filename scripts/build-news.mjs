@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, copyFileSync, rmSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, copyFileSync, rmSync, statSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
 import { execSync } from 'node:child_process';
 
@@ -175,6 +175,30 @@ function assembleDist() {
     console.log('Copied secret.json to dist/ (auth gate enabled)');
   }
 
+  // Copy subpages
+  const subpagesDir = 'src';
+  const subpages = readdirSync(subpagesDir).filter(function(entry) {
+    return entry !== 'home' && entry !== 'raw' && entry !== 'vendor' && entry !== 'secret.json';
+  });
+  for (const sub of subpages) {
+    const subSrc = join(subpagesDir, sub);
+    const stat = statSync(subSrc);
+    if (!stat.isDirectory()) continue;
+    const indexFile = join(subSrc, 'index.html');
+    if (!existsSync(indexFile)) continue;
+    const subDst = join(DIST, sub);
+    mkdirSync(subDst, { recursive: true });
+    for (const f of readdirSync(subSrc)) {
+      const srcFile = join(subSrc, f);
+      const dstFile = join(subDst, f);
+      const fStat = statSync(srcFile);
+      if (fStat.isFile()) {
+        copyFileSync(srcFile, dstFile);
+      }
+    }
+    console.log(`Copied subpage ${sub}/ to dist/${sub}/`);
+  }
+
   // Copy vendor libraries
   const vendorSrc = 'src/vendor';
   const vendorDst = join(DIST, 'vendor');
@@ -200,7 +224,7 @@ function assembleDist() {
     .filter(a => a.date)
     .map(a => `  <url>\n    <loc>${SITE_URL}/</loc>\n    <lastmod>${a.date}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>`)
     .join('\n');
-  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${SITE_URL}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n${sitemapEntries}\n</urlset>\n`;
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${SITE_URL}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>${SITE_URL}/logwhispererai/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.9</priority>\n  </url>\n${sitemapEntries}\n</urlset>\n`;
   writeFileSync(join(DIST, 'sitemap.xml'), sitemapXml, 'utf-8');
 
   console.log(`Assembled ${DIST}/ with ${feed.articles.length} article(s)`);

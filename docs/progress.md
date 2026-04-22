@@ -463,3 +463,50 @@ Meccanismo disabilitabile semplicemente assente il file `src/secret.json`.
 - [ ] Build script copia file se esiste
 - [ ] Zero XSS: solo textContent, nessun innerHTML
 - [ ] sessionStorage impostato su auth success
+
+---
+
+## Sprint 9 — LogWhispererAI Landing Page
+
+### Contesto
+
+Il PRD `docs/landingpage-prd.md` definisce i requisiti per una sottopagina prodotto `/logwhispererai` che valida l'offerta Micro-SaaS catturando lead qualificati. Il contenuto e i requisiti sono stati integrati in `docs/prd.md` Sezione 13.
+
+### Implementation Plan
+
+| Step | Task | Scope | Priority | Files | Description |
+|------|------|-------|----------|-------|-------------|
+| 9.1 | Create subpage HTML | `ui` | High | `src/logwhispererai/index.html` | Pagina statica completa con 5 sezioni (Hero, Problem, Solution, Authority, Offer) |
+| 9.2 | Update nav links | `ui` | High | `src/home/index.html` | Link "LogWhispererAI" in nav (desktop + mobile) punta a `/logwhispererai/` |
+| 9.3 | Update build script | `build` | High | `scripts/build-news.mjs` | Copia automatica `src/logwhispererai/` → `dist/logwhispererai/` |
+| 9.4 | Update sitemap | `build` | High | `scripts/build-news.mjs` | Inserimento URL `/logwhispererai/` nel sitemap.xml |
+| 9.5 | Integrate PRD | `docs` | High | `docs/prd.md` | Aggiunta Sezione 13 con requisiti LogWhispererAI |
+| 9.6 | Update progress | `docs` | High | `docs/progress.md` | Aggiunta Sprint 9 con plan e task progress |
+| 9.7 | Remove landingpage-prd.md | `docs` | Medium | `docs/landingpage-prd.md` | Contenuto integrato in prd.md, file rimosso |
+| 9.8 | Build and validate | — | High | — | `node scripts/build-news.mjs` + verifica dist/logwhispererai/ |
+
+### Task Progress
+
+| Step | Status | Notes |
+|------|--------|-------|
+| 9.1 Create subpage HTML | ✅ Done | 5 sezioni complete con design system Concept C |
+| 9.2 Update nav links | ✅ Done | Desktop nav + mobile menu + hero CBA puntano a /logwhispererai/ |
+| 9.3 Update build script | ✅ Done | Copia automatica subdirectory src/ → dist/ |
+| 9.4 Update sitemap | ✅ Done | URL /logwhispererai/ aggiunto con priority 0.9 |
+| 9.5 Integrate PRD | ✅ Done | Sezione 13 aggiunta a docs/prd.md |
+| 9.6 Update progress | ✅ Done | Sprint 9 aggiunto a docs/progress.md |
+| 9.7 Remove landingpage-prd.md | ⏳ Pending | Da rimuovere |
+| 9.8 Build and validate | ⏳ Pending | Da validare |
+
+### Validation Checklist
+
+- [ ] Pagina `/logwhispererai/` accessibile da build
+- [ ] Design system coerente con homepage (font, colori, layout)
+- [ ] Cinque sezioni implementate: Hero, Problem, Solution, Authority, Offer
+- [ ] Nav link punta alla sottopagina (desktop + mobile)
+- [ ] Form Tally embed presente
+- [ ] SEO: title, meta, JSON-LD, OG tags
+- [ ] Build script copia in dist/logwhispererai/
+- [ ] Sitemap include /logwhispererai/
+- [ ] Mobile responsive
+- [ ] Zero XSS
