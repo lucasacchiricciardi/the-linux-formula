@@ -124,15 +124,33 @@ The first AI assistant that translates your Linux server errors into ready-to-us
 <span class="font-label text-xs text-outline">FIG. 01</span>
 <span class="material-symbols-outlined text-outline">schema</span>
 </div>
-<div class="space-y-4">
-<div class="h-2 w-full bg-surface-container-highest">
-<div class="h-full bg-primary w-3/4"></div>
+<div class="space-y-4 mt-8">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-error/20 rounded-none flex items-center justify-center border border-error/30">
+<span class="material-symbols-outlined text-error">description</span>
 </div>
-<div class="h-2 w-full bg-surface-container-highest">
-<div class="h-full bg-secondary w-1/2"></div>
+<span class="material-symbols-outlined text-outline">arrow_forward</span>
+<div class="w-10 h-10 bg-primary/20 rounded-none flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary">psychology</span>
 </div>
-<div class="h-2 w-full bg-surface-container-highest">
-<div class="h-full bg-outline w-5/6"></div>
+<span class="material-symbols-outlined text-outline">arrow_forward</span>
+<div class="w-10 h-10 bg-[#10b981]/20 rounded-none flex items-center justify-center border border-[#10b981]/30">
+<span class="material-symbols-outlined text-[#10b981]">terminal</span>
+</div>
+</div>
+<div class="space-y-2 pt-4">
+<div class="flex justify-between items-center border-b border-outline-variant/20 pb-2">
+<span class="font-label text-[10px] text-on-surface-variant">Input</span>
+<span class="font-body text-xs text-on-surface">kernel.log</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/20 pb-2">
+<span class="font-label text-[10px] text-on-surface-variant">AI Analysis</span>
+<span class="font-body text-xs text-primary">OOM Killer detected</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/20 pb-2">
+<span class="font-label text-[10px] text-on-surface-variant">Fix Command</span>
+<span class="font-body text-xs text-[#10b981]">sudo sysctl vm.swappiness=10</span>
+</div>
 </div>
 </div>
 <div class="font-label text-[10px] text-on-surface-variant leading-tight">
@@ -286,6 +304,37 @@ Get notified immediately via Telegram or Slack when your server logs contain act
 </div>
 </section>
 
+<section class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
+<div class="flex items-center gap-4 mb-12">
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">How It Works</h2>
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="text-center">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-3xl text-primary">upload</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-3">1. Upload Your Log</h3>
+<p class="font-body text-on-surface-variant">Paste your log text or upload a log file. We'll automatically detect the format (syslog, kernel, dmesg, etc.)</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-3xl text-primary">psychology</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-3">2. AI Analysis</h3>
+<p class="font-body text-on-surface-variant">Our AI identifies the root cause and translates technical jargon into plain English. You'll understand exactly what went wrong.</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-3xl text-primary">terminal</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-3">3. Get the Fix</h3>
+<p class="font-body text-on-surface-variant">Receive the exact command to resolve the issue. Every suggestion follows the Safety First protocol.</p>
+</div>
+</div>
+</section>
+
 <section class="bg-surface-container-lowest border-y border-outline-variant/20">
 <div class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
 <div class="flex items-center gap-4 mb-8">
@@ -348,6 +397,46 @@ LogWhispererAI is built on the patterns, failures, and solutions encountered acr
 During the Beta phase, AI responses are provided in English. Full multilingual support is planned for the final release.
 </p>
 </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bg-surface-container-low border-y border-outline-variant/20">
+<div class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
+<div class="flex items-center gap-4 mb-12">
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">FAQ</h2>
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+<div class="space-y-6">
+<div>
+<h3 class="font-body font-semibold text-on-surface mb-2">Is this really free during beta?</h3>
+<p class="font-body text-sm text-on-surface-variant">Yes. The entire beta period is completely free. No credit card required. No hidden fees. You'll get full access to LogWhispererAI at no cost.</p>
+</div>
+<div>
+<h3 class="font-body font-semibold text-on-surface mb-2">What languages does the AI support?</h3>
+<p class="font-body text-sm text-on-surface-variant">During beta, AI responses are in English. Italian and other languages are planned for the final release. You can upload logs in any format.</p>
+</div>
+<div>
+<h3 class="font-body font-semibold text-on-surface mb-2">How accurate is the analysis?</h3>
+<p class="font-body text-sm text-on-surface-variant">The AI is trained on 20+ years of real-world system administration patterns. Every recommendation follows the "Safety First" protocol — destructive commands are flagged before execution.</p>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="font-body font-semibold text-on-surface mb-2">What log formats can I upload?</h3>
+<p class="font-body text-sm text-on-surface-variant">Any text-based log format: syslog, kernel.log, dmesg, journalctl, Apache, Nginx, Docker, Kubernetes, or custom application logs. Max file size: 1MB.</p>
+</div>
+<div>
+<h3 class="font-body font-semibold text-on-surface mb-2">Will this work for production servers?</h3>
+<p class="font-body text-sm text-on-surface-variant">LogWhispererAI analyzes log files — it doesn't connect to your servers. You can safely upload anonymized logs from any environment including production.</p>
+</div>
+<div>
+<h3 class="font-body font-semibold text-on-surface mb-2">How do I get my free log analysis?</h3>
+<p class="font-body text-sm text-on-surface-variant">Fill out the signup form below and describe or attach the log that's causing you trouble. We'll analyze it and send the solution to your email within 24 hours.</p>
 </div>
 </div>
 </div>
