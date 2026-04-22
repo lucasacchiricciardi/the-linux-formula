@@ -1,0 +1,111 @@
+{
+  "nav": {
+    "home": "Home",
+    "logwhispererai": "LogWhispererAI",
+    "skip_link": "Vai al contenuto principale"
+  },
+  "hero": {
+    "badge": "LogWhispererAI_Beta_v0.1",
+    "title": "Smetti di decifrare i log.",
+    "subtitle_accent": "Inizia a risolvere i crash.",
+    "description": "Il primo assistente AI che traduce i tuoi errori del server Linux in soluzioni pronte all'uso. Basato su oltre 20 anni di esperienza nei sistemi enterprise — il Metodo Sacchi (Sicurezza Prima).",
+    "cta_beta": "Iscriviti alla Beta Chiusa (Gratuita)",
+    "cta_how_it_works": "Vedi come Funziona"
+  },
+  "problem": {
+    "title": "Il Problema",
+    "intro": "È l'1 di notte. Il server è giù. I log sono un muro di testo incomprensibile. Quanto tempo perderai prima di trovare la soluzione giusta?",
+    "pain_1_title": "Ore perse su StackOverflow",
+    "pain_1_desc": "Cercare tra discussioni obsolete per una fix che corrisponda al tuo errore esatto.",
+    "pain_2_title": "Ansia da downtime",
+    "pain_2_desc": "Ogni minuto di server giù costa denaro e fiducia.",
+    "pain_3_title": "Rischio di fix sbagliate",
+    "pain_3_desc": "Copiare comandi che non capisci può peggiorare le cose.",
+    "terminal_title": "kernel.log"
+  },
+  "solution": {
+    "title": "La Soluzione: Metodo Sacchi",
+    "intro": "Non è solo un altro chatbot AI. LogWhispererAI è addestrato su oltre 20 anni di esperienza reale nell'amministrazione di sistemi. Ogni suggerimento segue il protocollo Sicurezza Prima: poco per volta, double check.",
+    "step_1_title": "Traduzione Umana",
+    "step_1_desc": "Dal gergo macchina all'inglese semplice. Capisci esattamente cosa è andato storto e perché — niente猜.",
+    "step_2_title": "Comando di Fix Esatto",
+    "step_2_desc": "Ricevi il comando preciso da copiare e incollare. Nessun suggerimento vago — solo soluzioni actionable.",
+    "step_3_title": "Sicurezza Prima",
+    "step_3_desc": "Ogni raccomandazione segue il protocollo 'poco per volta, double check'. I comandi distruttivi sono segnalati e spiegati.",
+    "instant_title": "Consegna Istantanea",
+    "instant_desc": "Ricevi notifica immediata via Telegram o Slack quando i log del tuo server contengono errori actionable. Nessun controllo manuale dei log. Nessno firefighting reattivo.",
+    "channel_1": "Bot Telegram",
+    "channel_2": "Webhook Slack"
+  },
+  "howitworks": {
+    "title": "Come Funziona",
+    "step_1_title": "1. Carica il Tuo Log",
+    "step_1_desc": "Incolla il tuo testo di log o carica un file di log. Rileveremo automaticamente il formato (syslog, kernel, dmesg, ecc.)",
+    "step_2_title": "2. Analisi AI",
+    "step_2_desc": "La nostra AI identifica la causa radice e traduce il gergo tecnico in inglese semplice. Capirai esattamente cosa è andato storto.",
+    "step_3_title": "3. Ricevi la Fix",
+    "step_3_desc": "Ricevi il comando esatto per risolvere il problema. Ogni suggerimento segue il protocollo Sicurezza Prima."
+  },
+  "authority": {
+    "title": "Autorità",
+    "author_name": "Luca Sacchi",
+    "author_role": "Amministratore Sistema Senior",
+    "bio": "Oltre 20 anni nella gestione di infrastrutture Unix/Linux mission-critical. Formatore per programmi ITS/IFTS, unendo teoria accademica con operazioni enterprise-grade.",
+    "experience": "Esperienza",
+    "experience_value": "20+ Anni",
+    "specialty": "Specialità",
+    "specialty_value": "Unix / Linux / Solaris",
+    "role_label": "Ruolo",
+    "role_value": "Formatore ITS/IFTS",
+    "powered_badge": "Alimentato dall'Esperienza",
+    "ai_title": "Non solo AI. AI + Competenza.",
+    "ai_desc": "LogWhispererAI è costruito sui pattern, fallimenti e soluzioni incontrati in due decenni di amministrazione di sistemi enterprise. L'AI non indovina — applica metodologie provate.",
+    "language_note_title": "Nota sulla Lingua",
+    "language_note_desc": "Durante la fase Beta, le risposte AI sono fornite in inglese. Supporto multilingue completo è pianificato per il rilascio finale."
+  },
+  "faq": {
+    "title": "FAQ",
+    "q1_question": "È davvero gratuito durante la beta?",
+    "q1_answer": "Sì. L'intero periodo beta è completamente gratuito. Nessuna carta di credito richiesta. Nessuna tariffa nascisa. Avrai accesso completo a LogWhispererAI senza costi.",
+    "q2_question": "Quali lingue supporta l'AI?",
+    "q2_answer": "Durante la beta, le risposte AI sono in inglese. Italiano e altre lingue sono pianificate per il rilascio finale. Puoi caricare log in qualsiasi formato.",
+    "q3_question": "Quanto è accurata l'analisi?",
+    "q3_answer": "L'AI è addestrata su oltre 20 anni di pattern reali di amministrazione di sistemi. Ogni raccomandazione segue il protocollo 'Sicurezza Prima' — i comandi distruttivi sono segnalati prima dell'esecuzione.",
+    "q4_question": "Quali formati di log posso caricare?",
+    "q4_answer": "Qualsiasi formato di log basato su testo: syslog, kernel.log, dmesg, journalctl, Apache, Nginx, Docker, Kubernetes, o log applicativi personalizzati. Dimensione max file: 1MB.",
+    "q5_question": "Funzionerà per server di produzione?",
+    "q5_answer": "LogWhispererAI analizza file di log — non si connette ai tuoi server. Puoi caricare in sicurezza log anonimizzati da qualsiasi ambiente inclusa la produzione.",
+    "q6_question": "Come ottengo la mia analisi log gratuita?",
+    "q6_answer": "Compila il form sottostante e descrivi o allega il log che ti sta dando problemi. Lo analizzeremo e ti invieremo la soluzione via email entro 24 ore."
+  },
+  "signup": {
+    "title": "Iscriviti alla Beta Chiusa",
+    "badge": "Accesso Anticipato — Gratuito",
+    "headline": "Sii tra i primi a risolvere i log con AI.",
+    "description": "Iscriviti alla beta chiusa e ottieni accesso gratuito a LogWhispererAI. Carica un log che ti sta facendo impazzire — ti invieremo la soluzione via email come test beta.",
+    "benefit_1": "Gratuito per tutto il periodo beta",
+    "benefit_2": "Canale diretto di feedback con il fondatore",
+    "benefit_3": "Accesso prioritario al rilascio finale",
+    "benefit_4": "Carica un log, ottieni un'analisi AI gratuita",
+    "form_title": "Modulo Iscrizione Beta",
+    "email_placeholder": "Il tuo indirizzo email",
+    "servers_placeholder": "Numero di server gestiti",
+    "log_prompt": "Hai un log che ti sta facendo impazzire? Descrivilo o menzionalo nel modulo — ti invieremo un'analisi AI gratuita come test beta.",
+    "submit": "Iscriviti alla Beta Chiusa",
+    "js_required": "JavaScript richiesto per il form Tally. Emailaci a"
+  },
+  "mobile": {
+    "cta_beta": "Iscriviti",
+    "cta_home": "Home"
+  },
+  "footer": {
+    "brand": "The Linux Formula",
+    "tagline": "Insight di livello architetturale per sistemi Linux enterprise.",
+    "coordinates_title": "Coordinate",
+    "office": "Ufficio: Viale Bligny 13/a Milano",
+    "piva": "P.IVA: IT09731490968",
+    "links_title": "Link",
+    "copyright": "© The Linux Formula.",
+    "all_rights": "Tutti i Diritti Riservati."
+  }
+}

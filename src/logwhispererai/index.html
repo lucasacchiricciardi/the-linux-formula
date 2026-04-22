@@ -65,10 +65,15 @@ body {
     word-break: break-all;
     overflow-x: auto;
 }
+.lang-btn.lang-active {
+    color: #003f87;
+    font-weight: 600;
+    border-bottom: 2px solid #003f87;
+}
 </style>
 </head>
 <body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
-<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-on-primary px-4 py-2 rounded-none z-50 font-label text-xs uppercase tracking-widest">Skip to main content</a>
+<a href="#main-content" data-i18n="nav.skip_link" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-on-primary px-4 py-2 rounded-none z-50 font-label text-xs uppercase tracking-widest">Skip to main content</a>
 
 <nav class="bg-surface-container-lowest/80 backdrop-blur-xl w-full sticky top-0 z-50" aria-label="Main navigation">
 <div class="flex justify-between items-center px-12 py-6 max-w-7xl mx-auto">
@@ -77,8 +82,12 @@ body {
 <a class="text-xl font-headline font-black tracking-tighter text-on-primary-fixed" href="https://lucasacchiricciardi.github.io/the-linux-formula/">The Linux Formula</a>
 </div>
 <div class="hidden md:flex space-x-8 items-center bg-surface-container-low px-6 py-2">
-<a class="text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors hover:-translate-y-0.5 transform duration-150" href="https://lucasacchiricciardi.github.io/the-linux-formula/">Home</a>
-<a class="text-primary font-bold border-l-4 border-primary px-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">LogWhispererAI</a>
+<a data-i18n="nav.home" class="text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors hover:-translate-y-0.5 transform duration-150" href="https://lucasacchiricciardi.github.io/the-linux-formula/">Home</a>
+<a data-i18n="nav.logwhispererai" class="text-primary font-bold border-l-4 border-primary px-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">LogWhispererAI</a>
+<span class="flex gap-1 ml-2">
+<button data-lang-switch="en" class="px-2 py-1 font-label text-xs uppercase tracking-wider hover:text-primary transition-colors lang-btn" aria-label="English">EN</button>
+<button data-lang-switch="it" class="px-2 py-1 font-label text-xs uppercase tracking-wider hover:text-primary transition-colors lang-btn" aria-label="Italiano">IT</button>
+</span>
 </div>
 <button class="md:hidden text-on-surface" id="mobile-menu-btn" aria-label="Toggle navigation menu">
 <span class="material-symbols-outlined">menu</span>
@@ -96,23 +105,23 @@ body {
 <section class="max-w-7xl mx-auto w-full px-6 md:px-12 py-12 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16">
 <div class="lg:col-span-8 flex flex-col justify-center space-y-8">
 <div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-highest w-max">
-<span class="w-2 h-2 bg-primary rounded-none"></span>
-<span class="font-label text-xs text-on-surface-variant uppercase tracking-widest">LogWhispererAI_Beta_v0.1</span>
+  <span class="w-2 h-2 bg-primary rounded-none"></span>
+  <span data-i18n="hero.badge" class="font-label text-xs text-on-surface-variant uppercase tracking-widest">LogWhispererAI_Beta_v0.1</span>
 </div>
 <h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tight text-on-surface leading-tight text-balance">
-Stop deciphering logs.<br/>
-<span class="text-primary italic font-light">Start fixing crashes.</span>
+  <span data-i18n="hero.title">Stop deciphering logs.</span><br/>
+  <span class="text-primary italic font-light"><span data-i18n="hero.subtitle_accent">Start fixing crashes.</span></span>
 </h1>
-<p class="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl leading-relaxed">
-The first AI assistant that translates your Linux server errors into ready-to-use solutions. Built on 20+ years of enterprise systems expertise — the Metodo Sacchi (Safety First).
+<p data-i18n="hero.description" class="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+  The first AI assistant that translates your Linux server errors into ready-to-use solutions. Built on 20+ years of enterprise systems expertise — the Metodo Sacchi (Safety First).
 </p>
 <div class="flex flex-wrap gap-4 pt-4">
 <a class="bg-primary text-on-primary font-label text-sm uppercase tracking-widest px-8 py-4 hover:bg-primary-container transition-colors flex items-center gap-2 rounded-none" href="#beta-signup">
-<span>Join the Closed Beta (Free)</span>
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
+  <span data-i18n="hero.cta_beta">Join the Closed Beta (Free)</span>
+  <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
 <a class="border-b-2 border-outline-variant/20 text-on-surface font-label text-sm uppercase tracking-widest px-8 py-4 hover:border-primary hover:text-primary transition-all flex items-center gap-2 rounded-none bg-surface-container-low" href="#how-it-works">
-<span>See How It Works</span>
+  <span data-i18n="hero.cta_how_it_works">See How It Works</span>
 </a>
 </div>
 </div>
@@ -172,35 +181,35 @@ The first AI assistant that translates your Linux server errors into ready-to-us
 <section class="bg-surface-container-lowest border-y border-outline-variant/20">
 <div class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
 <div class="flex items-center gap-4 mb-16">
-<div class="h-px bg-outline-variant/50 flex-grow"></div>
-<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">The Problem</h2>
-<div class="h-px bg-outline-variant/50 flex-grow"></div>
+  <div class="h-px bg-outline-variant/50 flex-grow"></div>
+  <h2 data-i18n="problem.title" class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">The Problem</h2>
+  <div class="h-px bg-outline-variant/50 flex-grow"></div>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
 <div class="flex flex-col justify-center space-y-8">
-<p class="font-body text-lg text-on-surface-variant leading-relaxed">
-It's 1 AM. The server is down. The logs are an incomprehensible wall of text. How much time will you waste before finding the right fix?
+<p data-i18n="problem.intro" class="font-body text-lg text-on-surface-variant leading-relaxed">
+  It's 1 AM. The server is down. The logs are an incomprehensible wall of text. How much time will you waste before finding the right fix?
 </p>
 <div class="space-y-6">
 <div class="flex items-start gap-3">
 <span class="material-symbols-outlined text-error mt-1">error</span>
 <div>
-<h3 class="font-body font-semibold text-on-surface">Hours lost on StackOverflow</h3>
-<p class="font-body text-sm text-on-surface-variant">Searching through outdated threads for a fix that matches your exact error.</p>
+<h3 data-i18n="problem.pain_1_title" class="font-body font-semibold text-on-surface">Hours lost on StackOverflow</h3>
+<p data-i18n="problem.pain_1_desc" class="font-body text-sm text-on-surface-variant">Searching through outdated threads for a fix that matches your exact error.</p>
 </div>
 </div>
 <div class="flex items-start gap-3">
 <span class="material-symbols-outlined text-error mt-1">error</span>
 <div>
-<h3 class="font-body font-semibold text-on-surface">Downtime anxiety</h3>
-<p class="font-body text-sm text-on-surface-variant">Every minute your server is down costs money and trust.</p>
+<h3 data-i18n="problem.pain_2_title" class="font-body font-semibold text-on-surface">Downtime anxiety</h3>
+<p data-i18n="problem.pain_2_desc" class="font-body text-sm text-on-surface-variant">Every minute your server is down costs money and trust.</p>
 </div>
 </div>
 <div class="flex items-start gap-3">
 <span class="material-symbols-outlined text-error mt-1">error</span>
 <div>
-<h3 class="font-body font-semibold text-on-surface">Risk of wrong fixes</h3>
-<p class="font-body text-sm text-on-surface-variant">Copy-pasting commands you don't fully understand can make things worse.</p>
+<h3 data-i18n="problem.pain_3_title" class="font-body font-semibold text-on-surface">Risk of wrong fixes</h3>
+<p data-i18n="problem.pain_3_desc" class="font-body text-sm text-on-surface-variant">Copy-pasting commands you don't fully understand can make things worse.</p>
 </div>
 </div>
 </div>
@@ -210,7 +219,7 @@ It's 1 AM. The server is down. The logs are an incomprehensible wall of text. Ho
 <span class="w-3 h-3 rounded-none bg-error"></span>
 <span class="w-3 h-3 rounded-none bg-[#f59e0b]"></span>
 <span class="w-3 h-3 rounded-none bg-[#10b981]"></span>
-<span class="font-label text-xs text-on-surface-variant ml-2 uppercase tracking-widest">kernel.log</span>
+<span data-i18n="problem.terminal_title" class="font-label text-xs text-on-surface-variant ml-2 uppercase tracking-widest">kernel.log</span>
 </div>
 <div class="terminal-block text-on-surface-variant">
 <span class="text-error">[  123.456789] </span><span class="text-on-surface">BUG: unable to handle page fault for address: ffff88800</span>
@@ -234,10 +243,10 @@ It's 1 AM. The server is down. The logs are an incomprehensible wall of text. Ho
 <section id="how-it-works" class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
 <div class="flex items-center gap-4 mb-16">
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
-<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">The Solution: Metodo Sacchi</h2>
+<h2 data-i18n="solution.title" class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">The Solution: Metodo Sacchi</h2>
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
 </div>
-<p class="font-body text-lg text-on-surface-variant max-w-3xl leading-relaxed mb-16">
+<p data-i18n="solution.intro" class="font-body text-lg text-on-surface-variant max-w-3xl leading-relaxed mb-16">
 This isn't just another AI chatbot. LogWhispererAI is trained on 20+ years of real-world systems administration experience. Every suggestion follows the <strong class="text-on-surface">Safety First</strong> protocol: <em>little often, double check</em>.
 </p>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
@@ -248,8 +257,8 @@ This isn't just another AI chatbot. LogWhispererAI is trained on 20+ years of re
 </div>
 <span class="font-label text-xs text-outline">01</span>
 </div>
-<h3 class="font-headline text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Human Translation</h3>
-<p class="font-body text-on-surface-variant leading-relaxed">
+<h3 data-i18n="solution.step_1_title" class="font-headline text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Human Translation</h3>
+<p data-i18n="solution.step_1_desc" class="font-body text-on-surface-variant leading-relaxed">
 From machine jargon to plain English. Understand exactly what went wrong and why — no guessing.
 </p>
 </div>
@@ -550,8 +559,20 @@ Architectural-grade insights for enterprise Linux systems.
             }
         });
     }
+
+    // Language switcher handlers
+    var langBtns = document.querySelectorAll('[data-lang-switch]');
+    langBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var lang = btn.getAttribute('data-lang-switch');
+            if (window.i18n && window.i18n.switchLanguage) {
+                window.i18n.switchLanguage(lang);
+            }
+        });
+    });
 })();
 </script>
+<script src="./i18n/i18n.js"></script>
 <script src="../analytics.js"></script>
 
 <!-- Sticky CTA Mobile -->
