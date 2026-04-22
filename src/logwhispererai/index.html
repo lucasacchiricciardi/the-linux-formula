@@ -94,8 +94,8 @@ body {
 </button>
 </div>
 <div id="mobile-menu" class="hidden md:hidden px-12 pb-4">
-<a class="block text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors py-2 px-2" href="https://lucasacchiricciardi.github.io/the-linux-formula/">Home</a>
-<a class="block text-primary font-bold border-l-4 border-primary px-2 py-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">LogWhispererAI</a>
+<a data-i18n="nav.home" class="block text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors py-2 px-2" href="https://lucasacchiricciardi.github.io/the-linux-formula/">Home</a>
+<a data-i18n="nav.logwhispererai" class="block text-primary font-bold border-l-4 border-primary px-2 py-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">LogWhispererAI</a>
 </div>
 <div class="h-px w-full bg-outline-variant/20"></div>
 </nav>
@@ -170,7 +170,7 @@ body {
 <div class="flex items-center gap-4 mt-8">
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
 <a class="bg-primary text-on-primary font-label text-sm uppercase tracking-widest px-8 py-4 hover:bg-primary-container transition-colors flex items-center gap-2 rounded-none" href="#beta-signup">
-<span>Join the Closed Beta (Free)</span>
+<span data-i18n="hero.cta_beta">Join the Closed Beta (Free)</span>
 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
@@ -269,9 +269,9 @@ From machine jargon to plain English. Understand exactly what went wrong and why
 </div>
 <span class="font-label text-xs text-outline">02</span>
 </div>
-<h3 class="font-headline text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Exact Fix Command</h3>
-<p class="font-body text-on-surface-variant leading-relaxed">
-Receive the precise command to copy and paste. No vague suggestions — actionable solutions only.
+<h3 data-i18n="solution.step_2_title" class="font-headline text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Exact Fix Command</h3>
+<p data-i18n="solution.step_2_desc" class="font-body text-on-surface-variant leading-relaxed">
+  Receive the precise command to copy and paste. No vague suggestions — actionable solutions only.
 </p>
 </div>
 <div class="bg-surface-container-low p-8 border-t-4 border-primary hover:bg-surface-container-high transition-colors group">
@@ -281,9 +281,9 @@ Receive the precise command to copy and paste. No vague suggestions — actionab
 </div>
 <span class="font-label text-xs text-outline">03</span>
 </div>
-<h3 class="font-headline text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Safety First</h3>
-<p class="font-body text-on-surface-variant leading-relaxed">
-Every recommendation follows the "little often, double check" protocol. Destructive commands are flagged and explained.
+<h3 data-i18n="solution.step_3_title" class="font-headline text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">Safety First</h3>
+<p data-i18n="solution.step_3_desc" class="font-body text-on-surface-variant leading-relaxed">
+  Every recommendation follows the "little often, double check" protocol. Destructive commands are flagged and explained.
 </p>
 </div>
 </div>
@@ -294,19 +294,19 @@ Every recommendation follows the "little often, double check" protocol. Destruct
 <div class="relative z-10">
 <div class="flex items-center gap-3 mb-6">
 <span class="material-symbols-outlined text-primary">notifications_active</span>
-<h3 class="font-headline text-xl font-bold text-on-surface">Instant Delivery</h3>
+<h3 data-i18n="solution.instant_title" class="font-headline text-xl font-bold text-on-surface">Instant Delivery</h3>
 </div>
-<p class="font-body text-on-surface-variant leading-relaxed max-w-2xl">
-Get notified immediately via Telegram or Slack when your server logs contain actionable errors. No manual log checking. No reactive firefighting.
+<p data-i18n="solution.instant_desc" class="font-body text-on-surface-variant leading-relaxed max-w-2xl">
+  Get notified immediately via Telegram or Slack when your server logs contain actionable errors. No manual log checking. No reactive firefighting.
 </p>
 <div class="flex gap-4 mt-6">
 <div class="bg-surface px-4 py-2 border-l-2 border-primary">
 <span class="block font-label text-[10px] text-outline mb-1">CHANNEL_01</span>
-<span class="font-body text-sm font-medium text-on-surface">Telegram Bot</span>
+<span data-i18n="solution.channel_1" class="font-body text-sm font-medium text-on-surface">Telegram Bot</span>
 </div>
 <div class="bg-surface px-4 py-2 border-l-2 border-secondary">
 <span class="block font-label text-[10px] text-outline mb-1">CHANNEL_02</span>
-<span class="font-body text-sm font-medium text-on-surface">Slack Webhook</span>
+<span data-i18n="solution.channel_2" class="font-body text-sm font-medium text-on-surface">Slack Webhook</span>
 </div>
 </div>
 </div>
@@ -316,7 +316,7 @@ Get notified immediately via Telegram or Slack when your server logs contain act
 <section class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
 <div class="flex items-center gap-4 mb-16">
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
-<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">How It Works</h2>
+<h2 data-i18n="howitworks.title" class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">How It Works</h2>
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -324,22 +324,22 @@ Get notified immediately via Telegram or Slack when your server logs contain act
 <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
 <span class="material-symbols-outlined text-3xl text-primary">upload</span>
 </div>
-<h3 class="font-headline text-xl font-bold text-on-surface mb-3">1. Upload Your Log</h3>
-<p class="font-body text-on-surface-variant">Paste your log text or upload a log file. We'll automatically detect the format (syslog, kernel, dmesg, etc.)</p>
+<h3 data-i18n="howitworks.step_1_title" class="font-headline text-xl font-bold text-on-surface mb-3">1. Upload Your Log</h3>
+<p data-i18n="howitworks.step_1_desc" class="font-body text-on-surface-variant">Paste your log text or upload a log file. We'll automatically detect the format (syslog, kernel, dmesg, etc.)</p>
 </div>
 <div class="text-center">
 <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
 <span class="material-symbols-outlined text-3xl text-primary">psychology</span>
 </div>
-<h3 class="font-headline text-xl font-bold text-on-surface mb-3">2. AI Analysis</h3>
-<p class="font-body text-on-surface-variant">Our AI identifies the root cause and translates technical jargon into plain English. You'll understand exactly what went wrong.</p>
+<h3 data-i18n="howitworks.step_2_title" class="font-headline text-xl font-bold text-on-surface mb-3">2. AI Analysis</h3>
+<p data-i18n="howitworks.step_2_desc" class="font-body text-on-surface-variant">Our AI identifies the root cause and translates technical jargon into plain English. You'll understand exactly what went wrong.</p>
 </div>
 <div class="text-center">
 <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
 <span class="material-symbols-outlined text-3xl text-primary">terminal</span>
 </div>
-<h3 class="font-headline text-xl font-bold text-on-surface mb-3">3. Get the Fix</h3>
-<p class="font-body text-on-surface-variant">Receive the exact command to resolve the issue. Every suggestion follows the Safety First protocol.</p>
+<h3 data-i18n="howitworks.step_3_title" class="font-headline text-xl font-bold text-on-surface mb-3">3. Get the Fix</h3>
+<p data-i18n="howitworks.step_3_desc" class="font-body text-on-surface-variant">Receive the exact command to resolve the issue. Every suggestion follows the Safety First protocol.</p>
 </div>
 </div>
 </section>
@@ -349,14 +349,14 @@ Get notified immediately via Telegram or Slack when your server logs contain act
 <div class="flex items-center gap-4 mb-16">
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
 <a class="bg-primary text-on-primary font-label text-sm uppercase tracking-widest px-8 py-4 hover:bg-primary-container transition-colors flex items-center gap-2 rounded-none" href="#beta-signup">
-<span>Join the Closed Beta (Free)</span>
+<span data-i18n="hero.cta_beta">Join the Closed Beta (Free)</span>
 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
 </div>
 <div class="flex items-center gap-4 mb-16">
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
-<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">Authority</h2>
+<h2 data-i18n="authority.title" class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">Authority</h2>
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -366,25 +366,25 @@ Get notified immediately via Telegram or Slack when your server logs contain act
 <span class="material-symbols-outlined text-3xl text-primary">person</span>
 </div>
 <div>
-<h3 class="font-headline text-xl font-bold text-on-surface">Luca Sacchi</h3>
-<p class="font-label text-sm text-primary">Senior Systems Administrator</p>
+<h3 data-i18n="authority.author_name" class="font-headline text-xl font-bold text-on-surface">Luca Sacchi</h3>
+<p data-i18n="authority.author_role" class="font-label text-sm text-primary">Senior Systems Administrator</p>
 </div>
 </div>
-<p class="font-body text-on-surface-variant leading-relaxed mb-6">
-20+ years managing mission-critical Unix/Linux infrastructure. Educator for ITS/IFTS programs, bridging academic theory with enterprise-grade operations.
+<p data-i18n="authority.bio" class="font-body text-on-surface-variant leading-relaxed mb-6">
+  20+ years managing mission-critical Unix/Linux infrastructure. Educator for ITS/IFTS programs, bridging academic theory with enterprise-grade operations.
 </p>
 <div class="space-y-2">
 <div class="flex justify-between items-center border-b border-outline-variant/20 py-2">
-<span class="font-label text-xs text-on-surface-variant">Experience</span>
-<span class="font-body text-sm font-medium text-on-surface">20+ Years</span>
+<span data-i18n="authority.experience" class="font-label text-xs text-on-surface-variant">Experience</span>
+<span data-i18n="authority.experience_value" class="font-body text-sm font-medium text-on-surface">20+ Years</span>
 </div>
 <div class="flex justify-between items-center border-b border-outline-variant/20 py-2">
-<span class="font-label text-xs text-on-surface-variant">Specialty</span>
-<span class="font-body text-sm font-medium text-on-surface text-right">Unix / Linux / Solaris</span>
+<span data-i18n="authority.specialty" class="font-label text-xs text-on-surface-variant">Specialty</span>
+<span data-i18n="authority.specialty_value" class="font-body text-sm font-medium text-on-surface text-right">Unix / Linux / Solaris</span>
 </div>
 <div class="flex justify-between items-center border-b border-outline-variant/20 py-2">
-<span class="font-label text-xs text-on-surface-variant">Role</span>
-<span class="font-body text-sm font-medium text-on-surface text-right">ITS/IFTS Educator</span>
+<span data-i18n="authority.role_label" class="font-label text-xs text-on-surface-variant">Role</span>
+<span data-i18n="authority.role_value" class="font-body text-sm font-medium text-on-surface text-right">ITS/IFTS Educator</span>
 </div>
 </div>
 </div>
@@ -394,16 +394,16 @@ Get notified immediately via Telegram or Slack when your server logs contain act
 </div>
 <div class="relative z-10 h-full flex flex-col justify-between">
 <div>
-<span class="inline-block px-2 py-1 bg-surface text-on-surface font-label text-[10px] uppercase tracking-widest mb-6">Powered By Experience</span>
-<h3 class="font-headline text-xl font-bold text-on-surface mb-4">Not just AI. AI + Expertise.</h3>
-<p class="font-body text-on-surface-variant leading-relaxed">
-LogWhispererAI is built on the patterns, failures, and solutions encountered across two decades of enterprise systems administration. The AI doesn't guess — it applies proven methodologies.
+<span data-i18n="authority.powered_badge" class="inline-block px-2 py-1 bg-surface text-on-surface font-label text-[10px] uppercase tracking-widest mb-6">Powered By Experience</span>
+<h3 data-i18n="authority.ai_title" class="font-headline text-xl font-bold text-on-surface mb-4">Not just AI. AI + Expertise.</h3>
+<p data-i18n="authority.ai_desc" class="font-body text-on-surface-variant leading-relaxed">
+  LogWhispererAI is built on the patterns, failures, and solutions encountered across two decades of enterprise systems administration. The AI doesn't guess — it applies proven methodologies.
 </p>
 </div>
 <div class="mt-8 bg-surface p-4 border-l-2 border-primary">
-<span class="font-label text-xs text-on-surface-variant uppercase tracking-widest block">Language Note</span>
-<p class="font-body text-sm text-on-surface mt-1">
-During the Beta phase, AI responses are provided in English. Full multilingual support is planned for the final release.
+<span data-i18n="authority.language_note_title" class="font-label text-xs text-on-surface-variant uppercase tracking-widest block">Language Note</span>
+<p data-i18n="authority.language_note_desc" class="font-body text-sm text-on-surface mt-1">
+  During the Beta phase, AI responses are provided in English. Full multilingual support is planned for the final release.
 </p>
 </div>
 </div>
@@ -416,36 +416,36 @@ During the Beta phase, AI responses are provided in English. Full multilingual s
 <div class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
 <div class="flex items-center gap-4 mb-16">
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
-<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">FAQ</h2>
+<h2 data-i18n="faq.title" class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">FAQ</h2>
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 <div class="space-y-6">
 <div>
-<h3 class="font-body font-semibold text-on-surface mb-2">Is this really free during beta?</h3>
-<p class="font-body text-sm text-on-surface-variant">Yes. The entire beta period is completely free. No credit card required. No hidden fees. You'll get full access to LogWhispererAI at no cost.</p>
+<h3 data-i18n="faq.q1_question" class="font-body font-semibold text-on-surface mb-2">Is this really free during beta?</h3>
+<p data-i18n="faq.q1_answer" class="font-body text-sm text-on-surface-variant">Yes. The entire beta period is completely free. No credit card required. No hidden fees. You'll get full access to LogWhispererAI at no cost.</p>
 </div>
 <div>
-<h3 class="font-body font-semibold text-on-surface mb-2">What languages does the AI support?</h3>
-<p class="font-body text-sm text-on-surface-variant">During beta, AI responses are in English. Italian and other languages are planned for the final release. You can upload logs in any format.</p>
+<h3 data-i18n="faq.q2_question" class="font-body font-semibold text-on-surface mb-2">What languages does the AI support?</h3>
+<p data-i18n="faq.q2_answer" class="font-body text-sm text-on-surface-variant">During beta, AI responses are in English. Italian and other languages are planned for the final release. You can upload logs in any format.</p>
 </div>
 <div>
-<h3 class="font-body font-semibold text-on-surface mb-2">How accurate is the analysis?</h3>
-<p class="font-body text-sm text-on-surface-variant">The AI is trained on 20+ years of real-world system administration patterns. Every recommendation follows the "Safety First" protocol — destructive commands are flagged before execution.</p>
+<h3 data-i18n="faq.q3_question" class="font-body font-semibold text-on-surface mb-2">How accurate is the analysis?</h3>
+<p data-i18n="faq.q3_answer" class="font-body text-sm text-on-surface-variant">The AI is trained on 20+ years of real-world system administration patterns. Every recommendation follows the "Safety First" protocol — destructive commands are flagged before execution.</p>
 </div>
 </div>
 <div class="space-y-6">
 <div>
-<h3 class="font-body font-semibold text-on-surface mb-2">What log formats can I upload?</h3>
-<p class="font-body text-sm text-on-surface-variant">Any text-based log format: syslog, kernel.log, dmesg, journalctl, Apache, Nginx, Docker, Kubernetes, or custom application logs. Max file size: 1MB.</p>
+<h3 data-i18n="faq.q4_question" class="font-body font-semibold text-on-surface mb-2">What log formats can I upload?</h3>
+<p data-i18n="faq.q4_answer" class="font-body text-sm text-on-surface-variant">Any text-based log format: syslog, kernel.log, dmesg, journalctl, Apache, Nginx, Docker, Kubernetes, or custom application logs. Max file size: 1MB.</p>
 </div>
 <div>
-<h3 class="font-body font-semibold text-on-surface mb-2">Will this work for production servers?</h3>
-<p class="font-body text-sm text-on-surface-variant">LogWhispererAI analyzes log files — it doesn't connect to your servers. You can safely upload anonymized logs from any environment including production.</p>
+<h3 data-i18n="faq.q5_question" class="font-body font-semibold text-on-surface mb-2">Will this work for production servers?</h3>
+<p data-i18n="faq.q5_answer" class="font-body text-sm text-on-surface-variant">LogWhispererAI analyzes log files — it doesn't connect to your servers. You can safely upload anonymized logs from any environment including production.</p>
 </div>
 <div>
-<h3 class="font-body font-semibold text-on-surface mb-2">How do I get my free log analysis?</h3>
-<p class="font-body text-sm text-on-surface-variant">Fill out the signup form below and describe or attach the log that's causing you trouble. We'll analyze it and send the solution to your email within 24 hours.</p>
+<h3 data-i18n="faq.q6_question" class="font-body font-semibold text-on-surface mb-2">How do I get my free log analysis?</h3>
+<p data-i18n="faq.q6_answer" class="font-body text-sm text-on-surface-variant">Fill out the signup form below and describe or attach the log that's causing you trouble. We'll analyze it and send the solution to your email within 24 hours.</p>
 </div>
 </div>
 </div>
@@ -455,51 +455,51 @@ During the Beta phase, AI responses are provided in English. Full multilingual s
 <section id="beta-signup" class="max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-24">
 <div class="flex items-center gap-4 mb-16">
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
-<h2 class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">Join the Closed Beta</h2>
+<h2 data-i18n="signup.title" class="font-headline text-3xl font-bold text-on-surface tracking-tight px-4">Join the Closed Beta</h2>
 <div class="h-px bg-outline-variant/50 flex-grow"></div>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
 <div class="flex flex-col justify-center space-y-6">
-<span class="inline-block px-2 py-1 bg-surface-container-highest text-on-surface font-label text-[10px] uppercase tracking-widest w-max">Early Access — Free</span>
-<h3 class="font-headline text-2xl font-bold text-on-surface">Be among the first to fix logs with AI.</h3>
-<p class="font-body text-on-surface-variant leading-relaxed">
-Join the closed beta and get free access to LogWhispererAI. Upload a real log that's driving you crazy — we'll send you the solution via email as a beta test.
+<span data-i18n="signup.badge" class="inline-block px-2 py-1 bg-surface-container-highest text-on-surface font-label text-[10px] uppercase tracking-widest w-max">Early Access — Free</span>
+<h3 data-i18n="signup.headline" class="font-headline text-2xl font-bold text-on-surface">Be among the first to fix logs with AI.</h3>
+<p data-i18n="signup.description" class="font-body text-on-surface-variant leading-relaxed">
+  Join the closed beta and get free access to LogWhispererAI. Upload a real log that's driving you crazy — we'll send you the solution via email as a beta test.
 </p>
 <div class="space-y-3">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="font-body text-sm text-on-surface">Free during the entire beta period</span>
+<span data-i18n="signup.benefit_1" class="font-body text-sm text-on-surface">Free during the entire beta period</span>
 </div>
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="font-body text-sm text-on-surface">Direct feedback channel with the founder</span>
+<span data-i18n="signup.benefit_2" class="font-body text-sm text-on-surface">Direct feedback channel with the founder</span>
 </div>
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="font-body text-sm text-on-surface">Priority access to the final release</span>
+<span data-i18n="signup.benefit_3" class="font-body text-sm text-on-surface">Priority access to the final release</span>
 </div>
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="font-body text-sm text-on-surface">Upload a log, get a free AI analysis</span>
+<span data-i18n="signup.benefit_4" class="font-body text-sm text-on-surface">Upload a log, get a free AI analysis</span>
 </div>
 </div>
 </div>
 <div class="bg-surface-container-low p-8 border-t-4 border-primary">
-<h3 class="font-label text-sm uppercase tracking-widest text-on-surface-variant mb-6">Beta Signup Form</h3>
+<h3 data-i18n="signup.form_title" class="font-label text-sm uppercase tracking-widest text-on-surface-variant mb-6">Beta Signup Form</h3>
 <form action="https://tally.so/form/w3xNqG" method="POST" class="space-y-4">
-<input type="email" name="email" placeholder="Your email address" required class="w-full bg-surface border border-outline-variant/20 text-on-surface px-4 py-3 text-sm font-body placeholder:text-on-surface-variant focus:border-primary focus:outline-none rounded-none"/>
-<input type="number" name="servers" placeholder="Number of servers managed" min="1" max="1000" class="w-full bg-surface border border-outline-variant/20 text-on-surface px-4 py-3 text-sm font-body placeholder:text-on-surface-variant focus:border-primary focus:outline-none rounded-none"/>
+<input data-i18n="signup.email_placeholder" type="email" name="email" placeholder="Your email address" required class="w-full bg-surface border border-outline-variant/20 text-on-surface px-4 py-3 text-sm font-body placeholder:text-on-surface-variant focus:border-primary focus:outline-none rounded-none"/>
+<input data-i18n="signup.servers_placeholder" type="number" name="servers" placeholder="Number of servers managed" min="1" max="1000" class="w-full bg-surface border border-outline-variant/20 text-on-surface px-4 py-3 text-sm font-body placeholder:text-on-surface-variant focus:border-primary focus:outline-none rounded-none"/>
 <div class="flex items-start gap-3">
 <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
-<p class="font-body text-xs text-on-surface-variant leading-relaxed">Have a log that is driving you crazy? Describe it or mention it in the form — we will send you a free AI analysis as a beta test.</p>
+<p data-i18n="signup.log_prompt" class="font-body text-xs text-on-surface-variant leading-relaxed">Have a log that is driving you crazy? Describe it or mention it in the form — we will send you a free AI analysis as a beta test.</p>
 </div>
-<button type="submit" class="bg-primary text-on-primary font-label text-sm uppercase tracking-widest px-8 py-4 hover:bg-primary-container transition-colors rounded-none w-full flex items-center justify-center gap-2">
-<span>Join the Closed Beta</span>
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
+<button data-i18n="signup.submit" type="submit" class="bg-primary text-on-primary font-label text-sm uppercase tracking-widest px-8 py-4 hover:bg-primary-container transition-colors rounded-none w-full flex items-center justify-center gap-2">
+  <span>Join the Closed Beta</span>
+  <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </button>
 </form>
 <noscript>
-<p class="font-body text-sm text-on-surface-variant">JavaScript required for Tally form. Email us at <span class="text-primary font-medium">logwhisperer@thelinuxformula.com</span></p>
+<p data-i18n="signup.js_required" class="font-body text-sm text-on-surface-variant">JavaScript required for Tally form. Email us at <span class="text-primary font-medium">logwhisperer@thelinuxformula.com</span></p>
 </noscript>
 </div>
 </div>
@@ -509,21 +509,21 @@ Join the closed beta and get free access to LogWhispererAI. Upload a real log th
 <footer class="bg-surface-container-low text-on-surface border-t border-outline-variant/20 mt-auto">
 <div class="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
 <div class="md:col-span-1">
-<span class="font-headline font-bold text-lg block mb-4">The Linux Formula</span>
-<p class="font-label text-[10px] leading-relaxed uppercase tracking-widest text-on-surface-variant">
-Architectural-grade insights for enterprise Linux systems.
+<span data-i18n="footer.brand" class="font-headline font-bold text-lg block mb-4">The Linux Formula</span>
+<p data-i18n="footer.tagline" class="font-label text-[10px] leading-relaxed uppercase tracking-widest text-on-surface-variant">
+  Architectural-grade insights for enterprise Linux systems.
 </p>
 </div>
 <div class="md:col-span-2 grid grid-cols-2 gap-8 font-label text-[10px] leading-relaxed uppercase tracking-widest text-on-surface-variant">
 <div>
-<span class="block text-on-surface font-semibold mb-4 border-b border-outline-variant/20 pb-2">Coordinates</span>
+<span data-i18n="footer.coordinates_title" class="block text-on-surface font-semibold mb-4 border-b border-outline-variant/20 pb-2">Coordinates</span>
 <ul class="space-y-2">
-<li>Office: Viale Bligny 13/a Milano</li>
-<li>P.IVA: IT09731490968</li>
+<li data-i18n="footer.office">Office: Viale Bligny 13/a Milano</li>
+<li data-i18n="footer.piva">P.IVA: IT09731490968</li>
 </ul>
 </div>
 <div>
-<span class="block text-on-surface font-semibold mb-4 border-b border-outline-variant/20 pb-2">Links</span>
+<span data-i18n="footer.links_title" class="block text-on-surface font-semibold mb-4 border-b border-outline-variant/20 pb-2">Links</span>
 <ul class="space-y-2">
 <li><a class="hover:text-primary transition-colors" href="https://lucasacchiricciardi.github.io/the-linux-formula/">Home</a></li>
 <li><a class="hover:text-primary transition-colors" href="https://www.linkedin.com/in/lucasacchi/" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
@@ -534,8 +534,8 @@ Architectural-grade insights for enterprise Linux systems.
 <div class="md:col-span-1 flex flex-col justify-between items-start md:items-end font-label text-[10px] uppercase tracking-widest text-outline">
 <span class="material-symbols-outlined text-3xl mb-4">terminal</span>
 <div class="text-left md:text-right">
-<p>&copy; The Linux Formula.</p>
-<p>All Rights Reserved.</p>
+<p>&copy; <span data-i18n="footer.copyright">The Linux Formula.</span></p>
+<p data-i18n="footer.all_rights">All Rights Reserved.</p>
 <p class="mt-2" id="copyright-years"></p>
 </div>
 </div>
@@ -577,11 +577,11 @@ Architectural-grade insights for enterprise Linux systems.
 
 <!-- Sticky CTA Mobile -->
 <div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant/20 px-4 py-3 z-40 flex gap-3">
-<a class="bg-primary text-on-primary font-label text-xs uppercase tracking-widest px-4 py-3 flex-1 text-center hover:bg-primary-container transition-colors rounded-none flex items-center justify-center gap-2" href="#beta-signup">
+<a data-i18n="mobile.cta_beta" class="bg-primary text-on-primary font-label text-xs uppercase tracking-widest px-4 py-3 flex-1 text-center hover:bg-primary-container transition-colors rounded-none flex items-center justify-center gap-2" href="#beta-signup">
 <span>Join Beta</span>
 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
-<a class="border border-primary text-primary font-label text-xs uppercase tracking-widest px-4 py-3 flex-1 text-center hover:bg-primary/5 transition-colors rounded-none" href="https://lucasacchiricciardi.github.io/the-linux-formula/">Home</a>
+<a data-i18n="mobile.cta_home" class="border border-primary text-primary font-label text-xs uppercase tracking-widest px-4 py-3 flex-1 text-center hover:bg-primary/5 transition-colors rounded-none" href="https://lucasacchiricciardi.github.io/the-linux-formula/">Home</a>
 </div>
 </body>
 </html>
