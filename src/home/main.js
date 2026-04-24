@@ -21,9 +21,13 @@
 
     var worker;
     try {
-      worker = new Worker('newsWorker.js');
-      // Set base URL for worker (important for GitHub Pages subdirectory)
-      var baseUrl = '/the-linux-formula';
+      // Determine base URL dynamically based on current page location
+      // For GitHub Pages subdirectory: /the-linux-formula/
+      // For custom domain: / or empty
+      var pathParts = window.location.pathname.split('/').filter(Boolean);
+      var baseUrl = pathParts.length > 0 ? '/' + pathParts[0] : '';
+      
+      worker = new Worker(baseUrl + 'newsWorker.js');
       worker.postMessage({ type: 'setBaseUrl', baseUrl: baseUrl });
     } catch (e) {
       showError('Failed to initialize news. Please refresh the page.');

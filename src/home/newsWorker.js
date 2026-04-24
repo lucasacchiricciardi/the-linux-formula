@@ -1,5 +1,6 @@
-// Base URL for fetching news, set by main thread via 'setBaseUrl' message
-let BASE_URL = '/the-linux-formula';
+// Base URL for fetching news - will be set by main thread via 'setBaseUrl' message
+// Default to empty string (works for both root and subdirectory deployments)
+let BASE_URL = '';
 let FETCH_URL = BASE_URL + '/news/news-feed.json';
 let VERSION_URL = BASE_URL + '/news/version.txt';
 const POLL_INTERVAL = 3600000; // 1 hour
