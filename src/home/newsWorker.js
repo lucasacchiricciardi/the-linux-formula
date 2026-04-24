@@ -88,14 +88,13 @@ async function fetchNews() {
 }
 
 self.onmessage = function(e) {
-  if (e.data && e.data.type === 'refresh') {
-    fetchNews();
-  }
-  if (e.data && e.data.type === 'setBaseUrl') {
+  if (e.data && e.data.type === 'init') {
     BASE_URL = e.data.baseUrl || '';
     FETCH_URL = BASE_URL + '/news/news-feed.json';
     VERSION_URL = BASE_URL + '/news/version.txt';
+    fetchNews();
+  }
+  if (e.data && e.data.type === 'refresh') {
+    fetchNews();
   }
 };
-
-fetchNews();

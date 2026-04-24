@@ -28,7 +28,7 @@
       var baseUrl = pathParts.length > 0 ? '/' + pathParts[0] : '';
       
       worker = new Worker(baseUrl + 'newsWorker.js');
-      worker.postMessage({ type: 'setBaseUrl', baseUrl: baseUrl });
+      worker.postMessage({ type: 'init', baseUrl: baseUrl });
     } catch (e) {
       showError('Failed to initialize news. Please refresh the page.');
       return;
