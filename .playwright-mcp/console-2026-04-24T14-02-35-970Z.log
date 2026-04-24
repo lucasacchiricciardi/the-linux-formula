@@ -1,0 +1,6 @@
+[     924ms] [ERROR] Access to manifest at 'https://lucasacchiricciardi.github.io/the-linux-formula/manifest.json' from origin 'https://thelinuxformula.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://thelinuxformula.com/:0
+[     926ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://lucasacchiricciardi.github.io/the-linux-formula/manifest.json:0
+[    1991ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ https://thelinuxformula.com/:0
+[    3659ms] [ERROR] Mixed Content: The page at 'https://thelinuxformula.com/' was loaded over HTTPS, but requested an insecure favicon 'http://thelinuxformula.com/favicon.svg'. This request has been blocked; the content must be served over HTTPS. @ https://thelinuxformula.com/:0
+[    3662ms] [ERROR] Access to manifest at 'https://lucasacchiricciardi.github.io/the-linux-formula/manifest.json' from origin 'https://thelinuxformula.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://thelinuxformula.com/:0
+[    3663ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://lucasacchiricciardi.github.io/the-linux-formula/manifest.json:0
