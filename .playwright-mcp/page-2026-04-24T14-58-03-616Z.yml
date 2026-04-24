@@ -1,0 +1,247 @@
+- generic [ref=e1]:
+  - link "Skip to main content":
+    - /url: "#main-content"
+  - navigation "Main navigation":
+    - generic:
+      - generic:
+        - generic: terminal
+        - link "The Linux Formula":
+          - /url: /
+      - generic:
+        - link "Home":
+          - /url: "#main-content"
+        - link "LogWhispererAI":
+          - /url: logwhispererai/
+        - generic:
+          - button "Switch to Italian":
+            - generic: translate
+            - generic: IT
+          - button "Switch to English":
+            - generic: translate
+            - generic: EN
+  - main:
+    - generic:
+      - generic:
+        - generic: SysAdmin_Protocol_v2.4
+      - 'heading "The Linux Formula: Tools, Apps, and Insights for the Open Source World." [level=1]':
+        - text: "The Linux Formula:"
+        - text: Tools, Apps, and Insights
+        - text: for the Open Source World.
+      - paragraph: A rigorous, methodical approach to system administration. Moving beyond generic tutorials to deliver architect-level blueprints for robust, scalable infrastructure.
+      - generic:
+        - link "Explore Insights arrow_forward":
+          - /url: "#news-feed-container"
+          - generic: Explore Insights
+          - generic: arrow_forward
+        - link "LogWhispererAI Beta":
+          - /url: logwhispererai/
+          - generic: LogWhispererAI Beta
+    - status:
+      - generic:
+        - heading "Latest Updates" [level=2]
+        - generic:
+          - generic: search
+          - textbox "Search articles":
+            - /placeholder: Search articles...
+      - generic:
+        - article:
+          - 'heading "Ansible vs Terraform: When to Use Each" [level=3]'
+          - text: 2026-04-18
+          - generic:
+            - generic: ansible
+            - generic: terraform
+            - generic: devops
+            - generic: automation
+            - generic: iac
+          - paragraph: "Ansible vs Terraform: Practical Comparison Two fundamental tools for infrastructure as code, but with different scopes. Let's analyze when to use each. Ansible (Configuration Management) Ideal for:- Configuring existing servers- Application deployments- Repeatable tasks (playbooks)- Agentless (SSH) Terraform (Infrastructure Provisioning) Ideal for:- Creating infrastructure from scratch- Cloud resources (AWS, GCP, Azure)- State management- Planning changes Conclusion Use..."
+          - generic: Related
+          - generic: → Docker Security Best Practices
+          - generic:
+            - link "work":
+              - /url: https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F&title=Ansible%20vs%20Terraform%3A%20When%20to%20Use%20Each
+              - generic: work
+            - link "mail":
+              - /url: mailto:?subject=Ansible%20vs%20Terraform%3A%20When%20to%20Use%20Each&body=Ansible%20vs%20Terraform%3A%20When%20to%20Use%20Each%0A%0Ahttps%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F
+              - generic: mail
+            - button "link":
+              - generic: link
+        - article:
+          - heading "Kernel 6.1 LTS and Long Term Support" [level=3]
+          - text: 2026-04-15
+          - generic:
+            - generic: kernel
+            - generic: lts
+            - generic: sysadmin
+          - paragraph: "Kernel 6.1 LTS: What's New The Linux 6.1 kernel marks a turning point for the LTS series. The main new features include improved hardware support and performance optimizations for server workloads. Key Points Better memory management for high-density systemsImproved Btrfs support with more efficient checksumsNew drivers for datacenter NICs..."
+          - generic:
+            - link "work":
+              - /url: https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F&title=Kernel%206.1%20LTS%20and%20Long%20Term%20Support
+              - generic: work
+            - link "mail":
+              - /url: mailto:?subject=Kernel%206.1%20LTS%20and%20Long%20Term%20Support&body=Kernel%206.1%20LTS%20and%20Long%20Term%20Support%0A%0Ahttps%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F
+              - generic: mail
+            - button "link":
+              - generic: link
+        - article:
+          - heading "Monitoring with Prometheus and Grafana" [level=3]
+          - text: 2026-04-10
+          - generic:
+            - generic: monitoring
+            - generic: prometheus
+            - generic: grafana
+            - generic: observability
+          - paragraph: "Enterprise Monitoring with Prometheus Prometheus and Grafana form the ideal pair for modern monitoring. Prometheus Time-series databasePull-based metricsPromQL for queriesService discovery Grafana Advanced visualizationsCustom dashboardsIntegrated alertingMulti-source data Basic Setup `bash Docker compose to get started prometheus:image: prom/prometheusgrafana:image: grafana/grafana` Best Practices Custom metrics for applicationsSLO/SLA monitoringAlert on percentiles (P95, P99)..."
+          - generic:
+            - link "work":
+              - /url: https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F&title=Monitoring%20with%20Prometheus%20and%20Grafana
+              - generic: work
+            - link "mail":
+              - /url: mailto:?subject=Monitoring%20with%20Prometheus%20and%20Grafana&body=Monitoring%20with%20Prometheus%20and%20Grafana%0A%0Ahttps%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F
+              - generic: mail
+            - button "link":
+              - generic: link
+        - article:
+          - heading "Docker Security Best Practices" [level=3]
+          - text: 2026-04-05
+          - generic:
+            - generic: docker
+            - generic: security
+            - generic: containers
+            - generic: devops
+          - paragraph: "Docker Security in Production Docker is everywhere, but security is often overlooked. Here are the best practices. Minimal Images Use verified official imagesPrefer alpine or distrolessMulti-stage builds to reduce attack surface Don't Run as Root `dockerfile Create user and use USER RUN adduser -D appuserUSER appuser` Vulnerability Scanning Trivy scannerClairDockle for best practices Network Segmentation Network isolate containersUse Docker Swarm or..."
+          - generic: Related
+          - generic: "→ Ansible vs Terraform: When to Use Each"
+          - generic:
+            - link "work":
+              - /url: https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F&title=Docker%20Security%20Best%20Practices
+              - generic: work
+            - link "mail":
+              - /url: mailto:?subject=Docker%20Security%20Best%20Practices&body=Docker%20Security%20Best%20Practices%0A%0Ahttps%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F
+              - generic: mail
+            - button "link":
+              - generic: link
+        - article:
+          - 'heading "Systemd vs OpenRC: The Practical Guide" [level=3]'
+          - text: 2026-03-28
+          - generic:
+            - generic: systemd
+            - generic: openrc
+            - generic: init
+            - generic: comparison
+          - paragraph: "Systemd vs OpenRC: Which to Choose? The choice of init system is one of the most debated decisions in the Linux community. Let's analyze the pros and cons of both. Systemd offers an integrated ecosystem with journaling, network management, and centralized logging. OpenRC remains the choice for those who prefer simplicity and..."
+          - generic:
+            - link "work":
+              - /url: https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F&title=Systemd%20vs%20OpenRC%3A%20The%20Practical%20Guide
+              - generic: work
+            - link "mail":
+              - /url: mailto:?subject=Systemd%20vs%20OpenRC%3A%20The%20Practical%20Guide&body=Systemd%20vs%20OpenRC%3A%20The%20Practical%20Guide%0A%0Ahttps%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F
+              - generic: mail
+            - button "link":
+              - generic: link
+        - article:
+          - heading "minimal-article-en" [level=3]
+          - paragraph: Article without frontmatter to test fallback. Title should be filename, date null, and empty tags....
+          - generic:
+            - link "work":
+              - /url: https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F&title=minimal-article-en
+              - generic: work
+            - link "mail":
+              - /url: mailto:?subject=minimal-article-en&body=minimal-article-en%0A%0Ahttps%3A%2F%2Flucasacchiricciardi.github.io%2Fthe-linux-formula%2F
+              - generic: mail
+            - button "link":
+              - generic: link
+    - generic:
+      - generic:
+        - heading "Subject Matter Expert" [level=2]
+      - generic:
+        - generic:
+          - generic:
+            - generic: person
+          - generic: "ID: LS-001"
+        - heading "Luca Sacchi" [level=3]
+        - paragraph: Senior Systems Administrator
+        - generic:
+          - generic:
+            - generic: Experience
+            - generic: 20+ Years
+          - generic:
+            - generic: Specialty
+            - generic: Unix / Linux / Solaris
+      - generic:
+        - generic:
+          - generic: architecture
+        - generic:
+          - generic:
+            - generic: Pedagogical Framework
+            - heading "The 'Metodo Sacchi'" [level=3]
+            - paragraph: Educator for ITS/IFTS programs, developing a rigorous, practically-grounded curriculum designed to bridge the gap between academic theory and high-stakes enterprise infrastructure management.
+          - generic:
+            - generic:
+              - generic: MODULE_01
+              - text: Systems Architecture
+            - generic:
+              - generic: MODULE_02
+              - text: Network Security
+    - generic:
+      - heading "External Vectors" [level=2]
+      - generic:
+        - link "work Professional Network linkedin.com/in/lucasacchi arrow_forward":
+          - /url: https://www.linkedin.com/in/lucasacchi/
+          - generic:
+            - generic:
+              - generic: work
+            - generic:
+              - heading "Professional Network" [level=4]
+              - paragraph: linkedin.com/in/lucasacchi
+          - generic: arrow_forward
+        - link "smart_display Broadcast Channel youtube.com/@lucasacchinet arrow_forward":
+          - /url: https://www.youtube.com/@lucasacchinet
+          - generic:
+            - generic:
+              - generic: smart_display
+            - generic:
+              - heading "Broadcast Channel" [level=4]
+              - paragraph: youtube.com/@lucasacchinet
+          - generic: arrow_forward
+  - contentinfo:
+    - generic:
+      - generic:
+        - generic: The Linux Formula
+        - paragraph: Architectural-grade insights for enterprise Linux systems.
+      - generic:
+        - generic:
+          - generic: Coordinates
+          - list:
+            - listitem: "Office: Viale Bligny 13/a Milano"
+            - listitem: "P.IVA: IT09731490968"
+        - generic:
+          - generic: Comm_Links
+          - list:
+            - listitem:
+              - text: "Cell:"
+              - generic:
+                - link "+39 3939242165":
+                  - /url: tel:+39 3939242165
+            - listitem:
+              - text: "Email:"
+              - generic:
+                - link "info@lucasacchi.net":
+                  - /url: mailto:info@lucasacchi.net
+        - generic:
+          - generic: Contact
+          - generic:
+            - textbox "Name"
+            - textbox "Email"
+            - textbox "Message"
+            - button "Send Message"
+      - generic:
+        - generic: terminal
+        - generic:
+          - paragraph: © The Linux Formula.
+          - paragraph: All Rights Reserved.
+          - paragraph: 2023 - 2026
+          - paragraph: "Analytics: anonymous, cookie-free"
+  - generic [ref=e3]:
+    - heading "Work in Progress" [level=2] [ref=e4]
+    - textbox "Enter password" [active] [ref=e5]
+    - button "Unlock" [ref=e6] [cursor=pointer]
