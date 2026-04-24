@@ -92,7 +92,7 @@ self.onmessage = function(e) {
     fetchNews();
   }
   if (e.data && e.data.type === 'setBaseUrl') {
-    BASE_URL = e.data.baseUrl || '/the-linux-formula';
+    BASE_URL = e.data.baseUrl || '';
     FETCH_URL = BASE_URL + '/news/news-feed.json';
     VERSION_URL = BASE_URL + '/news/version.txt';
   }
