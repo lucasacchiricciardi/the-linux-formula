@@ -22,13 +22,18 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      CI: true
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: false
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci --force
+          # Verify we're using Node 24
+          node --version
       - name: Run tests
         run: |
           node --test scripts/build-news.test.mjs
