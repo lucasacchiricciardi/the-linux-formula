@@ -537,6 +537,13 @@ From machine jargon to plain English. Understand exactly what went wrong and why
 <p>&copy; <span data-i18n="footer.copyright">The Linux Formula.</span></p>
 <p data-i18n="footer.all_rights">All Rights Reserved.</p>
 <p class="mt-2" id="copyright-years"></p>
+<div class="mt-4 flex gap-3">
+<a href="https://www.iubenda.com/privacy-policy/47650780" class="iubenda-nostyle iubenda-noiframe iubenda-embed text-[9px] text-on-surface-variant hover:text-primary transition-colors" title="Privacy Policy">Privacy Policy</a>
+<span class="text-outline-variant/40">•</span>
+<a href="https://www.iubenda.com/privacy-policy/47650780/cookie-policy" class="iubenda-nostyle iubenda-noiframe iubenda-embed text-[9px] text-on-surface-variant hover:text-primary transition-colors" title="Cookie Policy">Cookie Policy</a>
+<span class="text-outline-variant/40">•</span>
+<a href="https://www.iubenda.com/termini-e-condizioni/47650780" class="iubenda-white no-brand iubenda-noiframe iubenda-embed text-[9px] text-on-surface-variant hover:text-primary transition-colors" title="Termini e Condizioni">Termini e Condizioni</a>
+</div>
 </div>
 </div>
 </div>
@@ -574,6 +581,23 @@ From machine jargon to plain English. Understand exactly what went wrong and why
 </script>
 <script src="./i18n/i18n.js"></script>
 <script src="../analytics.js"></script>
+<script type="text/javascript">
+(function (w,d) {
+  var loader = function () {
+    var s = d.createElement("script");
+    var tag = d.getElementsByTagName("script")[0];
+    s.src="https://cdn.iubenda.com/iubenda.js";
+    tag.parentNode.insertBefore(s,tag);
+  };
+  if(w.addEventListener){
+    w.addEventListener("load", loader, false);
+  }else if(w.attachEvent){
+    w.attachEvent("onload", loader);
+  }else{
+    w.onload = loader;
+  }
+})(window, document);
+</script>
 
 <!-- Sticky CTA Mobile -->
 <div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant/20 px-4 py-3 z-40 flex gap-3">
