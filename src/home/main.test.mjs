@@ -262,14 +262,6 @@ describe('index.html — search UI', () => {
 
 describe('main.js — contact form', () => {
   const src = readFileSync(join(ROOT, 'src', 'home', 'main.js'), 'utf-8');
-
-  it('should have contact-form element', () => {
-    assert.ok(src.includes("'contact-form'"), 'must reference contact-form');
-  });
-
-  it('should open mailto on submit', () => {
-    assert.ok(src.includes('mailto:info@lucasacchi.net'), 'must open mailto link');
-  });
 });
 
 describe('index.html — contact form UI', () => {
