@@ -88,11 +88,14 @@
     "benefit_3": "Priority access to the final release",
     "benefit_4": "Upload a log, get a free AI analysis",
     "form_title": "Beta Signup Form",
+    "name_placeholder": "Your name",
     "email_placeholder": "Your email address",
-    "servers_placeholder": "Number of servers managed",
+    "message_placeholder": "Describe your log issue or tell us about your setup...",
     "log_prompt": "Have a log that is driving you crazy? Describe it or mention it in the form — we will send you a free AI analysis as a beta test.",
     "submit": "Join the Closed Beta",
-    "js_required": "JavaScript required for Tally form. Email us at"
+    "success_message": "Thank you! We'll be in touch soon.",
+    "error_message": "Something went wrong. Please try again or email us at logwhisperer@thelinuxformula.com",
+    "js_required": "JavaScript required for form submission. Email us at"
   },
   "mobile": {
     "cta_beta": "Join Beta",

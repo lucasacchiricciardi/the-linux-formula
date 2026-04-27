@@ -69,7 +69,7 @@
       var key = el.getAttribute('data-i18n');
       var text = getTranslation(key);
       if (text) {
-        if (el.tagName === 'INPUT' && el.placeholder !== undefined) {
+        if ((el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') && el.placeholder !== undefined) {
           el.placeholder = text;
         } else {
           el.textContent = text;
