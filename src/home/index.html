@@ -571,14 +571,15 @@
 </ul>
 </div>
 <div class="md:col-span-2">
-<span class="block text-on-surface font-semibold mb-4 border-b border-outline-variant/20 pb-2">Contact</span>
-<form id="contact-form" class="space-y-3">
-<input type="text" name="name" placeholder="Name" required class="w-full bg-surface border border-outline-variant/20 text-on-surface px-3 py-2 text-xs font-label placeholder:text-on-surface-variant focus:border-primary focus:outline-none rounded-none"/>
-<input type="email" name="email" placeholder="Email" required class="w-full bg-surface border border-outline-variant/20 text-on-surface px-3 py-2 text-xs font-label placeholder:text-on-surface-variant focus:border-primary focus:outline-none rounded-none"/>
-<textarea name="message" placeholder="Message" required rows="3" class="w-full bg-surface border border-outline-variant/20 text-on-surface px-3 py-2 text-xs font-label placeholder:text-on-surface-variant focus:border-primary focus:outline-none rounded-none resize-none"></textarea>
-<button type="submit" class="bg-primary text-on-primary font-label text-xs uppercase tracking-widest px-4 py-2 hover:bg-primary-container transition-colors rounded-none w-full">Send Message</button>
+<span class="block text-on-surface font-semibold mb-4 border-b border-outline-variant/20 pb-2" data-i18n="footer.contact">Contact</span>
+<form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-3">
+<input type="hidden" name="access_key" value="7730946a-ae95-4853-8674-0b4022a431e4">
+<input type="hidden" name="redirect" value="https://thelinuxformula.com/thank-you/">
+<input type="text" name="name" placeholder="Name" required data-i18n-placeholder="footer.name" class="w-full bg-surface border border-outline-variant/20 text-on-surface px-3 py-2 text-xs font-label placeholder:text-on-surface-variant focus:border-primary focus:outline-none rounded-none"/>
+<input type="email" name="email" placeholder="Email" required data-i18n-placeholder="footer.email" class="w-full bg-surface border border-outline-variant/20 text-on-surface px-3 py-2 text-xs font-label placeholder:text-on-surface-variant focus:border-primary focus:outline-none rounded-none"/>
+<textarea name="message" placeholder="Message" required rows="3" data-i18n-placeholder="footer.message" class="w-full bg-surface border border-outline-variant/20 text-on-surface px-3 py-2 text-xs font-label placeholder:text-on-surface-variant focus:border-primary focus:outline-none rounded-none resize-none"></textarea>
+<button type="submit" data-i18n="footer.send" class="bg-primary text-on-primary font-label text-xs uppercase tracking-widest px-4 py-2 hover:bg-primary-container transition-colors rounded-none w-full">Send Message</button>
 </form>
-<p id="contact-success" class="hidden text-xs text-primary mt-2">Message sent! I'll get back to you soon.</p>
 </div>
 </div>
 <div class="md:col-span-1 flex flex-col justify-between items-start md:items-end font-label text-[10px] uppercase tracking-widest text-outline">
@@ -601,6 +602,19 @@
 </footer>
 <script src="analytics.js"></script>
 <script src="main.js" defer></script>
+<script src="i18n/i18n.js"></script>
+<script>
+(function() {
+  ['lang-it-btn', 'lang-it-btn-mobile'].forEach(function(id) {
+    var btn = document.getElementById(id);
+    if (btn) btn.addEventListener('click', function() { window.i18n.switchLanguage('it'); });
+  });
+  ['lang-en-btn', 'lang-en-btn-mobile'].forEach(function(id) {
+    var btn = document.getElementById(id);
+    if (btn) btn.addEventListener('click', function() { window.i18n.switchLanguage('en'); });
+  });
+})();
+</script>
 <script type="text/javascript">
 (function (w,d) {
   var loader = function () {

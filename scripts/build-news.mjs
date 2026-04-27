@@ -181,6 +181,14 @@ function assembleDist() {
     }
   }
 
+  // Copy i18n directory from src/home/i18n/ to dist/i18n/
+  const i18nSrc = join(SRC_HOME, 'i18n');
+  const i18nDst = join(DIST, 'i18n');
+  if (existsSync(i18nSrc)) {
+    copyDirectoryRecursive(i18nSrc, i18nDst);
+    console.log('Copied i18n/ to dist/i18n/');
+  }
+
   // Copy secret.json if exists (for auth gate)
   const secretSrc = 'src/secret.json';
   const secretDst = join(DIST, 'secret.json');
@@ -241,7 +249,7 @@ function assembleDist() {
     .filter(a => a.date)
     .map(a => `  <url>\n    <loc>${SITE_URL}/</loc>\n    <lastmod>${a.date}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>`)
     .join('\n');
-  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${SITE_URL}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>${SITE_URL}/logwhispererai/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.9</priority>\n  </url>\n${sitemapEntries}\n</urlset>\n`;
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${SITE_URL}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>${SITE_URL}/logwhispererai/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.9</priority>\n  </url>\n  <url>\n    <loc>${SITE_URL}/thank-you/</loc>\n    <changefreq>never</changefreq>\n    <priority>0.3</priority>\n  </url>\n${sitemapEntries}\n</urlset>\n`;
   writeFileSync(join(DIST, 'sitemap.xml'), sitemapXml, 'utf-8');
 
   console.log(`Assembled ${DIST}/ with ${feed.articles.length} article(s)`);

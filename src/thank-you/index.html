@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Thank you for your message — The Linux Formula"/>
+<meta name="robots" content="noindex, follow"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="manifest" href="/manifest.json"/>
+<meta name="theme-color" content="#003f87"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="TLF"/>
+<title>Thank You — The Linux Formula</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/tailwind.css"/>
+<style>
+  body {
+    background-image:
+      linear-gradient(to right, rgba(194, 198, 212, 0.2) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(194, 198, 212, 0.2) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<div class="min-h-screen flex flex-col">
+  <nav class="bg-surface-container-lowest/80 backdrop-blur-xl w-full sticky top-0 z-50 border-b border-outline-variant/20">
+    <div class="flex justify-between items-center px-12 py-6 max-w-7xl mx-auto">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">terminal</span>
+        <a class="text-xl font-headline font-black tracking-tighter text-on-primary-fixed" href="/">The Linux Formula</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-1 flex items-center justify-center px-6 py-24">
+    <div class="max-w-2xl w-full bg-surface-container-low border-t-4 border-primary p-12 shadow-lg">
+      <div class="text-center">
+        <div class="flex justify-center mb-6">
+          <span class="material-symbols-outlined text-primary text-6xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+        </div>
+
+        <h1 class="text-3xl font-headline font-bold text-on-surface mb-4">Thank you!</h1>
+
+        <p class="text-lg text-on-surface-variant mb-2">Your message has been received.</p>
+
+        <p class="text-base text-on-surface-variant leading-relaxed mb-8">I will read it and get back to you as soon as possible.</p>
+
+        <div class="bg-primary/10 border-l-4 border-primary p-4 mb-8 text-left">
+          <p class="text-sm text-on-surface font-label uppercase tracking-wider">Note: check your inbox and spam folder for the reply.</p>
+        </div>
+
+        <a href="/" class="inline-flex items-center gap-2 bg-primary text-on-primary font-label text-sm uppercase tracking-widest px-8 py-3 hover:bg-primary-container transition-colors rounded-none">
+          <span>Back to Home</span>
+          <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-surface-container-low text-on-surface border-t border-outline-variant/20 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="md:col-span-1">
+        <span class="font-headline font-bold text-lg block mb-4">The Linux Formula</span>
+        <p class="font-label text-[10px] leading-relaxed uppercase tracking-widest text-on-surface-variant">
+          Architectural-grade insights for enterprise Linux systems.
+        </p>
+      </div>
+      <div class="md:col-span-2 grid grid-cols-2 gap-8 font-label text-[10px] leading-relaxed uppercase tracking-widest text-on-surface-variant">
+        <div>
+          <span class="block text-on-surface font-semibold mb-4 border-b border-outline-variant/20 pb-2">Coordinates</span>
+          <ul class="space-y-2">
+            <li>Office: Viale Bligny 13/a Milano</li>
+            <li>P.IVA: IT09731490968</li>
+          </ul>
+        </div>
+        <div>
+          <span class="block text-on-surface font-semibold mb-4 border-b border-outline-variant/20 pb-2">Comm_Links</span>
+          <ul class="space-y-2">
+            <li>Cell: <span id="phone-obf"></span></li>
+            <li>Email: <span id="email-obf"></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="md:col-span-1 flex flex-col justify-between items-start md:items-end font-label text-[10px] uppercase tracking-widest text-outline">
+        <span class="material-symbols-outlined text-3xl mb-4">terminal</span>
+        <div class="text-left md:text-right">
+          <p>&copy; The Linux Formula.</p>
+          <p>All Rights Reserved.</p>
+          <p class="mt-2" id="copyright-years"></p>
+          <p class="mt-2 text-[9px]">Analytics: anonymous, cookie-free</p>
+          <div class="mt-4 flex gap-3">
+            <a href="https://www.iubenda.com/privacy-policy/47650780" class="iubenda-nostyle iubenda-noiframe iubenda-embed text-[9px] text-on-surface-variant hover:text-primary transition-colors" title="Privacy Policy">Privacy Policy</a>
+            <span class="text-outline-variant/40">&bull;</span>
+            <a href="https://www.iubenda.com/privacy-policy/47650780/cookie-policy" class="iubenda-nostyle iubenda-noiframe iubenda-embed text-[9px] text-on-surface-variant hover:text-primary transition-colors" title="Cookie Policy">Cookie Policy</a>
+            <span class="text-outline-variant/40">&bull;</span>
+            <a href="https://www.iubenda.com/termini-e-condizioni/47650780" class="iubenda-nostyle iubenda-noiframe iubenda-embed text-[9px] text-on-surface-variant hover:text-primary transition-colors" title="Termini e Condizioni">Termini e Condizioni</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script type="text/javascript">
+(function (w,d) {
+  var loader = function () {
+    var s = d.createElement("script");
+    var tag = d.getElementsByTagName("script")[0];
+    s.src="https://cdn.iubenda.com/iubenda.js";
+    tag.parentNode.insertBefore(s,tag);
+  };
+  if(w.addEventListener){
+    w.addEventListener("load", loader, false);
+  }else if(w.attachEvent){
+    w.attachEvent("onload", loader);
+  }else{
+    w.onload = loader;
+  }
+})(window, document);
+</script>
+<script>
+(function() {
+  var y = new Date().getFullYear();
+  var el = document.getElementById('copyright-years');
+  if (el) el.textContent = '2023 - ' + y;
+
+  var phoneEl = document.getElementById('phone-obf');
+  var emailEl = document.getElementById('email-obf');
+  if (phoneEl) phoneEl.textContent = '+39 02 1234 5678';
+  if (emailEl) emailEl.textContent = 'info@thelinuxformula.com';
+})();
+</script>
+</body>
+</html>
