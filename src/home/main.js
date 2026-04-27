@@ -470,24 +470,6 @@ function retrieveAndDecompress(lang) {
     initializeOfflineFirst();
     setupSearch();
     
-    var contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        var name = contactForm.querySelector('[name="name"]').value;
-        var email = contactForm.querySelector('[name="email"]').value;
-        var message = contactForm.querySelector('[name="message"]').value;
-        var body = 'Name: ' + encodeURIComponent(name) + '\nEmail: ' + encodeURIComponent(email) + '\n\nMessage:\n' + encodeURIComponent(message);
-        window.location.href = 'mailto:info@lucasacchi.net?subject=Contact from thelinuxformula.com&body=' + body;
-        var successMsg = document.getElementById('contact-success');
-        if (successMsg) {
-          successMsg.classList.remove('hidden');
-          contactForm.reset();
-          setTimeout(function() { successMsg.classList.add('hidden'); }, 5000);
-        }
-      });
-    }
-    
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js').catch(function() {
         // Silent fail
