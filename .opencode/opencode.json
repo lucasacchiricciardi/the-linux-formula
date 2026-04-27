@@ -1,11 +1,29 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "zhipuai-coding-plan/glm-5.1",
-  "small_model": "zhipuai-coding-plan/glm-4.7",
+  "provider": {
+    "zai": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Z.AI Coding Plan",
+      "options": {
+        "baseURL": "https://api.z.ai/api/coding/paas/v4"
+      },
+      "models": {
+        "glm-4.7": {
+          "name": "GLM 4.7 (build)"
+        },
+        "glm-5.1": {
+          "name": "GLM 5.1 (thinking)",
+          "reasoning": true
+        }
+      }
+    }
+  },
+  "model": "zai/glm-5.1",
+  "small_model": "zai/glm-4.7",
   "agent": {
     "orchestrator": {
       "mode": "primary",
-      "model": "zhipuai-coding-plan/glm-5.1",
+      "model": "zai/glm-5.1",
       "description": "Coordinator - Interfaccia unica con l'utente",
       "permission": {
         "edit": "allow",
@@ -14,7 +32,7 @@
     },
     "pensante-architecture": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-5.1",
+      "model": "zai/glm-5.1",
       "description": "Spec-Driven Architecture",
       "permission": {
         "edit": "deny",
@@ -23,7 +41,7 @@
     },
     "pensante-security": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-5.1",
+      "model": "zai/glm-5.1",
       "description": "Security Audit",
       "permission": {
         "edit": "deny",
@@ -32,7 +50,7 @@
     },
     "pensante-design": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-5.1",
+      "model": "zai/glm-5.1",
       "description": "Design System",
       "permission": {
         "edit": "deny",
@@ -41,7 +59,7 @@
     },
     "pensante-integration": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-5.1",
+      "model": "zai/glm-5.1",
       "description": "Integration & Data Flow",
       "permission": {
         "edit": "deny",
@@ -50,7 +68,7 @@
     },
     "executer-implementation": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-4.7",
+      "model": "zai/glm-4.7",
       "description": "Code Implementation",
       "permission": {
         "edit": "allow",
@@ -59,7 +77,7 @@
     },
     "executer-test": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-4.7",
+      "model": "zai/glm-4.7",
       "description": "TDD Tests",
       "permission": {
         "edit": "allow",
@@ -68,7 +86,7 @@
     },
     "executer-security-audit": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-4.7",
+      "model": "zai/glm-4.7",
       "description": "Security Audit Execution",
       "permission": {
         "edit": "deny",
@@ -77,7 +95,7 @@
     },
     "executer-security-fix": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-4.7",
+      "model": "zai/glm-4.7",
       "description": "Security Fixes",
       "permission": {
         "edit": "allow",
@@ -86,7 +104,7 @@
     },
     "executer-ui": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-4.7",
+      "model": "zai/glm-4.7",
       "description": "UI Implementation",
       "permission": {
         "edit": "allow",
@@ -95,7 +113,7 @@
     },
     "executer-visual": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-4.7",
+      "model": "zai/glm-4.7",
       "description": "Visual Assets",
       "permission": {
         "edit": "allow",
@@ -104,7 +122,7 @@
     },
     "executer-build": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-4.7",
+      "model": "zai/glm-4.7",
       "description": "Build Scripts",
       "permission": {
         "edit": "allow",
@@ -113,7 +131,7 @@
     },
     "executer-worker": {
       "mode": "subagent",
-      "model": "zhipuai-coding-plan/glm-4.7",
+      "model": "zai/glm-4.7",
       "description": "Web Worker",
       "permission": {
         "edit": "allow",
