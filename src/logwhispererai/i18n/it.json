@@ -66,7 +66,7 @@
   "faq": {
     "title": "FAQ",
     "q1_question": "È davvero gratuito durante la beta?",
-    "q1_answer": "Sì. L'intero periodo beta è completamente gratuito. Nessuna carta di credito richiesta. Nessuna tariffa nascisa. Avrai accesso completo a LogWhispererAI senza costi.",
+    "q1_answer": "Sì. L'intero periodo beta è completamente gratuito. Nessuna carta di credito richiesta. Nessuna tariffa nascosta. A fine beta i piani partiranno da €50/mese — ma i primi 50 beta tester riceveranno un coupon Lifetime Founder con il 50% di sconto.",
     "q2_question": "Quali lingue supporta l'AI?",
     "q2_answer": "Durante la beta, le risposte AI sono in inglese. Italiano e altre lingue sono pianificate per il rilascio finale. Puoi caricare log in qualsiasi formato.",
     "q3_question": "Quanto è accurata l'analisi?",
@@ -96,6 +96,43 @@
     "success_message": "Grazie! Ti contatteremo presto.",
     "error_message": "Qualcosa è andato storto. Riprova o scrivici a logwhisperer@thelinuxformula.com",
     "js_required": "JavaScript richiesto per l'invio del form. Scrivici a"
+  },
+  "pricing": {
+    "title": "Prezzi",
+    "beta_notice": "Attualmente in Beta Chiusa. Tutte le funzionalità sono gratuite durante il periodo beta — nessun costo applicato. Iscriviti alla waitlist per testare il servizio gratuitamente.",
+    "founder_discount": "I primi 50 beta tester che ci aiuteranno a validare il servizio riceveranno un coupon \"Lifetime Founder\" con il 50% di sconto quando andremo in live.",
+    "per_month": "/ mese",
+    "cta_beta": "Iscriviti alla Beta",
+    "single": {
+      "name": "Single Node",
+      "target": "Per Freelance e Sysadmin",
+      "price_year": "€500 / anno — risparmia 2 mesi",
+      "feature_1": "1 server monitorato",
+      "feature_2": "Analisi log in tempo reale",
+      "feature_3": "Notifiche via email e Telegram",
+      "feature_4": "Soluzioni garantite dal Metodo Sacchi"
+    },
+    "cluster": {
+      "name": "Cluster",
+      "target": "Per Micro-Agency e Dev Shop",
+      "badge": "Consigliato",
+      "price_year": "€1.500 / anno — risparmia 2 mesi",
+      "feature_1": "Fino a 5 server monitorati",
+      "feature_2": "Tutto il piano Single Node",
+      "feature_3": "Elaborazione AI prioritaria",
+      "feature_4": "Report mensile uptime",
+      "feature_5": "Integrazione webhook Slack"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "target": "Per Grandi Infrastrutture",
+      "price": "Contattaci",
+      "price_desc": "Prezzi personalizzati per le tue esigenze",
+      "feature_1": "Server illimitati",
+      "feature_2": "Supporto dedicato e SLA",
+      "feature_3": "Integrazioni personalizzate",
+      "cta": "Contattaci"
+    }
   },
   "mobile": {
     "cta_beta": "Iscriviti",

@@ -66,7 +66,7 @@
   "faq": {
     "title": "FAQ",
     "q1_question": "Is this really free during beta?",
-    "q1_answer": "Yes. The entire beta period is completely free. No credit card required. No hidden fees. You'll get full access to LogWhispererAI at no cost.",
+    "q1_answer": "Yes. The entire beta period is completely free. No credit card required. No hidden fees. When the beta ends, plans will start at €50/month — but the first 50 beta testers get a Lifetime Founder coupon with 50% off.",
     "q2_question": "What languages does the AI support?",
     "q2_answer": "During beta, AI responses are in English. Italian and other languages are planned for the final release. You can upload logs in any format.",
     "q3_question": "How accurate is the analysis?",
@@ -96,6 +96,43 @@
     "success_message": "Thank you! We'll be in touch soon.",
     "error_message": "Something went wrong. Please try again or email us at logwhisperer@thelinuxformula.com",
     "js_required": "JavaScript required for form submission. Email us at"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "beta_notice": "Currently in Closed Beta. All features are free during the beta period — no charges apply. Join the waitlist to test the service at no cost.",
+    "founder_discount": "The first 50 beta testers who help us validate the service will receive a \"Lifetime Founder\" coupon with 50% off when we go live.",
+    "per_month": "/ month",
+    "cta_beta": "Join the Beta",
+    "single": {
+      "name": "Single Node",
+      "target": "For Freelancers & Sysadmins",
+      "price_year": "€500 / year — save 2 months",
+      "feature_1": "1 server monitored",
+      "feature_2": "Real-time log analysis",
+      "feature_3": "Email & Telegram notifications",
+      "feature_4": "Metodo Sacchi guaranteed solutions"
+    },
+    "cluster": {
+      "name": "Cluster",
+      "target": "For Micro-Agencies & Dev Shops",
+      "badge": "Recommended",
+      "price_year": "€1,500 / year — save 2 months",
+      "feature_1": "Up to 5 servers monitored",
+      "feature_2": "Everything in Single Node",
+      "feature_3": "Priority AI processing",
+      "feature_4": "Monthly uptime reports",
+      "feature_5": "Slack webhook integration"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "target": "For Large Infrastructures",
+      "price": "Contact Us",
+      "price_desc": "Custom pricing for your needs",
+      "feature_1": "Unlimited servers",
+      "feature_2": "Dedicated support & SLA",
+      "feature_3": "Custom integrations",
+      "cta": "Contact Us"
+    }
   },
   "mobile": {
     "cta_beta": "Join Beta",
