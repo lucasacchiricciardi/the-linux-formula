@@ -8,7 +8,7 @@
     "badge": "LogWhispererAI_Beta_v0.1",
     "title": "Stop deciphering logs.",
     "subtitle_accent": "Start fixing crashes.",
-    "description": "The first AI assistant that translates your Linux server errors into ready-to-use solutions. Built on 20+ years of enterprise systems expertise — the Metodo Sacchi (Safety First).",
+    "description": "The first AI assistant that translates your Linux server errors into ready-to-use solutions. Generative AI guided by 20+ years of enterprise sysadmin know-how — the Metodo Sacchi (Safety First).",
     "cta_beta": "Join the Closed Beta (Free)",
     "cta_how_it_works": "See How It Works"
   },
@@ -25,7 +25,7 @@
   },
   "solution": {
     "title": "The Solution: Metodo Sacchi",
-    "intro": "This isn't just another AI chatbot. LogWhispererAI is trained on 20+ years of real-world systems administration experience. Every suggestion follows the Safety First protocol: little often, double check.",
+    "intro": "This isn't just another AI chatbot. LogWhispererAI pairs generative AI with a curated knowledge base and prompt methodology refined through 20+ years of real-world systems administration. Every suggestion follows the Safety First protocol: little often, double check.",
     "step_1_title": "Human Translation",
     "step_1_desc": "From machine jargon to plain English. Understand exactly what went wrong and why — no guessing.",
     "step_2_title": "Exact Fix Command",
@@ -59,7 +59,7 @@
     "role_value": "ITS/IFTS Educator",
     "powered_badge": "Powered By Experience",
     "ai_title": "Not just AI. AI + Expertise.",
-    "ai_desc": "LogWhispererAI is built on the patterns, failures, and solutions encountered across two decades of enterprise systems administration. The AI doesn't guess — it applies proven methodologies.",
+    "ai_desc": "LogWhispererAI combines generative AI with a knowledge base of patterns, failures, and solutions encoded from two decades of enterprise systems administration. Validation logic checks every suggestion against the Safety First protocol before showing it to you.",
     "language_note_title": "Language Note",
     "language_note_desc": "During the Beta phase, AI responses are provided in English. Full multilingual support is planned for the final release."
   },
@@ -70,7 +70,7 @@
     "q2_question": "What languages does the AI support?",
     "q2_answer": "During beta, AI responses are in English. Italian and other languages are planned for the final release. You can upload logs in any format.",
     "q3_question": "How accurate is the analysis?",
-    "q3_answer": "The AI is trained on 20+ years of real-world system administration patterns. Every recommendation follows the 'Safety First' protocol — destructive commands are flagged before execution.",
+    "q3_answer": "LogWhispererAI uses generative AI guided by a curated sysadmin knowledge base and our internal methodology built on 20+ years of Linux/Unix experience. Every recommendation passes through validation rules that flag destructive commands before showing them to you. The AI can still get things wrong — Safety First is what catches it.",
     "q4_question": "What log formats can I upload?",
     "q4_answer": "Any text-based log format: syslog, kernel.log, dmesg, journalctl, Apache, Nginx, Docker, Kubernetes, or custom application logs. Max file size: 1MB.",
     "q5_question": "Will this work for production servers?",
@@ -99,7 +99,7 @@
   },
   "pricing": {
     "title": "Pricing",
-    "beta_notice": "Currently in Closed Beta. All features are free during the beta period — no charges apply. Join the waitlist to test the service at no cost.",
+    "beta_notice": "Currently in Closed Beta — payments are not yet active. The prices shown below are indicative for the post-Beta release, to give you an order-of-magnitude reference. All features are free during the Beta period — join the waitlist to test the service at no cost.",
     "founder_discount": "The first 50 beta testers who help us validate the service will receive a \"Lifetime Founder\" coupon with 50% off when we go live.",
     "per_month": "/ month",
     "cta_beta": "Join the Beta",

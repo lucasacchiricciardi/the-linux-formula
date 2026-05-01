@@ -8,7 +8,7 @@
     "badge": "LogWhispererAI_Beta_v0.1",
     "title": "Smetti di decifrare i log.",
     "subtitle_accent": "Inizia a risolvere i crash.",
-    "description": "Il primo assistente AI che traduce i tuoi errori del server Linux in soluzioni pronte all'uso. Basato su oltre 20 anni di esperienza nei sistemi enterprise — il Metodo Sacchi (Sicurezza Prima).",
+    "description": "Il primo assistente AI che traduce i tuoi errori del server Linux in soluzioni pronte all'uso. AI generativa guidata da oltre 20 anni di know-how sistemistico enterprise — il Metodo Sacchi (Sicurezza Prima).",
     "cta_beta": "Iscriviti alla Beta Chiusa (Gratuita)",
     "cta_how_it_works": "Vedi come Funziona"
   },
@@ -25,7 +25,7 @@
   },
   "solution": {
     "title": "La Soluzione: Metodo Sacchi",
-    "intro": "Non è solo un altro chatbot AI. LogWhispererAI è addestrato su oltre 20 anni di esperienza reale nell'amministrazione di sistemi. Ogni suggerimento segue il protocollo Sicurezza Prima: poco per volta, double check.",
+    "intro": "Non è solo un altro chatbot AI. LogWhispererAI unisce AI generativa a una knowledge base curata e a una metodologia di prompt affinata in oltre 20 anni di amministrazione sistemi reale. Ogni suggerimento segue il protocollo Sicurezza Prima: poco per volta, double check.",
     "step_1_title": "Traduzione Umana",
     "step_1_desc": "Dal gergo macchina all'inglese semplice. Capisci esattamente cosa è andato storto e perché — niente猜.",
     "step_2_title": "Comando di Fix Esatto",
@@ -59,7 +59,7 @@
     "role_value": "Formatore ITS/IFTS",
     "powered_badge": "Alimentato dall'Esperienza",
     "ai_title": "Non solo AI. AI + Competenza.",
-    "ai_desc": "LogWhispererAI è costruito sui pattern, fallimenti e soluzioni incontrati in due decenni di amministrazione di sistemi enterprise. L'AI non indovina — applica metodologie provate.",
+    "ai_desc": "LogWhispererAI unisce AI generativa a una knowledge base di pattern, fallimenti e soluzioni codificati in due decenni di amministrazione di sistemi enterprise. La logica di validazione controlla ogni suggerimento rispetto al protocollo Sicurezza Prima prima di mostrartelo.",
     "language_note_title": "Nota sulla Lingua",
     "language_note_desc": "Durante la fase Beta, le risposte AI sono fornite in inglese. Supporto multilingue completo è pianificato per il rilascio finale."
   },
@@ -70,7 +70,7 @@
     "q2_question": "Quali lingue supporta l'AI?",
     "q2_answer": "Durante la beta, le risposte AI sono in inglese. Italiano e altre lingue sono pianificate per il rilascio finale. Puoi caricare log in qualsiasi formato.",
     "q3_question": "Quanto è accurata l'analisi?",
-    "q3_answer": "L'AI è addestrata su oltre 20 anni di pattern reali di amministrazione di sistemi. Ogni raccomandazione segue il protocollo 'Sicurezza Prima' — i comandi distruttivi sono segnalati prima dell'esecuzione.",
+    "q3_answer": "LogWhispererAI usa AI generativa guidata da una knowledge base sistemistica curata e dalla nostra metodologia interna costruita in oltre 20 anni di esperienza Linux/Unix. Ogni raccomandazione passa attraverso regole di validazione che segnalano i comandi distruttivi prima di mostrarteli. L'AI può comunque sbagliare — Sicurezza Prima è quello che la cattura.",
     "q4_question": "Quali formati di log posso caricare?",
     "q4_answer": "Qualsiasi formato di log basato su testo: syslog, kernel.log, dmesg, journalctl, Apache, Nginx, Docker, Kubernetes, o log applicativi personalizzati. Dimensione max file: 1MB.",
     "q5_question": "Funzionerà per server di produzione?",
@@ -99,7 +99,7 @@
   },
   "pricing": {
     "title": "Prezzi",
-    "beta_notice": "Attualmente in Beta Chiusa. Tutte le funzionalità sono gratuite durante il periodo beta — nessun costo applicato. Iscriviti alla waitlist per testare il servizio gratuitamente.",
+    "beta_notice": "Attualmente in Beta Chiusa — i pagamenti non sono ancora attivi. I prezzi indicati sotto sono indicativi per il rilascio post-Beta, per darti un ordine di grandezza. Tutte le funzionalità sono gratuite durante il periodo Beta — iscriviti alla waitlist per testare il servizio gratuitamente.",
     "founder_discount": "I primi 50 beta tester che ci aiuteranno a validare il servizio riceveranno un coupon \"Lifetime Founder\" con il 50% di sconto quando andremo in live.",
     "per_month": "/ mese",
     "cta_beta": "Iscriviti alla Beta",
