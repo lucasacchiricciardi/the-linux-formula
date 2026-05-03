@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script type="text/javascript">
+var _iub = _iub || [];
+_iub.csConfiguration = {"askConsentAtCookiePolicyUpdate":true,"cookiePolicyInOtherWindow":true,"countryDetection":true,"floatingPreferencesButtonDisplay":"anchored-center-right","perPurposeConsent":true,"siteId":2315562,"whitelabel":false,"cookiePolicyId":47650780,"floatingPreferencesButtonCaption":true,"banner":{"acceptButtonCaptionColor":"#FFFFFF","acceptButtonColor":"#0073CE","acceptButtonDisplay":true,"backgroundColor":"#FFFFFF","backgroundOverlay":true,"brandBackgroundColor":"#FFFFFF","brandTextColor":"#000000","closeButtonRejects":true,"customizeButtonCaptionColor":"#4D4D4D","customizeButtonColor":"#DADADA","customizeButtonDisplay":true,"explicitWithdrawal":true,"fontSizeBody":"18px","fontSizeCloseButton":"22px","listPurposes":true,"prependOnBody":true,"rejectButtonDisplay":true,"textColor":"#000000"}};
+_iub.csLangConfiguration = {"it":{"cookiePolicyId":47650780,"floatingPreferencesButtonCaption":true}};
+</script>
+<script type="text/javascript" src="//cs.iubenda.com/sync/2315562.js" async></script>
+<script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta name="description" content="LogWhispererAI — AI-Powered Linux Log Analyzer. Transform cryptic server logs into actionable commands in under 60 seconds. Based on the Metodo Sacchi (Safety First)."/>
@@ -679,6 +686,8 @@ The first 50 beta testers who help us validate the service will receive a "Lifet
 <a href="https://www.iubenda.com/privacy-policy/47650780/cookie-policy" class="iubenda-nostyle iubenda-noiframe iubenda-embed text-[9px] text-on-surface-variant hover:text-primary transition-colors" title="Cookie Policy">Cookie Policy</a>
 <span class="text-outline-variant/40">•</span>
 <a href="https://www.iubenda.com/termini-e-condizioni/47650780" class="iubenda-nostyle iubenda-noiframe iubenda-embed text-[9px] text-on-surface-variant hover:text-primary transition-colors" title="Termini e Condizioni">Termini e Condizioni</a>
+<span class="text-outline-variant/40">•</span>
+<a href="https://analytics.lucasacchi.net/index.php?module=CoreAdminHome&action=optOut&language=it" class="text-[9px] text-on-surface-variant hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer" title="Opt-out from analytics">Opt-out</a>
 </div>
 </div>
 </div>
@@ -757,7 +766,36 @@ The first 50 beta testers who help us validate the service will receive a "Lifet
 })();
 </script>
 <script src="./i18n/i18n.js"></script>
-<script src="../analytics.js"></script>
+<!-- Matomo (loaded only after iubenda consent) -->
+<script>
+(function() {
+  function loadMatomo() {
+    var _paq = window._paq = window._paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    var u="//analytics.lucasacchi.net/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  }
+  if (typeof _iub !== 'undefined' && _iub.csConfiguration) {
+    _iub.csConfiguration.callback = _iub.csConfiguration.callback || {};
+    _iub.csConfiguration.callback.onConsentGiven = function() {
+      if (typeof _iub.csConfiguration.callback.onConsentGiven._matomoLoaded === 'undefined') {
+        _iub.csConfiguration.callback.onConsentGiven._matomoLoaded = true;
+        loadMatomo();
+      }
+    };
+    if (_iub.areCookiesEnabled && _iub.areCookiesEnabled()) {
+      loadMatomo();
+    }
+  } else {
+    loadMatomo();
+  }
+})();
+</script>
+<!-- End Matomo Code -->
 <script type="text/javascript">
 (function (w,d) {
   var loader = function () {
