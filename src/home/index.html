@@ -163,6 +163,11 @@ _iub.csLangConfiguration = {"it":{"cookiePolicyId":47650780,"floatingPreferences
         .tlf-auth-error.show {
             display: block;
         }
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to   { transform: translateX(0); opacity: 1; }
+        }
+        .animate-slideIn { animation: slideIn 0.3s ease-out; }
       </style>
 
 <script>
@@ -350,6 +355,15 @@ _iub.csLangConfiguration = {"it":{"cookiePolicyId":47650780,"floatingPreferences
   }
 })();
 </script>
+<link rel="alternate" type="application/rss+xml" href="/feed.xml" title="The Linux Formula Blog" />
+<!-- OneSignal Web Push -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({ appId: "3a81f143-4817-4244-bd61-38148604d269" });
+  });
+</script>
 </head>
 <body class="tlf-auth-required bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-on-primary px-4 py-2 rounded-none z-50 font-label text-xs uppercase tracking-widest">Skip to main content</a>
@@ -363,6 +377,7 @@ _iub.csLangConfiguration = {"it":{"cookiePolicyId":47650780,"floatingPreferences
 <div class="hidden md:flex space-x-8 items-center bg-surface-container-low px-6 py-2">
 <a class="text-primary font-bold border-l-4 border-primary px-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">Home</a>
 <a class="text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors hover:-translate-y-0.5 transform duration-150" href="logwhispererai/">LogWhispererAI</a>
+<button id="push-enable-btn" class="text-on-surface-variant hover:text-primary transition-colors" title="Abilita notifiche push per nuovi articoli" aria-label="Abilita notifiche"><span class="material-symbols-outlined text-sm">notifications</span></button>
 <div class="flex items-center gap-2 ml-2 pl-2 border-l border-outline-variant/20">
 <button id="lang-it-btn" class="lang-switcher flex items-center gap-1 px-2 py-1 text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20 rounded-none" aria-label="Switch to Italian">
 <span class="material-symbols-outlined text-sm">translate</span>
@@ -382,6 +397,7 @@ _iub.csLangConfiguration = {"it":{"cookiePolicyId":47650780,"floatingPreferences
 <a class="block text-primary font-bold border-l-4 border-primary px-2 py-2 font-label text-sm uppercase tracking-wider hover:bg-primary/5 transition-colors" href="#main-content">Home</a>
 <a class="block text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors py-2 px-2" href="logwhispererai/">LogWhispererAI</a>
 <div class="flex items-center gap-2 py-2 px-2 border-t border-outline-variant/20 mt-2">
+<button id="push-enable-btn-mobile" class="text-on-surface-variant hover:text-primary transition-colors" title="Abilita notifiche push per nuovi articoli" aria-label="Abilita notifiche"><span class="material-symbols-outlined text-sm">notifications</span></button>
 <span class="font-label text-xs text-on-surface-variant uppercase">Lingua / Language</span>
 <button id="lang-it-btn-mobile" class="lang-switcher flex items-center gap-1 px-2 py-1 text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/20 rounded-none" aria-label="Switch to Italian">
 <span class="material-symbols-outlined text-sm">translate</span>
@@ -463,6 +479,8 @@ _iub.csLangConfiguration = {"it":{"cookiePolicyId":47650780,"floatingPreferences
 <div class="h-3 bg-surface-container-highest rounded w-5/6"></div>
 </div>
 </div>
+<div id="blog-pagination-container"></div>
+<button id="blog-load-more" class="md:hidden mt-8 w-full py-3 font-label text-xs uppercase tracking-wider text-on-surface-variant border border-outline-variant/20 hover:bg-surface-container transition-colors" style="display:none;">Carica altri articoli</button>
 <noscript><p class="font-body text-sm text-on-surface-variant p-4">JavaScript is required to load the news feed.</p></noscript>
 <div id="news-feed-error" class="hidden font-label text-xs uppercase tracking-widest text-error p-4 border-l-2 border-error bg-error-container"></div>
 </section>

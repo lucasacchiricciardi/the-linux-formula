@@ -22,7 +22,7 @@ const DIST = process.env.BUILD_DIST || 'dist';
 const DIST_NEWS = join(DIST, 'news');
 const FEED_OUTPUT = join(DIST_NEWS, 'news-feed.json');
 
-const SITE_URL = process.env.SITE_URL || 'https://lucasacchiricciardi.github.io/the-linux-formula';
+const SITE_URL = process.env.SITE_URL || 'https://thelinuxformula.com';
 const APP_VERSION = process.env.BUILD_VERSION || '2.0.0';
 
 export function parseFrontmatter(content) {
@@ -239,6 +239,37 @@ function assembleDist() {
 
   const feed = buildNewsFeed(SRC_RAW);
   writeFileSync(FEED_OUTPUT, JSON.stringify(feed, null, 2) + '\n', 'utf-8');
+
+  // Generate RSS feed (feed.xml) — Italian articles only
+  const feedItems = feed.articles
+    .filter(a => a.lang === 'it')
+    .map(a => {
+      const pubDate = a.date ? new Date(a.date + 'T00:00:00Z').toUTCString() : new Date().toUTCString();
+      const excerpt = a.html ? a.html.replace(/<[^>]*>/g, '').slice(0, 500) : '';
+      return `  <item>
+    <title><![CDATA[${a.title}]]></title>
+    <link>${SITE_URL}/</link>
+    <guid isPermaLink="false">${SITE_URL}/#${a.id}</guid>
+    <pubDate>${pubDate}</pubDate>
+    <description><![CDATA[${excerpt}]]></description>
+    <category>${(a.tags || []).join(', ')}</category>
+  </item>`;
+    }).join('\n');
+
+  const feedXml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title><![CDATA[The Linux Formula — Blog]]></title>
+    <link>${SITE_URL}/</link>
+    <description><![CDATA[Tools, Apps, and Insights for the Open Source World]]></description>
+    <language>it</language>
+    <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml" />
+${feedItems}
+  </channel>
+</rss>
+`;
+  writeFileSync(join(DIST, 'feed.xml'), feedXml, 'utf-8');
+  console.log('Generated RSS feed at ' + join(DIST, 'feed.xml'));
 
   writeFileSync(join(DIST, 'version.txt'), APP_VERSION + '\n', 'utf-8');
 
