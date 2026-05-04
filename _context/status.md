@@ -8,7 +8,7 @@
 - **Repo**: GitHub — deploy automatico su GitHub Pages
 
 ## Prossima azione
-Nessuna. Progetto in manutenzione ordinaria.
+Backlog tecnico in `_context/backlog.md` — priorità: bug #4 (setBaseUrl stringa vuota) + version checking end-to-end (#1-3).
 
 ## Componenti
 | Componente | Stato |
@@ -27,4 +27,4 @@ Nessuna. Progetto in manutenzione ordinaria.
 | Paginazione blog (PAGE_SIZE=6) | ✅ Prev/Next desktop, Load More mobile |
 
 ## Ultimo aggiornamento
-2026-05-04
+2026-05-04 — fix XSS (innerHTML → DOM API), cleanup build script, branch publish eliminato, repo devs clonato su main, backlog tecnico aggiunto.
