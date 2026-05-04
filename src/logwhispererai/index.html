@@ -731,9 +731,16 @@ The first 50 beta testers who help us validate the service will receive a "Lifet
         betaForm.addEventListener('submit', function(e) {
             e.preventDefault();
             var submitBtn = betaForm.querySelector('button[type="submit"]');
-            var originalHTML = submitBtn.innerHTML;
+            var originalChildren = Array.from(submitBtn.childNodes);
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> <span>Sending...</span>';
+            while (submitBtn.firstChild) submitBtn.removeChild(submitBtn.firstChild);
+            var spinnerSpan = document.createElement('span');
+            spinnerSpan.className = 'material-symbols-outlined animate-spin text-sm';
+            spinnerSpan.textContent = 'progress_activity';
+            var sendingSpan = document.createElement('span');
+            sendingSpan.textContent = 'Sending...';
+            submitBtn.appendChild(spinnerSpan);
+            submitBtn.appendChild(sendingSpan);
 
             var formData = new FormData(betaForm);
             var object = {};
@@ -754,12 +761,14 @@ The first 50 beta testers who help us validate the service will receive a "Lifet
                 } else {
                     formError.classList.remove('hidden');
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalHTML;
+                    while (submitBtn.firstChild) submitBtn.removeChild(submitBtn.firstChild);
+                    originalChildren.forEach(function(node) { submitBtn.appendChild(node); });
                 }
             }).catch(function() {
                 formError.classList.remove('hidden');
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = originalHTML;
+                while (submitBtn.firstChild) submitBtn.removeChild(submitBtn.firstChild);
+                originalChildren.forEach(function(node) { submitBtn.appendChild(node); });
             });
         });
     }
