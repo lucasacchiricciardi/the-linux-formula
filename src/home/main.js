@@ -256,7 +256,10 @@ function retrieveAndDecompress(lang) {
       if (currentFilteredArticles.length === 0) {
         var msg = document.createElement('div');
         msg.className = 'col-span-full text-center py-12';
-        msg.innerHTML = '<p class="font-body text-lg text-on-surface-variant">Nessun articolo trovato.</p>';
+        var msgP = document.createElement('p');
+        msgP.className = 'font-body text-lg text-on-surface-variant';
+        msgP.textContent = 'Nessun articolo trovato.';
+        msg.appendChild(msgP);
         articlesContainer.appendChild(msg);
       } else {
         currentFilteredArticles.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE).forEach(function(a) {
@@ -271,7 +274,7 @@ function retrieveAndDecompress(lang) {
       var paginationContainer = document.getElementById('blog-pagination-container');
 
       if (paginationContainer) {
-        paginationContainer.innerHTML = '';
+        while (paginationContainer.firstChild) paginationContainer.removeChild(paginationContainer.firstChild);
         if (totalPages > 1) {
           var div = document.createElement('div');
           div.className = 'hidden md:flex justify-center items-center gap-6 mt-12';
