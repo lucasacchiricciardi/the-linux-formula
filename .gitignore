@@ -14,4 +14,4 @@ dist/
 
 # OS
 .DS_Store
-Thumbs.db
+Thumbs.dbsrc/secret.json
