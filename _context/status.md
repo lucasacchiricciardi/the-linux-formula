@@ -27,4 +27,4 @@ Backlog tecnico in `_context/backlog.md` — priorità: bug #4 (setBaseUrl strin
 | Paginazione blog (PAGE_SIZE=6) | ✅ Prev/Next desktop, Load More mobile |
 
 ## Ultimo aggiornamento
-2026-05-04 — fix XSS (innerHTML → DOM API), cleanup build script, branch publish eliminato, repo devs clonato su main, backlog tecnico aggiunto.
+2026-05-21 — WIP password gate ripristinato: `src/secret.json` rimosso da gitignore (era stato ignorato da commit 2026-05-16 "security(auth)"), file committato con hash APR1 per pwd "luca". Fix corruzione `.gitignore` (Thumbs.db concatenato con il path del file). Deploy GitHub Pages confermato, modal "Enter password" verificato con Playwright. Backlog tecnico invariato.
