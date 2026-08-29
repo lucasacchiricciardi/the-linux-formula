@@ -1,5 +1,7 @@
 # The Linux Formula — Status
 
+categoria: brand
+
 ## Stato
 🟢 OPERATIVO — sito live, GDPR completo, Matomo integrato
 
